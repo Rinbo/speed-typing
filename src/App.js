@@ -1,24 +1,18 @@
 import React, { Component } from "react";
-import Login from "./Login";
-import Register from "./Register";
-import DeleteUser from "./DeleteUser";
-import ValidateUser from "./ValidateUser";
+import Authpage from "./Authpage";
 
 export class App extends Component {
+  state = {
+    isSignedIn: null
+  };
+
   render() {
-    return (
-      <div>
-        <Register />
-        <br />
-        <br />
-        <br />
-        <Login />
-        <br />
-        <DeleteUser />
-        <br />
-        <ValidateUser />
-      </div>
-    );
+    const { isSignedIn } = this.state;
+    if (!isSignedIn) {
+      return <Authpage auth={this.auth} />;
+    }
+
+    return <div>Welcome!</div>;
   }
 }
 
