@@ -13,9 +13,10 @@ export class Register extends Component {
     const body = { ...this.state };
 
     endpoint
-      .post("/add", body)
+      .post("/users/add", body)
       .then(response => {
         console.log(response);
+        localStorage.setItem("token", { token: response.data.token });
       })
       .catch(err => console.log(err));
   };

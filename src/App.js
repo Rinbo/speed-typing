@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Login from "./Login";
 import Register from "./Register";
+import DeleteUser from "./DeleteUser";
+import ValidateUser from "./ValidateUser";
 
 export class App extends Component {
   render() {
@@ -11,6 +13,10 @@ export class App extends Component {
         <br />
         <br />
         <Login />
+        <br />
+        <DeleteUser />
+        <br />
+        <ValidateUser />
       </div>
     );
   }

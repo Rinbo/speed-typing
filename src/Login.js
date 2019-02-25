@@ -1,6 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import endpoint from "./endpoint";
-
 
 export class Login extends Component {
   state = {
@@ -11,15 +10,14 @@ export class Login extends Component {
   onSubmit = e => {
     e.preventDefault();
     const body = { ...this.state };
-
+    console.log(body);
     endpoint
-      .post("/signin", body)
+      .post("/users/signin", body)
       .then(response => {
-        console.log(response);
+        localStorage.setItem("token", response.data.token);
       })
       .catch(err => console.log(err));
   };
-
 
   render() {
     return (
@@ -46,8 +44,8 @@ export class Login extends Component {
           <button className="ui primary button">Login</button>
         </form>
       </div>
-    )
+    );
   }
 }
 
-export default Login
+export default Login;
