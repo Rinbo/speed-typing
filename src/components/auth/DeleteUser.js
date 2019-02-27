@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import endpoint from "./endpoint";
+import endpoint from "../apis/endpoint";
 
 export class DeleteUser extends Component {
   deleteUser = () => {

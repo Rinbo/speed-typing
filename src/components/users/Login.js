@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import endpoint from "./endpoint";
+import endpoint from "../apis/endpoint";
 
 export class Login extends Component {
   state = {
@@ -15,6 +15,7 @@ export class Login extends Component {
       .post("/users/signin", body)
       .then(response => {
         localStorage.setItem("token", response.data.token);
+        this.props.signIn(response.data);
       })
       .catch(err => console.log(err));
   };

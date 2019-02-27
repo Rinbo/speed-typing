@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-import endpoint from "./endpoint";
+import endpoint from "../apis/endpoint";
 
-export class Register extends Component {
+export class Login extends Component {
   state = {
-    name: "",
     email: "",
     password: ""
   };
@@ -11,12 +10,12 @@ export class Register extends Component {
   onSubmit = e => {
     e.preventDefault();
     const body = { ...this.state };
-
+    console.log(body);
     endpoint
-      .post("/users/add", body)
+      .post("/users/signin", body)
       .then(response => {
-        console.log(response);
-        localStorage.setItem("token", { token: response.data.token });
+        localStorage.setItem("token", response.data.token);
+        this.props.signIn(response.data);
       })
       .catch(err => console.log(err));
   };
@@ -25,15 +24,6 @@ export class Register extends Component {
     return (
       <div className="ui container" style={{ marginTop: 100 }}>
         <form className="ui form error" onSubmit={this.onSubmit}>
-          <div className="ui field">
-            <label>Name</label>
-            <input
-              onChange={e => {
-                this.setState({ name: e.target.value });
-              }}
-              value={this.state.name}
-            />
-          </div>
           <div className="ui field">
             <label>Email</label>
             <input
@@ -52,11 +42,11 @@ export class Register extends Component {
               value={this.state.password}
             />
           </div>
-          <button className="ui primary button">Add</button>
+          <button className="ui primary button">Login</button>
         </form>
       </div>
     );
   }
 }
 
-export default Register;
+export default Login;

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import endpoint from "./endpoint";
+import endpoint from "../../endpoint";
 
 export class ValidateUser extends Component {
   validateUser = () => {
