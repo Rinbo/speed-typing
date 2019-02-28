@@ -3,6 +3,7 @@ import Authpage from "./users/Authpage";
 import endpoint from "./apis/endpoint";
 import Spinner from "./utility/Spinner";
 import "./app.css";
+import LandingPage from "./LandingPage";
 
 export class App extends Component {
   state = {
@@ -40,21 +41,32 @@ export class App extends Component {
     });
   };
 
+  signOut = () => {
+    const token = localStorage.getItem("token");
+    const requestBody = { email: this.state.email, token: token };
+    localStorage.removeItem("token");
+    endpoint
+      .delete("/users/signout", requestBody)
+      .then(response => {
+        console.log(response);
+        this.setState({ email: null, signedInUser: null, isSignedIn: null });
+      })
+      .catch(e =>
+        console.log(
+          "Unable to destory token. However, you were logged out from the frontend. The security of your account is uncompromised."
+        )
+      );
+  };
+
   render() {
-    const { isSignedIn, isLoading, signedInUser } = this.state;
+    const { isSignedIn, isLoading } = this.state;
     if (isLoading) {
       return <Spinner />;
     }
     if (!isSignedIn) {
       return <Authpage auth={this.auth} signIn={this.signIn} />;
     }
-    return (
-      <div className="ui container">
-        <div className="ui basic segment">
-          <div className="ui centered header">Welcome {signedInUser}!</div>
-        </div>
-      </div>
-    );
+    return <LandingPage signOut={this.signOut} />;
   }
 }
 

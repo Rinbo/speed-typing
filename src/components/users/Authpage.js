@@ -14,7 +14,7 @@ export class Authpage extends Component {
           <div className="ui eight column centered grid">
             <div className="column">
               <button
-                className="ui black button borjessons-button"
+                className="ui basic black button borjessons-button"
                 onClick={() => this.setState({ authType: 1 })}
               >
                 Login
@@ -22,7 +22,7 @@ export class Authpage extends Component {
             </div>
             <div className="column">
               <button
-                className="ui black button borjessons-button"
+                className="ui basic black button borjessons-button"
                 onClick={() => this.setState({ authType: 2 })}
               >
                 Register
