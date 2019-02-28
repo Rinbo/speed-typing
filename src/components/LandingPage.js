@@ -5,18 +5,21 @@ export class LandingPage extends Component {
     return (
       <div className="ui container">
         <div className="ui vertical icon menu" style={{ marginTop: "20vh" }}>
-          <a className="item">
+          <div className="item borjessons-link">
             <i className="gamepad icon" />
-          </a>
-          <a className="item">
+          </div>
+          <div className="item borjessons-link">
             <i className="user icon" />
-          </a>
-          <a className="item">
+          </div>
+          <div className="item borjessons-link">
             <i className="trophy icon" />
-          </a>
-          <a className="item">
-            <i className="sign-out icon" onClick={() => this.props.signOut()} />
-          </a>
+          </div>
+          <div
+            className="item borjessons-link"
+            onClick={() => this.props.signOut()}
+          >
+            <i className="sign-out icon" />
+          </div>
         </div>
       </div>
     );

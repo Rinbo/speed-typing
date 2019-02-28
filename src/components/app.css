@@ -1,3 +1,11 @@
 .borjessons-button {
   width: 100px;
 }
+
+.borjessons-link {
+  cursor: pointer;
+}
+
+.borjessons-link:hover {
+  opacity: 0.7;  
+}
