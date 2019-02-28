@@ -43,13 +43,13 @@ export class App extends Component {
 
   signOut = () => {
     const token = localStorage.getItem("token");
-    const requestBody = { email: this.state.email, token: token };
+    const requestBody = { email: this.state.userEmail, token: token };
     localStorage.removeItem("token");
+    this.setState({ email: null, signedInUser: null, isSignedIn: null });
     endpoint
-      .delete("/users/signout", requestBody)
+      .post("/users/signout", requestBody)
       .then(response => {
         console.log(response);
-        this.setState({ email: null, signedInUser: null, isSignedIn: null });
       })
       .catch(e =>
         console.log(
