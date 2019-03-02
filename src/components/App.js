@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Authpage from "./users/Authpage";
 import endpoint from "./apis/endpoint";
+import { setHeaders, destroyToken } from "./apis/setHeaders";
 import Spinner from "./utility/Spinner";
 import "./app.css";
 import LandingPage from "./LandingPage";
@@ -14,9 +15,9 @@ export class App extends Component {
   };
 
   componentDidMount = () => {
-    const token = localStorage.getItem("token");
+    setHeaders();
     endpoint
-      .post("/users/validatetoken", { token })
+      .get("/users/validatetoken")
       .then(response => {
         localStorage.setItem("token", response.data.token);
         this.setState({
@@ -42,12 +43,9 @@ export class App extends Component {
   };
 
   signOut = () => {
-    const token = localStorage.getItem("token");
-    const requestBody = { email: this.state.userEmail, token: token };
-    localStorage.removeItem("token");
-    this.setState({ email: null, signedInUser: null, isSignedIn: null });
+    setHeaders();
     endpoint
-      .post("/users/signout", requestBody)
+      .delete("/users/signout")
       .then(response => {
         console.log(response);
       })
@@ -56,6 +54,8 @@ export class App extends Component {
           "Unable to destory token. However, you were logged out from the frontend. The security of your account is uncompromised."
         )
       );
+    this.setState({ email: null, signedInUser: null, isSignedIn: null });
+    destroyToken();
   };
 
   render() {
