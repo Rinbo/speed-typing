@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import endpoint from "../apis/endpoint";
+import { setHeaders } from "../apis/setHeaders";
 
 export class Register extends Component {
   state = {
@@ -15,7 +16,8 @@ export class Register extends Component {
     endpoint
       .post("/users/add", body)
       .then(response => {
-        localStorage.setItem("token", { token: response.data.token });
+        localStorage.setItem("token", response.data.token);
+        setHeaders();
         this.props.signIn(response.data);
       })
       .catch(err => console.log(err));

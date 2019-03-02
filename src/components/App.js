@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Authpage from "./users/Authpage";
+import Authpage from "./auth/Authpage";
 import endpoint from "./apis/endpoint";
 import { setHeaders, destroyToken } from "./apis/setHeaders";
 import Spinner from "./utility/Spinner";
@@ -19,14 +19,14 @@ export class App extends Component {
     endpoint
       .get("/users/validatetoken")
       .then(response => {
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.headers.token);
+        setHeaders();
         this.setState({
           isSignedIn: true,
           signedInUser: response.data.name,
           userEmail: response.data.email,
           isLoading: false
         });
-        console.log(response.data.token);
       })
       .catch(e => {
         this.setState({ isLoading: false });

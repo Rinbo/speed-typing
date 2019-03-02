@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import endpoint from "../apis/endpoint";
+import { setHeaders } from "../apis/setHeaders";
 
 export class Login extends Component {
   state = {
@@ -14,8 +15,10 @@ export class Login extends Component {
     endpoint
       .post("/users/signin", body)
       .then(response => {
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.headers.token);
+        setHeaders();
         this.props.signIn(response.data);
+        console.log(response.data);
       })
       .catch(err => console.log(err));
   };
