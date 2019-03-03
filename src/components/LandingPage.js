@@ -1,26 +1,15 @@
 import React, { Component } from "react";
+import GameContainer from "./game/GameContainer";
+import Menu from "./utility/Menu";
+import MobileMenu from "./utility/MobileMenu";
 
 export class LandingPage extends Component {
   render() {
     return (
       <div className="ui container">
-        <div className="ui vertical icon menu" style={{ marginTop: "20vh" }}>
-          <div className="item borjessons-link">
-            <i className="gamepad icon" />
-          </div>
-          <div className="item borjessons-link">
-            <i className="user icon" />
-          </div>
-          <div className="item borjessons-link">
-            <i className="trophy icon" />
-          </div>
-          <div
-            className="item borjessons-link"
-            onClick={() => this.props.signOut()}
-          >
-            <i className="sign-out icon" />
-          </div>
-        </div>
+        <Menu signOut={this.props.signOut} />
+        <MobileMenu signOut={this.props.signOut} />
+        <GameContainer />
       </div>
     );
   }
