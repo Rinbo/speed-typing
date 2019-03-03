@@ -7,23 +7,19 @@ export class Authpage extends Component {
 
   renderBlurb = () => {
     return (
-      <div
-        className="ui container"
-        style={{ marginTop: "10vh" }}
-      >
-        <div style={{ margin: "auto" }}>
+      <div className="ui container" style={{ margin: "35px 0px 60px 0px" }}>
+        <div style={{ margin: "auto", textAlign: "center" }}>
           <div
-            className="ui segment"
-            style={{ maxWidth: "40vw", display: "inline-block", fontSize: 16 }}
+            className="ui basic segment"
+            style={{
+              maxWidth: 600,
+              display: "inline-block",
+              fontSize: 17
+            }}
           >
             This is a typing speed test for coders. For one minute you will be
             presented with random code snippets that you should try to type as
             fast as you can.
-            <br />
-            <br />
-            It is always more fun to measure yourself against others, so all we
-            ask is that you provide a name that we can use to position you on
-            the scoreboard:
           </div>
         </div>
       </div>
@@ -34,38 +30,21 @@ export class Authpage extends Component {
     const { authType } = this.state;
 
     if (!authType) {
-      return this.renderBlurb();
-    }
-    if (authType === 1) {
-      return <Login signIn={this.props.signIn} />;
-    }
-    if (authType === 2) {
-      return <Register signIn={this.props.signIn} />;
+      return (
+        <div>
+          {this.renderBlurb()}
+          <Register signIn={this.props.signIn} />
+          <div
+            className="ui horizontal divider"
+            style={{ width: 360, margin: "auto" }}
+          >
+            OR
+          </div>
+          <Login signIn={this.props.signIn} />
+        </div>
+      );
     }
   }
 }
 
 export default Authpage;
-
-/* return (
-  <div className="ui container" style={{ marginTop: 100 }}>
-    <div className="ui six column centered stackable grid">
-      <div className="column">
-        <button
-          className="ui basic black button borjessons-button"
-          onClick={() => this.setState({ authType: 1 })}
-        >
-          Login
-        </button>
-      </div>
-      <div className="column">
-        <button
-          className="ui basic black button borjessons-button"
-          onClick={() => this.setState({ authType: 2 })}
-        >
-          Register
-        </button>
-      </div>
-    </div>
-  </div>
-); */

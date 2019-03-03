@@ -16,7 +16,7 @@ export class Register extends Component {
     endpoint
       .post("/users/add", body)
       .then(response => {
-        localStorage.setItem("token", response.data.token);
+        localStorage.setItem("token", response.headers.token);
         setHeaders();
         this.props.signIn(response.data);
       })
@@ -25,37 +25,62 @@ export class Register extends Component {
 
   render() {
     return (
-      <div className="ui container" style={{ marginTop: 100 }}>
-        <form className="ui form error" onSubmit={this.onSubmit}>
-          <div className="ui field">
-            <label>Name</label>
-            <input
-              onChange={e => {
-                this.setState({ name: e.target.value });
-              }}
-              value={this.state.name}
-            />
+      <div className="ui container">
+        <div className="ui middle aligned center aligned grid">
+          <div className="column" style={{ width: 360 }}>
+            <div className="content" style={{ marginBottom: 20 }}>
+              It is always more fun to measure yourself against others, so all
+              we ask is that you provide a name that we can use to position you
+              on the scoreboard:
+            </div>
+            <form className="ui large form" onSubmit={this.onSubmit}>
+              <div className="ui basic segment">
+                <div className="field">
+                  <div className="ui left icon input">
+                    <i className="user icon" />
+                    <input
+                      placeholder="Username"
+                      onChange={e => {
+                        this.setState({ name: e.target.value });
+                      }}
+                      value={this.state.name}
+                    />
+                  </div>
+                </div>
+                <div className="field">
+                  <div className="ui left icon input">
+                    <i className="mail icon" />
+                    <input
+                      placeholder="E-mail address"
+                      onChange={e => {
+                        this.setState({ email: e.target.value });
+                      }}
+                      value={this.state.email}
+                    />
+                  </div>
+                </div>
+                <div className="field">
+                  <div className="ui left icon input">
+                    <i className="lock icon" />
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      onChange={e => {
+                        this.setState({ password: e.target.value });
+                      }}
+                      value={this.state.password}
+                    />
+                  </div>
+                </div>
+                <button className="ui fluid large black submit button">
+                  Go!
+                </button>
+              </div>
+
+              <div className="ui error message" />
+            </form>
           </div>
-          <div className="ui field">
-            <label>Email</label>
-            <input
-              onChange={e => {
-                this.setState({ email: e.target.value });
-              }}
-              value={this.state.email}
-            />
-          </div>
-          <div className="ui field">
-            <label>Password</label>
-            <input
-              onChange={e => {
-                this.setState({ password: e.target.value });
-              }}
-              value={this.state.password}
-            />
-          </div>
-          <button className="ui primary button">Add</button>
-        </form>
+        </div>
       </div>
     );
   }

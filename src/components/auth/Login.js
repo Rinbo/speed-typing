@@ -25,28 +25,54 @@ export class Login extends Component {
 
   render() {
     return (
-      <div className="ui container" style={{ marginTop: 100 }}>
-        <form className="ui form error" onSubmit={this.onSubmit}>
-          <div className="ui field">
-            <label>Email</label>
-            <input
-              onChange={e => {
-                this.setState({ email: e.target.value });
-              }}
-              value={this.state.email}
-            />
+      <div className="ui container">
+        <div className="ui middle aligned center aligned grid">
+          <div className="column" style={{ width: 360 }}>
+            <div className="content" style={{ marginTop: 20 }}>
+              If you already have an account - Login
+            </div>
+            <form className="ui large form" onSubmit={this.onSubmit}>
+              <div className="ui basic segment">
+                <div className="field">
+                  <div className="ui left icon input">
+                    <i className="mail icon" />
+                    <input
+                      type="text"
+                      name="email"
+                      placeholder="E-mail address"
+                      onChange={e => {
+                        this.setState({ email: e.target.value });
+                      }}
+                      value={this.state.email}
+                    />
+                  </div>
+                </div>
+
+                <div className="field">
+                  <div className="ui left icon input">
+                    <i className="lock icon" />
+                    <input
+                      type="password"
+                      name="password"
+                      placeholder="Password"
+                      onChange={e => {
+                        this.setState({ password: e.target.value });
+                      }}
+                      value={this.state.password}
+                    />
+                  </div>
+                </div>
+                <button
+                  className="ui fluid large black submit button"
+                >
+                  Login
+                </button>
+              </div>
+
+              <div className="ui error message" />
+            </form>
           </div>
-          <div className="ui field">
-            <label>Password</label>
-            <input
-              onChange={e => {
-                this.setState({ password: e.target.value });
-              }}
-              value={this.state.password}
-            />
-          </div>
-          <button className="ui primary button">Login</button>
-        </form>
+        </div>
       </div>
     );
   }
