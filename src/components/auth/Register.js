@@ -33,7 +33,11 @@ export class Register extends Component {
               we ask is that you provide a name that we can use to position you
               on the scoreboard:
             </div>
-            <form className="ui large form" onSubmit={this.onSubmit}>
+            <form
+              className="ui large form"
+              onSubmit={this.onSubmit}
+              autoComplete="off"
+            >
               <div className="ui basic segment">
                 <div className="field">
                   <div className="ui left icon input">
