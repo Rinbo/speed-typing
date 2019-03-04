@@ -4,16 +4,15 @@ import GameField from "./GameField";
 export class GameContainer extends Component {
   state = {
     typedCode: "",
-    displayCode: `import {setHeader} from "../apis/axios"`,
-    count: 0
+    displayCode: `import {setHeader} from "../apis/axios"`
   };
 
-  bingo = () => {
-    this.setState({ displayCode: "Boom!", typedCode: "" });
-  };
-
-  parseInput = char => {
-    this.setState({ typedCode: char });
+  parseInput = input => {
+    if (input === this.state.displayCode) {
+      this.setState({ displayCode: "Boom!", typedCode: "" });
+    } else {
+      this.setState({ typedCode: input });
+    }
   };
 
   render() {

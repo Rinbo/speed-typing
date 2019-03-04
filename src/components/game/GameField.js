@@ -3,15 +3,10 @@ import React, { Component } from "react";
 export class GameField extends Component {
   renderCode = () => {
     const { displayCode, typedCode } = this.props;
-    let counter = 0;
     return displayCode.split("").map((char, index) => {
       let color = "black";
       if (char === typedCode[index]) {
         color = "lightgreen";
-        counter += 1;
-        if (counter === displayCode.length) {
-          this.bingo();
-        }
       } else if (typedCode[index] === undefined) {
         color = "black";
       } else {
@@ -23,10 +18,6 @@ export class GameField extends Component {
         </code>
       );
     });
-  };
-
-  bingo = () => {
-    this.props.bingo();
   };
 
   onchange = e => {
@@ -45,7 +36,10 @@ export class GameField extends Component {
             <input
               type="text"
               spellCheck="false"
-              onChange={this.onchange}
+              onChange={e => {
+                e.preventDefault();
+                this.props.parseInput(e.target.value);
+              }}
               value={this.props.typedCode}
               style={{ width: 400, marginTop: 30 }}
             />
