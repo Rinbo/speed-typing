@@ -1,6 +1,11 @@
 import React, { Component } from "react";
 
 export class GameField extends Component {
+  state = {
+    clockState: "ready",
+    clock: 5000
+  };
+
   renderCode = () => {
     const { displayCode, typedCode } = this.props;
     return displayCode.split("").map((char, index) => {
@@ -18,6 +23,25 @@ export class GameField extends Component {
         </code>
       );
     });
+  };
+
+  timer = () => {
+    if (this.state.clockState === "ready") {
+      this.startTimer();
+      this.setState({ clockState: true });
+    }
+  };
+
+  startTimer = () => {
+    const gameInterval = setInterval(() => {
+      const currentClock = this.state.clock;
+      if (currentClock === 0) {
+        this.setState({ clockState: "complete", clock: 5000 });
+        clearInterval(gameInterval);
+        return null;
+      }
+      this.setState({ clock: currentClock - 1000 });
+    }, 1000);
   };
 
   onchange = e => {
@@ -40,11 +64,14 @@ export class GameField extends Component {
                 e.preventDefault();
                 this.props.parseInput(e.target.value);
               }}
+              onKeyDown={this.timer}
               value={this.props.typedCode}
               style={{ width: 400, marginTop: 30 }}
             />
           </div>
         </form>
+        <br />
+        {this.state.clock / 1000}
       </div>
     );
   }
