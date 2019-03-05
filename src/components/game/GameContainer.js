@@ -24,12 +24,24 @@ export class GameContainer extends Component {
   };
 
   gameComplete = () => {
-    const { score, typedCode, displayCode } = this.state;
+    const { score } = this.state;
     const currentScore = score;
+    const remainingScore = this.countRemaingScore();
     this.setState({
-      score: currentScore + displayCode.match(typedCode)[0].length,
+      score: currentScore + remainingScore,
       gameStatus: "complete"
     });
+  };
+
+  countRemaingScore = () => {
+    const { typedCode, displayCode } = this.state;
+    let counter = 0;
+    displayCode.split("").forEach((char, index) => {
+      if (char === typedCode[index]) {
+        counter += 1;
+      }
+    });
+    return counter;
   };
 
   render() {

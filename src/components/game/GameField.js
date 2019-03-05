@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export class GameField extends Component {
   state = {
     clockState: "ready",
-    clock: 10000
+    clock: 2000
   };
 
   renderCode = () => {
