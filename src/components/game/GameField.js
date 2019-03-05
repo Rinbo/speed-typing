@@ -3,7 +3,7 @@ import React, { Component } from "react";
 export class GameField extends Component {
   state = {
     clockState: "ready",
-    clock: 5000
+    clock: 10000
   };
 
   renderCode = () => {
@@ -38,6 +38,7 @@ export class GameField extends Component {
       if (currentClock === 0) {
         this.setState({ clockState: "complete", clock: 5000 });
         clearInterval(gameInterval);
+        this.props.gameComplete();
         return null;
       }
       this.setState({ clock: currentClock - 1000 });
