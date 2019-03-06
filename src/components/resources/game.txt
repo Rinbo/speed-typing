@@ -1,0 +1,7 @@
+import axios from "axios";
+export default axios.create({
+"Access-Control-Allow-Origin": "*",
+"Access-Control-Allow-Headers":
+const { typedCode, displayCode } = this.state;
+typedCode={typedCode}
+if (char === typedCode[index]) {

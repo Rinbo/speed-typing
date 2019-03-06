@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import GameField from "./GameField";
+import file from "../resources/game.txt";
 
 export class GameContainer extends Component {
   state = {
