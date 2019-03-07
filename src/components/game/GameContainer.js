@@ -8,28 +8,28 @@ export class GameContainer extends Component {
     displayCode: ``,
     score: 0,
     gameStatus: "ready",
-    codeRepo: ""
+    codeRepo: []
   };
 
   componentDidMount = () => {
     fetch(file)
       .then(response => response.text())
-      .then(text => this.setState({ codeRepo: text }));
-    setTimeout(() => {
-      this.getRandomCode();
-      console.log("HELLOO!!!");
-    }, 1000);
+      .then(text => this.setState({ codeRepo: text.split("\n") }))
+      .then(() => this.getRandomCode());
   };
 
   getRandomCode = () => {
     const { codeRepo } = this.state;
-    const codeArray = codeRepo.split("\n");
-    const randomNumber = Math.floor(Math.random() * codeArray.length);
-    this.setState({ displayCode: codeArray[randomNumber] });
+    const randomNumber = Math.floor(Math.random() * codeRepo.length);
+    this.setState({
+      displayCode: codeRepo[randomNumber].trim()
+    });
   };
 
   parseInput = input => {
     const { score, displayCode } = this.state;
+    console.log(typeof input);
+    console.log(typeof displayCode);
     if (input === displayCode) {
       const currentScore = score;
       this.setState({
@@ -65,7 +65,6 @@ export class GameContainer extends Component {
 
   render() {
     const { gameStatus, typedCode, displayCode, score } = this.state;
-    console.log(displayCode);
     if (gameStatus === "ready") {
       return (
         <GameField
