@@ -7,7 +7,14 @@ export class GameContainer extends Component {
     typedCode: "",
     displayCode: `import {setHeader} from "../apis/axios"`,
     score: 0,
-    gameStatus: "ready" // complete, ready
+    gameStatus: "ready",
+    text: ""
+  };
+
+  componentDidMount = () => {
+    fetch(file)
+      .then(response => response.text())
+      .then(text => this.setState({ text: text }));
   };
 
   parseInput = input => {
@@ -46,6 +53,7 @@ export class GameContainer extends Component {
   };
 
   render() {
+    console.log(this.state.text);
     const { gameStatus, typedCode, displayCode, score } = this.state;
     if (gameStatus === "ready") {
       return (
