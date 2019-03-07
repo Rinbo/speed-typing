@@ -3,8 +3,12 @@ import React, { Component } from "react";
 export class GameField extends Component {
   state = {
     clockState: "ready",
-    clock: 2000
+    clock: 20000
   };
+  /* 
+  componentDidMount = () => {
+    this.props.getRandomCode();
+  }; */
 
   renderCode = () => {
     const { displayCode, typedCode } = this.props;
@@ -45,18 +49,13 @@ export class GameField extends Component {
     }, 1000);
   };
 
-  onchange = e => {
-    e.preventDefault();
-    this.props.parseInput(e.target.value);
-  };
-
   render() {
     return (
       <div style={{ textAlign: "center", marginTop: "10vh" }}>
         <pre>
           <code className="unselectable">{this.renderCode()}</code>
         </pre>
-        <form className="ui form">
+        <form className="ui form" onSubmit={e => e.preventDefault()}>
           <div className="field">
             <input
               type="text"

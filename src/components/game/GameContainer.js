@@ -5,16 +5,27 @@ import file from "../resources/game.txt";
 export class GameContainer extends Component {
   state = {
     typedCode: "",
-    displayCode: `import {setHeader} from "../apis/axios"`,
+    displayCode: ``,
     score: 0,
     gameStatus: "ready",
-    text: ""
+    codeRepo: ""
   };
 
   componentDidMount = () => {
     fetch(file)
       .then(response => response.text())
-      .then(text => this.setState({ text: text }));
+      .then(text => this.setState({ codeRepo: text }));
+    setTimeout(() => {
+      this.getRandomCode();
+      console.log("HELLOO!!!");
+    }, 1000);
+  };
+
+  getRandomCode = () => {
+    const { codeRepo } = this.state;
+    const codeArray = codeRepo.split("\n");
+    const randomNumber = Math.floor(Math.random() * codeArray.length);
+    this.setState({ displayCode: codeArray[randomNumber] });
   };
 
   parseInput = input => {
@@ -22,10 +33,10 @@ export class GameContainer extends Component {
     if (input === displayCode) {
       const currentScore = score;
       this.setState({
-        displayCode: "Boom!",
         typedCode: "",
         score: currentScore + displayCode.length
       });
+      this.getRandomCode();
     } else {
       this.setState({ typedCode: input });
     }
@@ -53,8 +64,8 @@ export class GameContainer extends Component {
   };
 
   render() {
-    console.log(this.state.text);
     const { gameStatus, typedCode, displayCode, score } = this.state;
+    console.log(displayCode);
     if (gameStatus === "ready") {
       return (
         <GameField
@@ -62,6 +73,7 @@ export class GameContainer extends Component {
           displayCode={displayCode}
           parseInput={this.parseInput}
           gameComplete={this.gameComplete}
+          getRandomCode={this.getRandomCode}
         />
       );
     }
