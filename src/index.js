@@ -1,5 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
+import { AuthStore } from "./components/auth/AuthContext";
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const Provider = () => {
+  return (
+    <AuthStore>
+      <App />
+    </AuthStore>
+  );
+};
+
+ReactDOM.render(<Provider />, document.getElementById("root"));

@@ -1,18 +1,16 @@
-import React, { Component } from "react";
+import React from "react";
 import GameContainer from "./game/GameContainer";
 import Menu from "./utility/Menu";
 import MobileMenu from "./utility/MobileMenu";
 
-export class LandingPage extends Component {
-  render() {
-    return (
-      <div className="ui container">
-        <Menu signOut={this.props.signOut} />
-        <MobileMenu signOut={this.props.signOut} />
-        <GameContainer />
-      </div>
-    );
-  }
-}
+export const LandingPage = () => {
+  return (
+    <div className="ui container">
+      <Menu />
+      <MobileMenu />
+      <GameContainer />
+    </div>
+  );
+};
 
 export default LandingPage;
