@@ -28,8 +28,6 @@ export class GameContainer extends Component {
 
   parseInput = input => {
     const { score, displayCode } = this.state;
-    console.log(typeof input);
-    console.log(typeof displayCode);
     if (input === displayCode) {
       const currentScore = score;
       this.setState({

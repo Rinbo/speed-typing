@@ -1,25 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import endpoint from "../apis/endpoint";
 import { setHeaders, destroyToken } from "../apis/setHeaders";
 
 const Context = React.createContext("auth");
 
-export class AuthStore extends React.Component {
-  state = {
+export const AuthStore = props => {
+  const [state, updateState] = useState({
     isSignedIn: null,
     signedInUser: null,
     userEmail: null,
     isLoading: true
-  };
+  });
 
-  componentDidMount = () => {
+  useEffect(() => {
     setHeaders();
     endpoint
       .get("/users/validatetoken")
       .then(response => {
         localStorage.setItem("token", response.headers.token);
         setHeaders();
-        this.setState({
+        updateState({
           isSignedIn: true,
           signedInUser: response.data.name,
           userEmail: response.data.email,
@@ -27,20 +27,26 @@ export class AuthStore extends React.Component {
         });
       })
       .catch(e => {
-        this.setState({ isLoading: false });
+        updateState({
+          isSignedIn: false,
+          signedInUser: null,
+          userEmail: null,
+          isLoading: false
+        });
         console.log("Failed to validate token");
       });
-  };
+  }, []);
 
-  signIn = user => {
-    this.setState({
+  const signIn = user => {
+    updateState({
       isSignedIn: true,
       signedInUser: user.name,
-      userEmail: user.email
+      userEmail: user.email,
+      isLoading: false
     });
   };
 
-  signOut = () => {
+  const signOut = () => {
     setHeaders();
     endpoint
       .delete("/users/signout")
@@ -52,19 +58,20 @@ export class AuthStore extends React.Component {
           "Unable to destory token. However, you were logged out from the frontend. The security of your account is uncompromised."
         )
       );
-    this.setState({ email: null, signedInUser: null, isSignedIn: null });
+    updateState({
+      isSignedIn: false,
+      signedInUser: null,
+      userEmail: null,
+      isLoading: false
+    });
     destroyToken();
   };
 
-  render() {
-    return (
-      <Context.Provider
-        value={{ ...this.state, signIn: this.signIn, signOut: this.signOut }}
-      >
-        {this.props.children}
-      </Context.Provider>
-    );
-  }
-}
+  return (
+    <Context.Provider value={{ ...state, signIn: signIn, signOut: signOut }}>
+      {props.children}
+    </Context.Provider>
+  );
+};
 
 export default Context;
