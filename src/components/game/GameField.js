@@ -1,17 +1,18 @@
-import React, { Component } from "react";
+import React, { useState, useRef } from "react";
 
-export class GameField extends Component {
-  state = {
-    clockState: "ready",
-    clock: 20000
-  };
-  /* 
-  componentDidMount = () => {
-    this.props.getRandomCode();
-  }; */
+const ROUND_TIME = 10000;
 
-  renderCode = () => {
-    const { displayCode, typedCode } = this.props;
+export const GameField = ({
+  typedCode,
+  displayCode,
+  parseInput,
+  gameComplete
+}) => {
+  const [gameState, updateGameState] = useState("ready");
+  const [clock, updateClock] = useState(ROUND_TIME);
+  const intervalRef = useRef();
+
+  const renderCode = () => {
     return displayCode.split("").map((char, index) => {
       let color = "black";
       if (char === typedCode[index]) {
@@ -29,52 +30,52 @@ export class GameField extends Component {
     });
   };
 
-  timer = () => {
-    if (this.state.clockState === "ready") {
-      this.startTimer();
-      this.setState({ clockState: true });
+  const begin = () => {
+    if (gameState === "ready") {
+      updateGameState("in progress");
+      startTimer();
     }
   };
 
-  startTimer = () => {
+  const startTimer = () => {
     const gameInterval = setInterval(() => {
-      const currentClock = this.state.clock;
-      if (currentClock === 0) {
-        this.setState({ clockState: "complete", clock: 5000 });
-        clearInterval(gameInterval);
-        this.props.gameComplete();
-        return null;
-      }
-      this.setState({ clock: currentClock - 1000 });
+      updateClock(prevTick => prevTick - 1000);
     }, 1000);
+    intervalRef.current = gameInterval;
+    return () => clearInterval(intervalRef.current);
   };
 
-  render() {
-    return (
-      <div style={{ textAlign: "center", marginTop: "10vh" }}>
-        <pre>
-          <code className="unselectable">{this.renderCode()}</code>
-        </pre>
-        <form className="ui form" onSubmit={e => e.preventDefault()}>
-          <div className="field">
-            <input
-              type="text"
-              spellCheck="false"
-              onChange={e => {
-                e.preventDefault();
-                this.props.parseInput(e.target.value);
-              }}
-              onKeyDown={this.timer}
-              value={this.props.typedCode}
-              style={{ width: 400, marginTop: 30 }}
-            />
-          </div>
-        </form>
-        <br />
-        {this.state.clock / 1000}
-      </div>
-    );
+  if (clock === 0) {
+    clearInterval(intervalRef.current);
+    setTimeout(() => {
+      gameComplete();
+    }, 10);
   }
-}
+
+  return (
+    <div style={{ textAlign: "center", marginTop: "10vh" }}>
+      <pre>
+        <code className="unselectable">{renderCode()}</code>
+      </pre>
+      <form className="ui form" onSubmit={e => e.preventDefault()}>
+        <div className="field">
+          <input
+            type="text"
+            spellCheck="false"
+            onChange={e => {
+              e.preventDefault();
+              parseInput(e.target.value);
+            }}
+            onKeyDown={begin}
+            value={typedCode}
+            style={{ width: 400, marginTop: 30 }}
+          />
+        </div>
+      </form>
+      <br />
+      {clock / 1000}
+    </div>
+  );
+};
 
 export default GameField;

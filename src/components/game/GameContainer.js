@@ -70,7 +70,6 @@ export class GameContainer extends Component {
           displayCode={displayCode}
           parseInput={this.parseInput}
           gameComplete={this.gameComplete}
-          getRandomCode={this.getRandomCode}
         />
       );
     }

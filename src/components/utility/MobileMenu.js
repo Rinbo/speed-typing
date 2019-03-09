@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import AuthContext from "../auth/AuthContext";
 
-export default ({ signOut }) => {
+export default () => {
   const authContext = useContext(AuthContext);
 
   return (
