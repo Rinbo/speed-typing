@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import AuthContext from "../auth/AuthContext";
 
-export default () => {
+export default ({ selectPage }) => {
   const authContext = useContext(AuthContext);
 
   return (
@@ -12,7 +12,7 @@ export default () => {
       <div className="item borjessons-link">
         <i className="user icon" />
       </div>
-      <div className="item borjessons-link">
+      <div className="item borjessons-link" onClick={selectPage(2)}>
         <i className="trophy icon" />
       </div>
       <div

@@ -20,7 +20,17 @@ export const Register = () => {
         setHeaders();
         authContext.signIn(response.data);
       })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err.response.data);
+        let details = err.response.data.details.split(";");
+        if (details.length > 2) {
+          console.log(
+            details[details.length - 1]
+              .replace("default message [", "")
+              .replace("]", "")
+          );
+        }
+      });
   };
 
   return (

@@ -51,7 +51,7 @@ export const AuthStore = props => {
     endpoint
       .delete("/users/signout")
       .then(response => {
-        console.log(response);
+        console.log(response.data);
       })
       .catch(e =>
         console.log(

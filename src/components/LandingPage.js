@@ -1,13 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import GameContainer from "./game/GameContainer";
 import Menu from "./utility/Menu";
 import MobileMenu from "./utility/MobileMenu";
+import GlobalHighScores from "./highscores/GlobalHighScores";
 
 export const LandingPage = () => {
+  const [pageNumber, updatePageNumber] = useState(1);
+
+  /* const renderMain = () => {
+    switch (pageNumber) {
+      case 1:
+        return <GameContainer />;
+      case 2:
+        return <GlobalHighScores />;
+      default:
+        return "Hello!";
+    }
+  }; */
+
+  const selectPage = pageNumber => {
+    updatePageNumber(pageNumber);
+  };
+
   return (
     <div className="ui container">
-      <Menu />
-      <MobileMenu />
+      <Menu selectPage={selectPage} />
+      <MobileMenu selectPage={selectPage} />
       <GameContainer />
     </div>
   );
