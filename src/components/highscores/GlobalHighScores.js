@@ -18,7 +18,12 @@ const GlobalHighScores = () => {
     console.log(data);
   };
 
-  return <div />;
+  return (
+    <div>
+      <div className="ui header">==== High Scores ==== </div>
+      <div> @TODO - add react router-dom</div>
+    </div>
+  );
 };
 
 export default GlobalHighScores;
