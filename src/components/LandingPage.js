@@ -7,26 +7,27 @@ import GlobalHighScores from "./highscores/GlobalHighScores";
 export const LandingPage = () => {
   const [pageNumber, updatePageNumber] = useState(1);
 
-  /* const renderMain = () => {
+  const renderMain = () => {
     switch (pageNumber) {
       case 1:
         return <GameContainer />;
       case 2:
         return <GlobalHighScores />;
       default:
-        return "Hello!";
+        return <div>"Hello!"</div>;
     }
-  }; */
+  };
 
   const selectPage = pageNumber => {
     updatePageNumber(pageNumber);
   };
+  console.log(pageNumber, "pnr");
 
   return (
     <div className="ui container">
       <Menu selectPage={selectPage} />
       <MobileMenu selectPage={selectPage} />
-      <GameContainer />
+      {renderMain()}
     </div>
   );
 };

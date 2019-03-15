@@ -6,13 +6,13 @@ export default ({ selectPage }) => {
 
   return (
     <div className="ui vertical icon menu hide-on-mobile fixed-menu">
-      <div className="item borjessons-link">
+      <div className="item borjessons-link" onClick={() => selectPage(1)}>
         <i className="gamepad icon" />
       </div>
       <div className="item borjessons-link">
         <i className="user icon" />
       </div>
-      <div className="item borjessons-link" onClick={selectPage(2)}>
+      <div className="item borjessons-link" onClick={() => selectPage(2)}>
         <i className="trophy icon" />
       </div>
       <div
