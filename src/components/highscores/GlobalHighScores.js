@@ -20,7 +20,7 @@ const GlobalHighScores = () => {
   const renderHighscores = () => {
     return highscores.map(highscore => {
       return (
-        <div className="ui celled ordered centered list" style={{maxWidth: 400}}>
+        <div className="ui celled ordered list" style={{maxWidth: 400, textAlign:"center"}}>
           <div className="item" key={highscore.key}>
             <div className="item">{highscore.name}</div>
             <div className="item">{highscore.name}</div>
