@@ -18,14 +18,16 @@ const GlobalHighScores = () => {
   }, []);
 
   const renderHighscores = () => {
-    return highscores.map(highscore => {
+    return highscores.map((highscore, index) => {
       return (
-        <div className="ui celled ordered list" style={{maxWidth: 400, textAlign:"center"}}>
-          <div className="item" key={highscore.key}>
-            <div className="item">{highscore.name}</div>
-            <div className="item">{highscore.name}</div>
-          </div>
-        </div>
+        <tbody>
+          <tr key={highscore.id}>
+            <td>{index + 1}.</td>
+            <td>{highscore.name}</td>
+            <td>{highscore.score}</td>
+            <td>{highscore.date.slice(0, 10)}</td>
+          </tr>
+        </tbody>
       );
     });
   };
@@ -33,7 +35,27 @@ const GlobalHighScores = () => {
   if (highscores.length === 0) {
     return <Spinner />;
   }
-  return renderHighscores();
+  return (
+    <table
+      className="ui very basic centered collapsing celled table"
+      style={{
+        maxWidth: 400,
+        textAlign: "center",
+        display: "block",
+        margin: "auto"
+      }}
+    >
+      <thead>
+        <tr>
+          <th>Position</th>
+          <th>User</th>
+          <th>Score</th>
+          <th>Date</th>
+        </tr>
+      </thead>
+      {renderHighscores()}
+    </table>
+  );
 };
 
 export default GlobalHighScores;

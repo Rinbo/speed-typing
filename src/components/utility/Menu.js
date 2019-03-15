@@ -6,21 +6,26 @@ export default ({ selectPage }) => {
 
   return (
     <div className="ui vertical icon menu hide-on-mobile fixed-menu">
-      <div className="item borjessons-link" onClick={() => selectPage(1)}>
-        <i className="gamepad icon" />
-      </div>
-      <div className="item borjessons-link">
-        <i className="user icon" />
-      </div>
-      <div className="item borjessons-link" onClick={() => selectPage(2)}>
-        <i className="trophy icon" />
-      </div>
-      <div
+      <button className="item borjessons-link" onClick={() => selectPage(1)}>
+        <i className="gamepad icon borjessons-icon" />
+      </button>
+      <button href="#" className="item borjessons-link">
+        <i className="user icon borjessons-icon" />
+      </button>
+      <button
+        href="#"
+        className="item borjessons-link"
+        onClick={() => selectPage(2)}
+      >
+        <i className="trophy icon borjessons-icon" />
+      </button>
+      <button
+        href="#"
         className="item borjessons-link"
         onClick={() => authContext.signOut()}
       >
-        <i className="sign-out icon" />
-      </div>
+        <i className="sign-out icon borjessons-icon" />
+      </button>
     </div>
   );
 };
