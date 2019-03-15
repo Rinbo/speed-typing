@@ -24,7 +24,7 @@ export default () => {
   return (
     <div className="ui container">
       <div className="ui middle aligned center aligned grid">
-        <div className="column" style={{ width: 360 }}>
+        <div className="column" style={{ maxWidth: 360 }}>
           <div className="content" style={{ marginTop: 20 }}>
             If you already have an account - Login
           </div>

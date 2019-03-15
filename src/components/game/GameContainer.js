@@ -77,7 +77,7 @@ export class GameContainer extends Component {
       return (
         <div
           className="ui container"
-          style={{ textAlign: "center", fontSize: 30, marginTop: 100 }}
+          style={{ textAlign: "center", fontSize: 30}}
         >
           Your score: {score}
         </div>

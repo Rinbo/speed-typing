@@ -36,7 +36,7 @@ export const Register = () => {
   return (
     <div className="ui container">
       <div className="ui middle aligned center aligned grid">
-        <div className="column" style={{ width: 360 }}>
+        <div className="column" style={{ maxWidth: 360 }}>
           <div className="content" style={{ marginBottom: 20 }}>
             It is always more fun to measure yourself against others, so all we
             ask is that you provide a name that we can use to position you on

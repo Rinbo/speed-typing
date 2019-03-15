@@ -7,7 +7,7 @@ import LandingPage from "./LandingPage";
 
 export const App = () => {
   const authContext = useContext(AuthContext);
-  
+
   const renderApp = () => {
     if (authContext.isLoading) {
       return <Spinner />;

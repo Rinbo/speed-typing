@@ -30,7 +30,7 @@ export const Authpage = ({ signIn }) => {
       <Register signIn={signIn} />
       <div
         className="ui horizontal divider"
-        style={{ width: 360, margin: "auto" }}
+        style={{ maxWidth: 360, margin: "auto" }}
       >
         OR
       </div>

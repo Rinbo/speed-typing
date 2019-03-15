@@ -53,7 +53,7 @@ export const GameField = ({
   }
 
   return (
-    <div style={{ textAlign: "center", marginTop: "10vh" }}>
+    <div style={{ textAlign: "center" }}>
       <pre>
         <code className="unselectable">{renderCode()}</code>
       </pre>
@@ -68,7 +68,7 @@ export const GameField = ({
             }}
             onKeyDown={begin}
             value={typedCode}
-            style={{ width: 400, marginTop: 30 }}
+            style={{ maxWidth: 400, marginTop: 30 }}
           />
         </div>
       </form>
