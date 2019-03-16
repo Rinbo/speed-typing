@@ -53,12 +53,12 @@ export const GameField = ({
   }
 
   return (
-    <div style={{ textAlign: "center" }}>
+    <div style={{ textAlign: "center", maxWidth: 400, margin: "auto" }}>
       <pre>
         <code className="unselectable">{renderCode()}</code>
       </pre>
       <form className="ui form" onSubmit={e => e.preventDefault()}>
-        <div className="field">
+        <div className="field" style={{ marginTop: 30 }}>
           <input
             type="text"
             spellCheck="false"
@@ -68,12 +68,21 @@ export const GameField = ({
             }}
             onKeyDown={begin}
             value={typedCode}
-            style={{ maxWidth: 400, marginTop: 30 }}
+            style={{ maxWidth: 400, display: "inline" }}
           />
         </div>
       </form>
-      <br />
-      {clock / 1000}
+      <div className="item" style={{ marginTop: 10 }}>
+        <button className="ui basic black button left floated">
+          <i className="recycle icon" style={{ margin: "auto" }} />
+        </button>
+        <div
+          className="ui right floated"
+          style={{ padding: 10, textAlign: "right" }}
+        >
+          {clock / 1000}
+        </div>
+      </div>
     </div>
   );
 };
