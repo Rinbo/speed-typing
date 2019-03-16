@@ -16,15 +16,22 @@ export const GameField = ({
   const renderCode = () => {
     return displayCode.split("").map((char, index) => {
       let color = "black";
+      let backgroundColor = "";
       if (char === typedCode[index]) {
         color = "lightgreen";
       } else if (typedCode[index] === undefined) {
         color = "black";
       } else {
-        color = "red";
+        color = "#FA8072";
+        if (char === " ") {
+          backgroundColor = "red";
+        }
       }
       return (
-        <code key={index} style={{ color: color }}>
+        <code
+          key={index}
+          style={{ color: color, backgroundColor: backgroundColor }}
+        >
           {char}
         </code>
       );
