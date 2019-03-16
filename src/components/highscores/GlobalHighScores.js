@@ -20,14 +20,12 @@ const GlobalHighScores = () => {
   const renderHighscores = () => {
     return highscores.map((highscore, index) => {
       return (
-        <tbody>
-          <tr key={highscore.id}>
-            <td>{index + 1}.</td>
-            <td>{highscore.name}</td>
-            <td>{highscore.score}</td>
-            <td>{highscore.date.slice(0, 10)}</td>
-          </tr>
-        </tbody>
+        <tr key={highscore.id}>
+          <td>{index + 1}.</td>
+          <td>{highscore.name}</td>
+          <td>{highscore.score}</td>
+          <td>{highscore.date.slice(0, 10)}</td>
+        </tr>
       );
     });
   };
@@ -53,7 +51,7 @@ const GlobalHighScores = () => {
           <th>Date</th>
         </tr>
       </thead>
-      {renderHighscores()}
+      <tbody>{renderHighscores()}</tbody>
     </table>
   );
 };
