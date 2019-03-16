@@ -70,6 +70,7 @@ export class GameContainer extends Component {
           displayCode={displayCode}
           parseInput={this.parseInput}
           gameComplete={this.gameComplete}
+          getRandomCode={this.getRandomCode}
         />
       );
     }
@@ -77,7 +78,7 @@ export class GameContainer extends Component {
       return (
         <div
           className="ui container"
-          style={{ textAlign: "center", fontSize: 30}}
+          style={{ textAlign: "center", fontSize: 30 }}
         >
           Your score: {score}
         </div>

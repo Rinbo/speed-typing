@@ -6,7 +6,8 @@ export const GameField = ({
   typedCode,
   displayCode,
   parseInput,
-  gameComplete
+  gameComplete,
+  getRandomCode
 }) => {
   const [gameState, updateGameState] = useState("ready");
   const [clock, updateClock] = useState(ROUND_TIME);
@@ -73,12 +74,25 @@ export const GameField = ({
         </div>
       </form>
       <div className="item" style={{ marginTop: 10 }}>
-        <button className="ui basic black button left floated">
-          <i className="recycle icon" style={{ margin: "auto" }} />
+        <button
+          className="ui basic black button left floated"
+          onClick={() => {
+            clearInterval(intervalRef.current);
+            updateClock(ROUND_TIME);
+            updateGameState("ready");
+            parseInput("");
+            getRandomCode();
+          }}
+        >
+          <i className="undo icon" style={{ margin: "auto" }} />
         </button>
         <div
           className="ui right floated"
-          style={{ padding: 10, textAlign: "right" }}
+          style={{
+            padding: 10,
+            textAlign: "right",
+            color: clock <= 5000 ? "red" : "black"
+          }}
         >
           {clock / 1000}
         </div>
