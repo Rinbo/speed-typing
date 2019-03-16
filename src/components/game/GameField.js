@@ -1,13 +1,13 @@
 import React, { useState, useRef } from "react";
 
-const ROUND_TIME = 10000;
+const ROUND_TIME = 2000;
 
 export const GameField = ({
   typedCode,
   displayCode,
   parseInput,
   gameComplete,
-  getRandomCode
+  restart
 }) => {
   const [gameState, updateGameState] = useState("ready");
   const [clock, updateClock] = useState(ROUND_TIME);
@@ -80,8 +80,7 @@ export const GameField = ({
             clearInterval(intervalRef.current);
             updateClock(ROUND_TIME);
             updateGameState("ready");
-            parseInput("");
-            getRandomCode();
+            restart();
           }}
         >
           <i className="undo icon" style={{ margin: "auto" }} />

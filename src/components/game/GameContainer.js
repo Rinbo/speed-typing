@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import GameField from "./GameField";
+import Spinner from "../utility/Spinner";
 import file from "../resources/game.txt";
+import GameComplete from "./GameComplete";
 
 export class GameContainer extends Component {
   state = {
@@ -24,6 +26,11 @@ export class GameContainer extends Component {
     this.setState({
       displayCode: codeRepo[randomNumber].trim()
     });
+  };
+
+  restart = () => {
+    this.setState({ gameStatus: "ready", typedCode: "", score: 0 });
+    this.getRandomCode();
   };
 
   parseInput = input => {
@@ -70,21 +77,14 @@ export class GameContainer extends Component {
           displayCode={displayCode}
           parseInput={this.parseInput}
           gameComplete={this.gameComplete}
-          getRandomCode={this.getRandomCode}
+          restart={this.restart}
         />
       );
     }
     if (gameStatus === "complete") {
-      return (
-        <div
-          className="ui container"
-          style={{ textAlign: "center", fontSize: 30 }}
-        >
-          Your score: {score}
-        </div>
-      );
+      return <GameComplete restart={this.restart} score={score} />;
     }
-    return <div className="ui centered header">Woot! How did I get here?</div>;
+    return <Spinner />;
   }
 }
 
