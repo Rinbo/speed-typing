@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-const ROUND_TIME = 2000;
+const ROUND_TIME = 20000;
 
 export const GameField = ({
   typedCode,

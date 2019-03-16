@@ -21,7 +21,6 @@ export const LandingPage = () => {
   const selectPage = pageNumber => {
     updatePageNumber(pageNumber);
   };
-  console.log(pageNumber, "pnr");
 
   return (
     <div className="ui container">
