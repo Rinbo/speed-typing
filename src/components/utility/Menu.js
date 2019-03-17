@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import AuthContext from "../auth/AuthContext";
+import AuthContext from "../context/APIContext";
 
 export default ({ selectPage }) => {
   const authContext = useContext(AuthContext);
@@ -9,18 +9,13 @@ export default ({ selectPage }) => {
       <button className="item borjessons-link" onClick={() => selectPage(1)}>
         <i className="gamepad icon borjessons-icon" />
       </button>
-      <button href="#" className="item borjessons-link">
+      <button className="item borjessons-link">
         <i className="user icon borjessons-icon" />
       </button>
-      <button
-        href="#"
-        className="item borjessons-link"
-        onClick={() => selectPage(2)}
-      >
+      <button className="item borjessons-link" onClick={() => selectPage(2)}>
         <i className="trophy icon borjessons-icon" />
       </button>
       <button
-        href="#"
         className="item borjessons-link"
         onClick={() => authContext.signOut()}
       >

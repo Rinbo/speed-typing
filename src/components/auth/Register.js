@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
 import endpoint from "../apis/endpoint";
 import { setHeaders } from "../apis/setHeaders";
-import AuthContext from "./AuthContext";
+import AuthContext from "../context/APIContext";
 
 export const Register = () => {
   const [name, updateName] = useState("");

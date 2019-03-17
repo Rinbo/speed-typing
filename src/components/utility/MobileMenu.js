@@ -1,12 +1,12 @@
 import React, { useContext } from "react";
-import AuthContext from "../auth/AuthContext";
+import AuthContext from "../context/APIContext";
 
 export default ({ selectPage }) => {
   const authContext = useContext(AuthContext);
 
   return (
     <div className="ui bottom fixed fluid four item menu show-on-mobile">
-      <div className="item borjessons-link" onClick={()=>selectPage(1)}>
+      <div className="item borjessons-link" onClick={() => selectPage(1)}>
         <i className="gamepad icon" />
       </div>
       <div className="item borjessons-link">

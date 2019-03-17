@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import Authpage from "./auth/Authpage";
 import Spinner from "./utility/Spinner";
-import AuthContext from "./auth/AuthContext";
+import AuthContext from "./context/APIContext";
 import "./app.css";
 import LandingPage from "./LandingPage";
 

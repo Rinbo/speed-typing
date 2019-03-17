@@ -9,7 +9,9 @@ export const AuthStore = props => {
     isSignedIn: null,
     signedInUser: null,
     userEmail: null,
-    isLoading: true
+    isLoading: true,
+    statusMessage: "",
+    statusCode: null
   });
 
   useEffect(() => {
@@ -19,11 +21,14 @@ export const AuthStore = props => {
       .then(response => {
         localStorage.setItem("token", response.headers.token);
         setHeaders();
+        console.log(response, "from use effect");
         updateState({
           isSignedIn: true,
           signedInUser: response.data.name,
           userEmail: response.data.email,
-          isLoading: false
+          isLoading: false,
+          statusMessage: "Token validated. Welcome back " + response.data.name,
+          statusCode: 200
         });
       })
       .catch(e => {
@@ -31,7 +36,10 @@ export const AuthStore = props => {
           isSignedIn: false,
           signedInUser: null,
           userEmail: null,
-          isLoading: false
+          isLoading: false,
+          statusMessage:
+            "Unable to validate your token. Please try to log in using your credentials",
+          statusCode: 401
         });
         console.log("Failed to validate token");
       });
@@ -42,7 +50,9 @@ export const AuthStore = props => {
       isSignedIn: true,
       signedInUser: user.name,
       userEmail: user.email,
-      isLoading: false
+      isLoading: false,
+      statusMessage: "Signin successful. Welcome " + user.name,
+      statusCode: 200
     });
   };
 
@@ -62,13 +72,23 @@ export const AuthStore = props => {
       isSignedIn: false,
       signedInUser: null,
       userEmail: null,
-      isLoading: false
+      isLoading: false,
+      statusMessage: "Signout Successful. Cya later",
+      statusCode: 200
     });
     destroyToken();
   };
 
+  const setStatus = (message, code) => {
+    updateState(() => {
+      return { ...state, ...{ statusMessage: message, statusCode: code } };
+    });
+  };
+
   return (
-    <Context.Provider value={{ ...state, signIn: signIn, signOut: signOut }}>
+    <Context.Provider
+      value={{ ...state, signIn: signIn, signOut: signOut, setStatus }}
+    >
       {props.children}
     </Context.Provider>
   );

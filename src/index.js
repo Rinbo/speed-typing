@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import App from "./components/App";
-import { AuthStore } from "./components/auth/AuthContext";
+import { AuthStore } from "./components/context/APIContext";
 
 const Provider = () => {
   return (
