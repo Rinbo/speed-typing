@@ -21,7 +21,6 @@ export const AuthStore = props => {
       .then(response => {
         localStorage.setItem("token", response.headers.token);
         setHeaders();
-        console.log(response, "from use effect");
         updateState({
           isSignedIn: true,
           signedInUser: response.data.name,
@@ -80,15 +79,13 @@ export const AuthStore = props => {
   };
 
   const setStatus = (message, code) => {
-    updateState(() => {
-      return { ...state, ...{ statusMessage: message, statusCode: code } };
+    updateState(prevState => {
+      return { ...prevState, statusMessage: message, statusCode: code };
     });
   };
 
   return (
-    <Context.Provider
-      value={{ ...state, signIn: signIn, signOut: signOut, setStatus }}
-    >
+    <Context.Provider value={{ ...state, signIn, signOut, setStatus }}>
       {props.children}
     </Context.Provider>
   );

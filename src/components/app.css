@@ -50,3 +50,28 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+@keyframes banner {
+  0% {
+    left: -100%;
+  }
+  10% {
+    left: 20%;
+  }
+  90% {
+    left: 20%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+.statusMessage {
+  width: 60%;
+  position: fixed;
+  top: 0px;
+  left: 20%;
+  transition: 1s;
+  /* animation-name: banner;
+  animation-duration: 3s; */
+}
