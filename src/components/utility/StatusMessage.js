@@ -1,24 +1,25 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import APIContext from "../context/APIContext";
+import AnimatedMessage from "./AnimatedMessage";
 
 const StatusMessage = () => {
   const apiContext = useContext(APIContext);
+  const [showMessage, updateShowMessage] = useState("");
 
-  const renderBanner = () => {
-    return (
-      <div
-        id="banner"
-        className="ui centered sub header statusMessage"
-        style={{
-          color: apiContext.statusCode === 200 ? "green" : "red",
-          marginTop: 20
-        }}
-      >
-        {apiContext.statusMessage}
-      </div>
-    );
-  };
-  return renderBanner();
+  useEffect(() => {
+    updateShowMessage(apiContext.statusMessage);
+  });
+
+  if (showMessage === "") {
+    return null;
+  }
+  return (
+    <AnimatedMessage
+      message={apiContext.statusMessage}
+      statusCode={apiContext.statusCode}
+      setStatus={apiContext.setStatus}
+    />
+  );
 };
 
 export default StatusMessage;

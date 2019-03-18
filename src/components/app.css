@@ -62,7 +62,7 @@
     left: 20%;
   }
   100% {
-    left: 200%;
+    left: 100%;
   }
 }
 
@@ -70,8 +70,8 @@
   width: 60%;
   position: fixed;
   top: 0px;
-  left: 20%;
+  left: -100%;
   transition: 1s;
-  /* animation-name: banner;
-  animation-duration: 3s; */
+  animation-name: banner;
+  animation-duration: 3s;
 }
