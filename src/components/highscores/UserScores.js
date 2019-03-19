@@ -8,6 +8,7 @@ const UserScores = () => {
   const apiContext = useContext(APIContext);
 
   useEffect(() => {
+    setHeaders();
     endpoint
       .get("/highscores/user")
       .then(response => {
@@ -48,7 +49,7 @@ const UserScores = () => {
       <table
         className="ui very basic centered collapsing celled table"
         style={{
-          maxWidth: 350,
+          maxWidth: 225,
           textAlign: "center",
           display: "block",
           margin: "25px auto"

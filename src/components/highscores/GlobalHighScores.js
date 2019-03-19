@@ -8,6 +8,7 @@ const GlobalHighScores = () => {
   const apiContext = useContext(APIContext);
 
   useEffect(() => {
+    setHeaders();
     endpoint
       .get("/highscores/all")
       .then(response => {

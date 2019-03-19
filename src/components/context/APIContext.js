@@ -40,6 +40,7 @@ export const AuthStore = props => {
             "Unable to validate your token. Please try to log in using your credentials",
           statusCode: 401
         });
+        localStorage.removeItem("token");
         console.log("Failed to validate token");
       });
   }, []);
