@@ -9,7 +9,7 @@ export default ({ selectPage }) => {
       <div className="item borjessons-link" onClick={() => selectPage(1)}>
         <i className="gamepad icon" />
       </div>
-      <div className="item borjessons-link">
+      <div className="item borjessons-link" onClick={() => selectPage(3)}>
         <i className="user icon" />
       </div>
       <div className="item borjessons-link" onClick={() => selectPage(2)}>

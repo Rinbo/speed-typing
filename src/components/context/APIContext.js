@@ -26,7 +26,7 @@ export const AuthStore = props => {
           signedInUser: response.data.name,
           userEmail: response.data.email,
           isLoading: false,
-          statusMessage: "Token validated. Welcome back " + response.data.name,
+          statusMessage: "Welcome back " + response.data.name,
           statusCode: 200
         });
       })
@@ -68,7 +68,7 @@ export const AuthStore = props => {
       signedInUser: null,
       userEmail: null,
       isLoading: false,
-      statusMessage: "Signout Successful. Cya later",
+      statusMessage: "Cya later",
       statusCode: 200
     });
     destroyToken();

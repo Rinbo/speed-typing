@@ -3,44 +3,48 @@ import endpoint from "../apis/endpoint";
 import { setHeaders } from "../apis/setHeaders";
 import APIContext from "../context/APIContext";
 
-const GlobalHighScores = () => {
-  const [highscores, updateHighscores] = useState([]);
+const UserScores = () => {
+  const [scores, updateScore] = useState([]);
   const apiContext = useContext(APIContext);
 
   useEffect(() => {
     endpoint
-      .get("/highscores/all")
+      .get("/highscores/user")
       .then(response => {
-        updateHighscores(response.data);
+        updateScore(response.data);
         localStorage.setItem("token", response.headers.token);
         setHeaders();
       })
       .catch(e => {
-        const message = e.response.data.message.split('"')[1];
-        const statusCode = parseInt(e.response.data.message.match(/\d+/g)[0]);
-        apiContext.setStatus(message, statusCode);
+        try {
+          const message = e.response.data.message.split('"')[1];
+          const statusCode = parseInt(e.response.data.message.match(/\d+/g)[0]);
+          apiContext.setStatus(message, statusCode);
+        } catch (e) {
+          console.log("Failed to fetch user score data");
+        }
       });
   }, []);
 
-  const renderHighscores = () => {
-    return highscores.map((highscore, index) => {
+  const renderScores = () => {
+    return scores.map((score, index) => {
       return (
-        <tr key={highscore.id}>
+        <tr key={score.id}>
           <td>{index + 1}.</td>
-          <td>{highscore.name}</td>
-          <td>{highscore.score}</td>
-          <td>{highscore.date.slice(0, 10)}</td>
+          <td>{score.score}</td>
+          <td>{score.date.slice(0, 10)}</td>
         </tr>
       );
     });
   };
 
-  if (highscores.length === 0) {
+  if (scores.length === 0) {
     return null;
   }
+
   return (
     <>
-      <div className="ui centered sub header">Score board</div>
+      <div className="ui centered sub header">Your history</div>
       <table
         className="ui very basic centered collapsing celled table"
         style={{
@@ -53,15 +57,14 @@ const GlobalHighScores = () => {
         <thead>
           <tr>
             <th>Position</th>
-            <th>User</th>
             <th>Score</th>
             <th>Date</th>
           </tr>
         </thead>
-        <tbody>{renderHighscores()}</tbody>
+        <tbody>{renderScores()}</tbody>
       </table>
     </>
   );
 };
 
-export default GlobalHighScores;
+export default UserScores;

@@ -9,7 +9,7 @@ export default ({ selectPage }) => {
       <button className="item borjessons-link" onClick={() => selectPage(1)}>
         <i className="gamepad icon borjessons-icon" />
       </button>
-      <button className="item borjessons-link">
+      <button className="item borjessons-link" onClick={() => selectPage(3)}>
         <i className="user icon borjessons-icon" />
       </button>
       <button className="item borjessons-link" onClick={() => selectPage(2)}>

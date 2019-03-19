@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import GameField from "./GameField";
-import Spinner from "../utility/Spinner";
 import file from "../resources/game.txt";
 import GameComplete from "./GameComplete";
 import endpoint from "../apis/endpoint";
@@ -97,7 +96,7 @@ export class GameContainer extends Component {
     if (gameStatus === "complete") {
       return <GameComplete restart={this.restart} score={score} />;
     }
-    return <Spinner />;
+    return null;
   }
 }
 

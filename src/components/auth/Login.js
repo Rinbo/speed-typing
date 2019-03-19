@@ -16,9 +16,12 @@ export default () => {
         localStorage.setItem("token", response.headers.token);
         setHeaders();
         authContext.signIn(response.data);
-        console.log(response.data);
       })
-      .catch(err => console.log(err.response.data.message));
+      .catch(err => {
+        const message = err.response.data.message.split('"')[1];
+        const statusCode = parseInt(err.response.data.message.match(/\d+/g)[0]);
+        authContext.setStatus(message, statusCode);
+      });
   };
 
   return (

@@ -76,7 +76,7 @@ export const GameField = ({
             }}
             onKeyDown={begin}
             value={typedCode}
-            style={{ maxWidth: 400, display: "inline" }}
+            style={{ display: "inline" }}
           />
         </div>
       </form>
