@@ -66,7 +66,6 @@ export class GameContainer extends Component {
       .put("/highscores/update", { score: this.state.score })
       .then(response => {
         localStorage.setItem("token", response.headers.token);
-        setHeaders();
         alert(response.data);
       });
   };

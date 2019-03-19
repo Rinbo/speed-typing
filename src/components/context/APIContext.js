@@ -62,11 +62,7 @@ export const AuthStore = props => {
       .then(response => {
         console.log(response.data);
       })
-      .catch(e =>
-        console.log(
-          "Unable to destory token. However, you were logged out from the frontend. The security of your account is uncompromised."
-        )
-      );
+      .catch(e => console.log("Unable to destory token."));
     updateState({
       isSignedIn: false,
       signedInUser: null,

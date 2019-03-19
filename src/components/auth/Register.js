@@ -21,15 +21,9 @@ export const Register = () => {
         authContext.signIn(response.data);
       })
       .catch(err => {
-        console.log(err.response.data);
-        let details = err.response.data.details.split(";");
-        if (details.length > 2) {
-          console.log(
-            details[details.length - 1]
-              .replace("default message [", "")
-              .replace("]", "")
-          );
-        }
+        const message = err.response.data.message.split('"')[1];
+        const statusCode = parseInt(err.response.data.message.match(/\d+/g)[0]);
+        authContext.setStatus(message, statusCode);
       });
   };
 

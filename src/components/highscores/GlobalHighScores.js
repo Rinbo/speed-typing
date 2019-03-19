@@ -34,25 +34,28 @@ const GlobalHighScores = () => {
     return <Spinner />;
   }
   return (
-    <table
-      className="ui very basic centered collapsing celled table"
-      style={{
-        maxWidth: 400,
-        textAlign: "center",
-        display: "block",
-        margin: "auto"
-      }}
-    >
-      <thead>
-        <tr>
-          <th>Position</th>
-          <th>User</th>
-          <th>Score</th>
-          <th>Date</th>
-        </tr>
-      </thead>
-      <tbody>{renderHighscores()}</tbody>
-    </table>
+    <>
+      <div className="ui centered sub header">Score board</div>
+      <table
+        className="ui very basic centered collapsing celled table"
+        style={{
+          maxWidth:350,
+          textAlign: "center",
+          display: "block",
+          margin: "25px auto",
+        }}
+      >
+        <thead>
+          <tr>
+            <th>Position</th>
+            <th>User</th>
+            <th>Score</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody>{renderHighscores()}</tbody>
+      </table>
+    </>
   );
 };
 
