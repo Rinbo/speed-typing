@@ -1,27 +1,28 @@
-import React, { useContext } from "react";
-import APIContext from "../context/APIContext";
+import React from "react";
+import Register from "../auth/Register";
 
 const GameComplete = ({ score, restart }) => {
-  const apiContext = useContext(APIContext);
-  //@TODO add registationform
   return (
-    <div style={{ textAlign: "center", fontSize: 30 }}>
-      <div
-        className="ui container"
-        style={{ textAlign: "center", fontSize: 30 }}
-      >
-        Your score: {score}
+    <>
+      <div style={{ textAlign: "center", fontSize: 30, marginBottom: 50 }}>
+        <div
+          className="ui container"
+          style={{ textAlign: "center", fontSize: 30 }}
+        >
+          Your score: {score}
+        </div>
+        <button
+          className="ui button basic black"
+          style={{ marginTop: 20 }}
+          onClick={() => {
+            restart();
+          }}
+        >
+          <i className="undo icon" style={{ margin: "auto" }} />
+        </button>
       </div>
-      <button
-        className="ui button basic black"
-        style={{ marginTop: 20 }}
-        onClick={() => {
-          restart();
-        }}
-      >
-        <i className="undo icon" style={{ margin: "auto" }} />
-      </button>
-    </div>
+      <Register />
+    </>
   );
 };
 
