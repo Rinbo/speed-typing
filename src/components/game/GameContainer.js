@@ -4,6 +4,7 @@ import file from "../resources/game.txt";
 import GameComplete from "./GameComplete";
 import endpoint from "../apis/endpoint";
 import { setHeaders } from "../apis/setHeaders";
+import { parseErr } from "../utility/parseResponse";
 
 export class GameContainer extends Component {
   state = {
@@ -65,7 +66,16 @@ export class GameContainer extends Component {
       .put("/highscores/update", { score: this.state.score })
       .then(response => {
         localStorage.setItem("token", response.headers.token);
-        alert(response.data);
+        console.log(response);
+        this.setState({
+          statusMessage: response.data,
+          statusCode: response.status
+        });
+      })
+      .catch(err => {
+        const [message, statusCode] = parseErr(err);
+        this.setState({ statusMessage: message, statusCode });
+        console.log(message, statusCode);
       });
   };
 
@@ -81,7 +91,14 @@ export class GameContainer extends Component {
   };
 
   render() {
-    const { gameStatus, typedCode, displayCode, score } = this.state;
+    const {
+      gameStatus,
+      typedCode,
+      displayCode,
+      score,
+      statusMessage,
+      statusCode
+    } = this.state;
     if (gameStatus === "ready") {
       return (
         <GameField

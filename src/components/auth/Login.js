@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import endpoint from "../apis/endpoint";
 import { setHeaders } from "../apis/setHeaders";
+import { parseErr } from "../utility/parseResponse";
 import AuthContext from "../context/APIContext";
 
 export default () => {
@@ -18,8 +19,7 @@ export default () => {
         authContext.signIn(response.data);
       })
       .catch(err => {
-        const message = err.response.data.message.split('"')[1];
-        const statusCode = parseInt(err.response.data.message.match(/\d+/g)[0]);
+        const [message, statusCode] = parseErr(err);
         authContext.setStatus(message, statusCode);
       });
   };

@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
+import APIContext from "../context/APIContext";
 
 const GameComplete = ({ score, restart }) => {
+  const apiContext = useContext(APIContext);
+  //@TODO add registationform
   return (
     <div style={{ textAlign: "center", fontSize: 30 }}>
       <div
