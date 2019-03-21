@@ -61,20 +61,18 @@ export class GameContainer extends Component {
   };
 
   updateHighScore = () => {
+    const { relayStatus } = this.props;
     setHeaders();
     endpoint
       .put("/highscores/update", { score: this.state.score })
       .then(response => {
         localStorage.setItem("token", response.headers.token);
+        relayStatus(response.data, response.status);
         console.log(response);
-        this.setState({
-          statusMessage: response.data,
-          statusCode: response.status
-        });
       })
       .catch(err => {
         const [message, statusCode] = parseErr(err);
-        this.setState({ statusMessage: message, statusCode });
+        relayStatus(message, statusCode);
         console.log(message, statusCode);
       });
   };
