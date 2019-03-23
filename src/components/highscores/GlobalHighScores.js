@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
 import endpoint from "../apis/endpoint";
-import { setHeaders } from "../apis/setHeaders";
 import APIContext from "../context/APIContext";
 
 const GlobalHighScores = () => {
@@ -8,13 +7,10 @@ const GlobalHighScores = () => {
   const apiContext = useContext(APIContext);
 
   useEffect(() => {
-    setHeaders();
     endpoint
       .get("/highscores/all")
       .then(response => {
         updateHighscores(response.data);
-        localStorage.setItem("token", response.headers.token);
-        setHeaders();
       })
       .catch(e => {
         const message = e.response.data.message.split('"')[1];

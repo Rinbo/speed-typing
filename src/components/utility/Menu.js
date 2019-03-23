@@ -14,6 +14,30 @@ export default ({ selectPage }) => {
     setWindowWidth(window.innerWidth);
   };
 
+  const renderUserLinks = () => {
+    return (
+      <>
+        <button className="item borjessons-link" onClick={() => selectPage(3)}>
+          <i className="user icon borjessons-icon" />
+        </button>
+        <button
+          className="item borjessons-link"
+          onClick={() => authContext.signOut()}
+        >
+          <i className="sign-out icon borjessons-icon" />
+        </button>
+      </>
+    );
+  };
+
+  const renderAuthLinks = () => {
+    return (
+      <button className="item borjessons-link" onClick={() => selectPage(4)}>
+        <i className="sign-in icon borjessons-icon" />
+      </button>
+    );
+  };
+
   return (
     <div
       className={
@@ -28,15 +52,7 @@ export default ({ selectPage }) => {
       <button className="item borjessons-link" onClick={() => selectPage(2)}>
         <i className="trophy icon borjessons-icon" />
       </button>
-      <button className="item borjessons-link" onClick={() => selectPage(3)}>
-        <i className="user icon borjessons-icon" />
-      </button>
-      <button
-        className="item borjessons-link"
-        onClick={() => authContext.signOut()}
-      >
-        <i className="sign-out icon borjessons-icon" />
-      </button>
+      {authContext.isSignedIn ? renderUserLinks() : renderAuthLinks()}
     </div>
   );
 };

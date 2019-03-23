@@ -1,7 +1,11 @@
 import axios from "axios";
 
 export const setHeaders = () => {
-  axios.defaults.headers.common["token"] = localStorage.getItem("token");
+  try {
+    axios.defaults.headers.common["token"] = localStorage.getItem("token");
+  } catch (e) {
+    console.log("Unable to fetch token");
+  }
 };
 
 export const destroyToken = () => {

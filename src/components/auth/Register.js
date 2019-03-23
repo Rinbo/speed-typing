@@ -32,9 +32,8 @@ export const Register = () => {
       <div className="ui middle aligned center aligned grid">
         <div className="column" style={{ maxWidth: 360 }}>
           <div className="content" style={{ marginBottom: 20 }}>
-            It is always more fun to measure yourself against others, so all we
-            ask is that you provide a name that we can use to position you on
-            the scoreboard:
+            Register an account and see how you measure up against others on the
+            scoreboard:
           </div>
           <form
             className="ui large form"
@@ -80,7 +79,7 @@ export const Register = () => {
                 </div>
               </div>
               <button className="ui fluid large black submit button">
-                Go!
+                Register!
               </button>
             </div>
 

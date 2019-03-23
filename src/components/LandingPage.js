@@ -1,5 +1,6 @@
 import React, { useState, useContext } from "react";
 import GameContainer from "./game/GameContainer";
+import AuthPage from "./auth/Authpage";
 import Menu from "./utility/Menu";
 import GlobalHighScores from "./highscores/GlobalHighScores";
 import UserScores from "./highscores/UserScores";
@@ -16,11 +17,13 @@ export const LandingPage = () => {
   const renderMain = () => {
     switch (pageNumber) {
       case 1:
-        return <GameContainer relayStatus={relayStatus} />;
+        return <GameContainer ready={"ready"} relayStatus={relayStatus} />;
       case 2:
         return <GlobalHighScores />;
       case 3:
         return <UserScores />;
+      case 4:
+        return <AuthPage />;
       default:
         return <div>"Hello!"</div>;
     }

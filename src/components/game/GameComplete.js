@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import Register from "../auth/Register";
+import AuthPage from "../auth/Authpage";
 import APIContext from "../context/APIContext";
 
 const GameComplete = ({ score, restart }) => {
@@ -24,7 +24,7 @@ const GameComplete = ({ score, restart }) => {
           <i className="undo icon" style={{ margin: "auto" }} />
         </button>
       </div>
-      {!apiContext.isSignedIn ? <Register /> : null}
+      {!apiContext.isSignedIn ? <AuthPage /> : null}
     </>
   );
 };
