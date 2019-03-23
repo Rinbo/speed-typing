@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import Authpage from "./auth/Authpage";
 import Spinner from "./utility/Spinner";
 import AuthContext from "./context/APIContext";
 import "./app.css";
@@ -11,9 +10,6 @@ export const App = () => {
   const renderApp = () => {
     if (authContext.isLoading) {
       return <Spinner />;
-    }
-    if (!authContext.isSignedIn) {
-      return <Authpage />;
     }
     return <LandingPage />;
   };

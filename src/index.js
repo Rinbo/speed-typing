@@ -4,7 +4,7 @@ import App from "./components/App";
 import { AuthStore } from "./components/context/APIContext";
 import StatusMessage from "./components/utility/StatusMessage";
 
-const Provider = () => {
+const AppWrapper = () => {
   return (
     <AuthStore>
       <StatusMessage />
@@ -15,4 +15,4 @@ const Provider = () => {
   );
 };
 
-ReactDOM.render(<Provider />, document.getElementById("root"));
+ReactDOM.render(<AppWrapper />, document.getElementById("root"));

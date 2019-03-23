@@ -1,7 +1,6 @@
 import React, { useState, useContext } from "react";
 import GameContainer from "./game/GameContainer";
 import Menu from "./utility/Menu";
-import MobileMenu from "./utility/MobileMenu";
 import GlobalHighScores from "./highscores/GlobalHighScores";
 import UserScores from "./highscores/UserScores";
 import APIContext from "./context/APIContext";
@@ -34,7 +33,7 @@ export const LandingPage = () => {
   return (
     <div className="ui container">
       <Menu selectPage={selectPage} />
-      <MobileMenu selectPage={selectPage} />
+
       {renderMain()}
     </div>
   );
