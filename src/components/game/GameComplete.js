@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import Register from "../auth/Register";
+import APIContext from "../context/APIContext";
 
 const GameComplete = ({ score, restart }) => {
+  const apiContext = useContext(APIContext);
+
   return (
     <>
       <div style={{ textAlign: "center", fontSize: 30, marginBottom: 50 }}>
@@ -21,7 +24,7 @@ const GameComplete = ({ score, restart }) => {
           <i className="undo icon" style={{ margin: "auto" }} />
         </button>
       </div>
-      <Register />
+      {!apiContext.isSignedIn ? <Register /> : null}
     </>
   );
 };

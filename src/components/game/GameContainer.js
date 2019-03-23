@@ -89,14 +89,7 @@ export class GameContainer extends Component {
   };
 
   render() {
-    const {
-      gameStatus,
-      typedCode,
-      displayCode,
-      score,
-      statusMessage,
-      statusCode
-    } = this.state;
+    const { gameStatus, typedCode, displayCode, score } = this.state;
     if (gameStatus === "ready") {
       return (
         <GameField
