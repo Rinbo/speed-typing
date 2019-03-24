@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import GameContainer from "./game/GameContainer";
-import AuthPage from "./auth/Authpage";
 import Menu from "./utility/Menu";
 import GlobalHighScores from "./highscores/GlobalHighScores";
 import UserScores from "./highscores/UserScores";
 import NavigationContext from "./context/NavigationContext";
+import Register from "./auth/Register";
+import Login from "./auth/Login";
 
 export const LandingPage = () => {
   const navigation = useContext(NavigationContext);
@@ -18,7 +19,9 @@ export const LandingPage = () => {
       case 3:
         return <UserScores />;
       case 4:
-        return <AuthPage />;
+        return <Register />;
+      case 5:
+        return <Login />;
       default:
         return <div>"Hello!"</div>;
     }

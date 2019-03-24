@@ -37,12 +37,7 @@ export const Authpage = () => {
       <div>
         {renderBlurb()}
         <Register setLoginPage={setLoginPage} />
-        <div
-          className="ui horizontal divider"
-          style={{ maxWidth: 360, margin: "auto" }}
-        >
-          OR
-        </div>
+
         <p style={{ textAlign: "center", marginTop: 15 }}>
           If you already have an account
         </p>

@@ -22,7 +22,10 @@ export default ({ selectPage }) => {
         </button>
         <button
           className="item borjessons-link"
-          onClick={() => authContext.signOut()}
+          onClick={() => {
+            authContext.signOut();
+            selectPage(1);
+          }}
         >
           <i className="sign-out icon borjessons-icon" />
         </button>

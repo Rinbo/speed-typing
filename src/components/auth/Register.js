@@ -3,11 +3,13 @@ import endpoint from "../apis/endpoint";
 import { setHeaders } from "../apis/setHeaders";
 import { parseErr } from "../utility/parseResponse";
 import AuthContext from "../context/APIContext";
+import NavigationContext from "../context/NavigationContext";
 
-export const Register = ({ setLoginPage }) => {
+export const Register = () => {
   const [name, updateName] = useState("");
   const [password, updatePassword] = useState("");
   const authContext = useContext(AuthContext);
+  const navigation = useContext(NavigationContext);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -19,7 +21,7 @@ export const Register = ({ setLoginPage }) => {
         localStorage.setItem("token", response.headers.token);
         setHeaders();
         authContext.signIn(response.data);
-        setLoginPage(false);
+        navigation.selectPage(1);
       })
       .catch(err => {
         const [message, statusCode] = parseErr(err);
@@ -70,9 +72,23 @@ export const Register = ({ setLoginPage }) => {
                 Register!
               </button>
             </div>
-
-            <div className="ui error message" />
           </form>
+          <div
+            className="ui horizontal divider"
+            style={{ maxWidth: 360, margin: "auto" }}
+          >
+            OR
+          </div>
+          <p style={{ textAlign: "center", marginTop: 15 }}>
+            If you already have an account
+          </p>
+          <button
+            style={{ display: "block", margin: "auto" }}
+            className="ui button basic black"
+            onClick={() => navigation.selectPage(5)}
+          >
+            Login
+          </button>
         </div>
       </div>
     </div>

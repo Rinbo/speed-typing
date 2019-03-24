@@ -3,11 +3,13 @@ import endpoint from "../apis/endpoint";
 import { setHeaders } from "../apis/setHeaders";
 import { parseErr } from "../utility/parseResponse";
 import AuthContext from "../context/APIContext";
+import NavigationContext from "../context/NavigationContext";
 
-export default ({ setLoginPage }) => {
+export default () => {
   const [name, updateName] = useState("");
   const [password, updatePassword] = useState("");
   const authContext = useContext(AuthContext);
+  const navigation = useContext(NavigationContext);
 
   const onSubmit = e => {
     e.preventDefault();
@@ -17,7 +19,7 @@ export default ({ setLoginPage }) => {
         localStorage.setItem("token", response.headers.token);
         setHeaders();
         authContext.signIn(response.data);
-        setLoginPage(false);
+        navigation.selectPage(1);
       })
       .catch(err => {
         const [message, statusCode] = parseErr(err);
