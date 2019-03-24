@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import GameField from "./GameField";
-import { gameCode } from "../resources/gameCode";
+import { makeCodeSnippet } from "../utility/codeMaker";
 import GameComplete from "./GameComplete";
 import endpoint from "../apis/endpoint";
 import { setHeaders } from "../apis/setHeaders";
@@ -19,9 +19,7 @@ export const GameContainer = () => {
   }, []);
 
   const getRandomCode = () => {
-    const game = [...Object.values(gameCode)];
-    const randomNumber = Math.floor(Math.random() * game.length);
-    setDisplayCode(game[randomNumber]);
+    setDisplayCode(makeCodeSnippet().trim());
   };
 
   const restart = () => {
@@ -43,17 +41,15 @@ export const GameContainer = () => {
 
   const gameComplete = () => {
     const remainingScore = countRemaingScore();
-    console.log(remainingScore, "fram game complete");
-    console.log(score, "scoooore")
     setScore(prevScore => prevScore + remainingScore);
     setGameStatus("complete");
-    updateHighScore();
+    updateHighScore(remainingScore + score);
   };
 
-  const updateHighScore = () => {
+  const updateHighScore = finalScore => {
     setHeaders();
     endpoint
-      .put("/highscores/update", { score })
+      .put("/highscores/update", { score: finalScore })
       .then(response => {
         localStorage.setItem("token", response.headers.token);
         apiContext.setStatus(response.data, response.status);
