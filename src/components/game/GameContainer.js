@@ -43,6 +43,8 @@ export const GameContainer = () => {
 
   const gameComplete = () => {
     const remainingScore = countRemaingScore();
+    console.log(remainingScore, "fram game complete");
+    console.log(score, "scoooore")
     setScore(prevScore => prevScore + remainingScore);
     setGameStatus("complete");
     updateHighScore();

@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 
-const ROUND_TIME = 2000;
+const ROUND_TIME = 5000;
 
 export const GameField = ({
   typedCode,
@@ -55,9 +55,7 @@ export const GameField = ({
 
   if (clock === 0) {
     clearInterval(intervalRef.current);
-    setTimeout(() => {
-      gameComplete();
-    }, 10);
+    gameComplete();
   }
 
   return (
