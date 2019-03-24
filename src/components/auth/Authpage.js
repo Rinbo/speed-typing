@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import Login from "./Login";
 import Register from "./Register";
 import APIContext from "../context/APIContext";
@@ -6,6 +6,11 @@ import GameContainer from "../game/GameContainer";
 
 export const Authpage = () => {
   const apiContext = useContext(APIContext);
+  const [loginPage, setLoginPage] = useState(false);
+
+  useEffect(() => {
+    setLoginPage(false);
+  }, []);
 
   const renderBlurb = () => {
     return (
@@ -24,23 +29,34 @@ export const Authpage = () => {
     );
   };
 
+  if (loginPage) {
+    return <Login setLoginPage={setLoginPage} />;
+  }
   if (!apiContext.isSignedIn) {
     return (
       <div>
         {renderBlurb()}
-        <Register signIn={apiContext.signIn} />
+        <Register setLoginPage={setLoginPage} />
         <div
           className="ui horizontal divider"
           style={{ maxWidth: 360, margin: "auto" }}
         >
           OR
         </div>
-        <Login signIn={apiContext.signIn} />
+        <p style={{ textAlign: "center", marginTop: 15 }}>
+          If you already have an account
+        </p>
+        <button
+          style={{ display: "block", margin: "auto" }}
+          className="ui button basic black"
+          onClick={() => setLoginPage(true)}
+        >
+          Login
+        </button>
       </div>
     );
-  } else {
-    return <GameContainer />;
   }
+  return <GameContainer />;
 };
 
 export default Authpage;

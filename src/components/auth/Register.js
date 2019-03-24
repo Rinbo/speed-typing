@@ -4,15 +4,14 @@ import { setHeaders } from "../apis/setHeaders";
 import { parseErr } from "../utility/parseResponse";
 import AuthContext from "../context/APIContext";
 
-export const Register = () => {
+export const Register = ({ setLoginPage }) => {
   const [name, updateName] = useState("");
-  const [email, updateEmail] = useState("");
   const [password, updatePassword] = useState("");
   const authContext = useContext(AuthContext);
 
   const onSubmit = e => {
     e.preventDefault();
-    const body = { name: name, email: email, password: password };
+    const body = { name: name, password: password };
 
     endpoint
       .post("/users/add", body)
@@ -20,6 +19,7 @@ export const Register = () => {
         localStorage.setItem("token", response.headers.token);
         setHeaders();
         authContext.signIn(response.data);
+        setLoginPage(false);
       })
       .catch(err => {
         const [message, statusCode] = parseErr(err);
@@ -50,18 +50,6 @@ export const Register = () => {
                       updateName(e.target.value);
                     }}
                     value={name}
-                  />
-                </div>
-              </div>
-              <div className="field">
-                <div className="ui left icon input">
-                  <i className="mail icon" />
-                  <input
-                    placeholder="E-mail address"
-                    onChange={e => {
-                      updateEmail(e.target.value);
-                    }}
-                    value={email}
                   />
                 </div>
               </div>

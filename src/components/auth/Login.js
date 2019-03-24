@@ -4,19 +4,20 @@ import { setHeaders } from "../apis/setHeaders";
 import { parseErr } from "../utility/parseResponse";
 import AuthContext from "../context/APIContext";
 
-export default () => {
-  const [email, updateEmail] = useState("");
+export default ({ setLoginPage }) => {
+  const [name, updateName] = useState("");
   const [password, updatePassword] = useState("");
   const authContext = useContext(AuthContext);
 
   const onSubmit = e => {
     e.preventDefault();
     endpoint
-      .post("/users/signin", { email: email, password: password })
+      .post("/users/signin", { name, password })
       .then(response => {
         localStorage.setItem("token", response.headers.token);
         setHeaders();
         authContext.signIn(response.data);
+        setLoginPage(false);
       })
       .catch(err => {
         const [message, statusCode] = parseErr(err);
@@ -28,22 +29,20 @@ export default () => {
     <div className="ui container">
       <div className="ui middle aligned center aligned grid">
         <div className="column" style={{ maxWidth: 360 }}>
-          <div className="content" style={{ marginTop: 20 }}>
-            If you already have an account - Login
-          </div>
+          <div className="content" style={{ marginTop: 20 }} />
           <form className="ui large form" onSubmit={onSubmit}>
             <div className="ui basic segment">
               <div className="field">
                 <div className="ui left icon input">
-                  <i className="mail icon" />
+                  <i className="user icon" />
                   <input
                     type="text"
-                    name="email"
-                    placeholder="E-mail address"
+                    name="name"
+                    placeholder="Name"
                     onChange={e => {
-                      updateEmail(e.target.value);
+                      updateName(e.target.value);
                     }}
-                    value={email}
+                    value={name}
                   />
                 </div>
               </div>

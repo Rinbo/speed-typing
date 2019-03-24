@@ -69,7 +69,7 @@ export const AuthStore = props => {
       signedInUser: null,
       userEmail: null,
       isLoading: false,
-      statusMessage: "Cya later",
+      statusMessage: "You are now signed out but can continue to play.",
       statusCode: 200
     });
     destroyToken();
