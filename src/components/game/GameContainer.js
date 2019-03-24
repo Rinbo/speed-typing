@@ -1,70 +1,57 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import GameField from "./GameField";
-import file from "../resources/game.txt";
+import { gameCode } from "../resources/gameCode";
 import GameComplete from "./GameComplete";
 import endpoint from "../apis/endpoint";
 import { setHeaders } from "../apis/setHeaders";
 import { parseErr } from "../utility/parseResponse";
 
-export class GameContainer extends Component {
-  state = {
-    typedCode: "",
-    displayCode: ``,
-    score: 0,
-    gameStatus: "ready",
-    codeRepo: []
+export const GameContainer = ({ relayStatus }) => {
+  const [typedCode, setTypedCode] = useState("");
+  const [displayCode, setDisplayCode] = useState("");
+  const [score, setScore] = useState(0);
+  const [gameStatus, setGameStatus] = useState("ready");
+
+  useEffect(() => {
+    getRandomCode();
+  }, []);
+
+  const getRandomCode = () => {
+    const game = [...Object.values(gameCode)];
+    const randomNumber = Math.floor(Math.random() * game.length);
+    setDisplayCode(game[randomNumber]);
   };
 
-  componentDidMount = () => {
-    fetch(file)
-      .then(response => response.text())
-      .then(text => this.setState({ codeRepo: text.split("\n") }))
-      .then(() => this.getRandomCode());
+  const restart = () => {
+    setGameStatus("ready");
+    setTypedCode("");
+    setScore(0);
+    getRandomCode();
   };
 
-  getRandomCode = () => {
-    const { codeRepo } = this.state;
-    const randomNumber = Math.floor(Math.random() * codeRepo.length);
-    this.setState({
-      displayCode: codeRepo[randomNumber].trim()
-    });
-  };
-
-  restart = () => {
-    this.setState({ gameStatus: "ready", typedCode: "", score: 0 });
-    this.getRandomCode();
-  };
-
-  parseInput = input => {
-    const { score, displayCode } = this.state;
+  const parseInput = input => {
     if (input === displayCode) {
       const currentScore = score;
-      this.setState({
-        typedCode: "",
-        score: currentScore + displayCode.length
-      });
-      this.getRandomCode();
+      setTypedCode("");
+      setScore(currentScore + displayCode.length);
+      getRandomCode();
     } else {
-      this.setState({ typedCode: input });
+      setTypedCode(input);
     }
   };
 
-  gameComplete = () => {
-    const { score } = this.state;
+  const gameComplete = () => {
     const currentScore = score;
-    const remainingScore = this.countRemaingScore();
-    this.setState({
-      score: currentScore + remainingScore,
-      gameStatus: "complete"
-    });
-    this.updateHighScore();
+    const remainingScore = countRemaingScore();
+    setScore(currentScore + remainingScore);
+    setGameStatus("complete");
+    updateHighScore();
   };
 
-  updateHighScore = () => {
-    const { relayStatus } = this.props;
+  const updateHighScore = () => {
     setHeaders();
     endpoint
-      .put("/highscores/update", { score: this.state.score })
+      .put("/highscores/update", { score })
       .then(response => {
         localStorage.setItem("token", response.headers.token);
         relayStatus(response.data, response.status);
@@ -77,8 +64,7 @@ export class GameContainer extends Component {
       });
   };
 
-  countRemaingScore = () => {
-    const { typedCode, displayCode } = this.state;
+  const countRemaingScore = () => {
     let counter = 0;
     displayCode.split("").forEach((char, index) => {
       if (char === typedCode[index]) {
@@ -88,24 +74,21 @@ export class GameContainer extends Component {
     return counter;
   };
 
-  render() {
-    const { gameStatus, typedCode, displayCode, score } = this.state;
-    if (gameStatus === "ready") {
-      return (
-        <GameField
-          typedCode={typedCode}
-          displayCode={displayCode}
-          parseInput={this.parseInput}
-          gameComplete={this.gameComplete}
-          restart={this.restart}
-        />
-      );
-    }
-    if (gameStatus === "complete") {
-      return <GameComplete restart={this.restart} score={score} />;
-    }
-    return null;
+  if (gameStatus === "ready") {
+    return (
+      <GameField
+        typedCode={typedCode}
+        displayCode={displayCode}
+        parseInput={parseInput}
+        gameComplete={gameComplete}
+        restart={restart}
+      />
+    );
   }
-}
+  if (gameStatus === "complete") {
+    return <GameComplete restart={restart} score={score} />;
+  }
+  return null;
+};
 
 export default GameContainer;
