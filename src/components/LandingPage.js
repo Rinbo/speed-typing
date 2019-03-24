@@ -1,23 +1,18 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import GameContainer from "./game/GameContainer";
 import AuthPage from "./auth/Authpage";
 import Menu from "./utility/Menu";
 import GlobalHighScores from "./highscores/GlobalHighScores";
 import UserScores from "./highscores/UserScores";
-import APIContext from "./context/APIContext";
+import NavigationContext from "./context/NavigationContext";
 
 export const LandingPage = () => {
-  const [pageNumber, updatePageNumber] = useState(1);
-  const apiContext = useContext(APIContext);
-
-  const relayStatus = (message, status) => {
-    apiContext.setStatus(message, status);
-  };
+  const navigation = useContext(NavigationContext);
 
   const renderMain = () => {
-    switch (pageNumber) {
+    switch (navigation.pageNumber) {
       case 1:
-        return <GameContainer ready={"ready"} relayStatus={relayStatus} />;
+        return <GameContainer />;
       case 2:
         return <GlobalHighScores />;
       case 3:
@@ -29,14 +24,9 @@ export const LandingPage = () => {
     }
   };
 
-  const selectPage = pageNumber => {
-    updatePageNumber(pageNumber);
-  };
-
   return (
     <div className="ui container">
-      <Menu selectPage={selectPage} />
-
+      <Menu selectPage={navigation.selectPage} />
       {renderMain()}
     </div>
   );

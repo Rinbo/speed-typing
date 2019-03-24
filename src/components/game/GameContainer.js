@@ -1,16 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import GameField from "./GameField";
 import { gameCode } from "../resources/gameCode";
 import GameComplete from "./GameComplete";
 import endpoint from "../apis/endpoint";
 import { setHeaders } from "../apis/setHeaders";
 import { parseErr } from "../utility/parseResponse";
+import APIContext from "../context/APIContext";
 
-export const GameContainer = ({ relayStatus }) => {
+export const GameContainer = () => {
   const [typedCode, setTypedCode] = useState("");
   const [displayCode, setDisplayCode] = useState("");
   const [score, setScore] = useState(0);
   const [gameStatus, setGameStatus] = useState("ready");
+  const apiContext = useContext(APIContext);
 
   useEffect(() => {
     getRandomCode();
@@ -31,9 +33,8 @@ export const GameContainer = ({ relayStatus }) => {
 
   const parseInput = input => {
     if (input === displayCode) {
-      const currentScore = score;
       setTypedCode("");
-      setScore(currentScore + displayCode.length);
+      setScore(prevScore => prevScore + displayCode.length);
       getRandomCode();
     } else {
       setTypedCode(input);
@@ -41,9 +42,8 @@ export const GameContainer = ({ relayStatus }) => {
   };
 
   const gameComplete = () => {
-    const currentScore = score;
     const remainingScore = countRemaingScore();
-    setScore(currentScore + remainingScore);
+    setScore(prevScore => prevScore + remainingScore);
     setGameStatus("complete");
     updateHighScore();
   };
@@ -54,12 +54,12 @@ export const GameContainer = ({ relayStatus }) => {
       .put("/highscores/update", { score })
       .then(response => {
         localStorage.setItem("token", response.headers.token);
-        relayStatus(response.data, response.status);
+        apiContext.setStatus(response.data, response.status);
         console.log(response);
       })
       .catch(err => {
         const [message, statusCode] = parseErr(err);
-        relayStatus(message, statusCode);
+        apiContext.setStatus(message, statusCode);
         console.log(message, statusCode);
       });
   };
