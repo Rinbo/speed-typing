@@ -13,8 +13,9 @@ export default () => {
 
   const onSubmit = e => {
     e.preventDefault();
+    console.log(apiContext.score, "from login");
     endpoint
-      .post("/users/signin", { name, password })
+      .post("/users/signin", { name, password, score: apiContext.score })
       .then(response => {
         localStorage.setItem("token", response.headers.token);
         setHeaders();

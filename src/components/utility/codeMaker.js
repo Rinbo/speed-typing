@@ -7,6 +7,7 @@ const operators = ["+", "-", "/", "*", "^"];
 const comparators = ["===", "==", ">", "<", ">=", "<="];
 const extentions = ["c", "txt", "rb", "py", "jl", "java", "bat"];
 const utilities = ["split", "concat", "join", "push"];
+// @TODO add Html
 const params1 = "abcdefghijklmnopqrstuvxyz".split("");
 const params2 = [
   "sigma",
@@ -56,9 +57,9 @@ const makeFunction = () => {
   const utility = utilities[randomizer(utilities.length)];
 
   if (f === "function") {
-    return `${f}( ${param1}, ${param2} ) { return ${param1} ${operator} ${param2}} `;
+    return `${f}(${param1}, ${param2}) { return ${param1}${operator}${param2}} `;
   }
-  return `${f}( ${param1} ) => { ${param1}.${utility}(${noun})} `;
+  return `${f}(${param1}) => { ${param1}.${utility}(${noun})} `;
 };
 
 const makeDeclaration = () => {
@@ -85,11 +86,11 @@ const makeConditional = () => {
   const comparator = comparators[randomizer(comparators.length)];
 
   if (c === "for") {
-    return `${c}(${param1} = 0; ${param1} ${comparator} ${noun}.length; ${param1}++) { ${noun}[${param1}] = ${param2}[${param1}] ${operator} ${randomizer(
+    return `${c}(${param1}=0; ${param1}${comparator}${noun}.length; ${param1}++) { ${noun}[${param1}] = ${param2}[${param1}]${operator}${randomizer(
       100
     )} }`;
   }
-  return `${c}(${param1} ${comparator} ${param2}) { ${noun}[${param1}] = ${param2}[${param1}] ${operator} ${randomizer(
+  return `${c}(${param1} ${comparator} ${param2}) { ${noun}[${param1}] = ${param2}[${param1}]${operator}${randomizer(
     100
   )} }`;
 };

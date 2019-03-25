@@ -44,6 +44,7 @@ export const GameContainer = () => {
     setScore(prevScore => prevScore + remainingScore);
     setGameStatus("complete");
     updateHighScore(remainingScore + score);
+    apiContext.setScore(remainingScore + score);
   };
 
   const updateHighScore = finalScore => {

@@ -11,7 +11,8 @@ export const AuthStore = props => {
     userEmail: null,
     isLoading: true,
     statusMessage: "",
-    statusCode: null
+    statusCode: null,
+    score: null
   });
 
   useEffect(() => {
@@ -75,6 +76,12 @@ export const AuthStore = props => {
     destroyToken();
   };
 
+  const setScore = score => {
+    updateState(prevState => {
+      return { ...prevState, score };
+    });
+  };
+
   const setStatus = (message, code) => {
     updateState(prevState => {
       return { ...prevState, statusMessage: message, statusCode: code };
@@ -82,7 +89,9 @@ export const AuthStore = props => {
   };
 
   return (
-    <Context.Provider value={{ ...state, signIn, signOut, setStatus }}>
+    <Context.Provider
+      value={{ ...state, signIn, signOut, setStatus, setScore }}
+    >
       {props.children}
     </Context.Provider>
   );

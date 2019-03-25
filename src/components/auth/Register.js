@@ -5,15 +5,16 @@ import { parseErr } from "../utility/parseResponse";
 import APIContext from "../context/APIContext";
 import NavigationContext from "../context/NavigationContext";
 
-export const Register = () => {
+export const Register = ({ score }) => {
   const [name, updateName] = useState("");
   const [password, updatePassword] = useState("");
   const apiContext = useContext(APIContext);
   const navigation = useContext(NavigationContext);
-
   const onSubmit = e => {
     e.preventDefault();
-    const body = { name: name, password: password };
+
+    const signupScore = score;
+    const body = { name, password, score: signupScore };
 
     endpoint
       .post("/users/add", body)

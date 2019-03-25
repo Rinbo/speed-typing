@@ -24,7 +24,7 @@ const GameComplete = ({ score, restart }) => {
           <i className="undo icon" style={{ margin: "auto" }} />
         </button>
       </div>
-      {!apiContext.isSignedIn ? <Register /> : null}
+      {!apiContext.isSignedIn ? <Register score={score} /> : null}
     </>
   );
 };
