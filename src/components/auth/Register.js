@@ -2,13 +2,13 @@ import React, { useContext, useState } from "react";
 import endpoint from "../apis/endpoint";
 import { setHeaders } from "../apis/setHeaders";
 import { parseErr } from "../utility/parseResponse";
-import AuthContext from "../context/APIContext";
+import APIContext from "../context/APIContext";
 import NavigationContext from "../context/NavigationContext";
 
 export const Register = () => {
   const [name, updateName] = useState("");
   const [password, updatePassword] = useState("");
-  const authContext = useContext(AuthContext);
+  const apiContext = useContext(APIContext);
   const navigation = useContext(NavigationContext);
 
   const onSubmit = e => {
@@ -20,12 +20,12 @@ export const Register = () => {
       .then(response => {
         localStorage.setItem("token", response.headers.token);
         setHeaders();
-        authContext.signIn(response.data);
+        apiContext.signIn(response.data);
         navigation.selectPage(1);
       })
       .catch(err => {
         const [message, statusCode] = parseErr(err);
-        authContext.setStatus(message, statusCode);
+        apiContext.setStatus(message, statusCode);
       });
   };
 
