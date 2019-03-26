@@ -4,7 +4,7 @@ import { setHeaders } from "../apis/setHeaders";
 import { parseErr } from "../utility/parseResponse";
 import APIContext from "../context/APIContext";
 import NavigationContext from "../context/NavigationContext";
-import { button } from "semantic-ui-react";
+import { Button } from "semantic-ui-react";
 
 export default () => {
   const [name, updateName] = useState("");
@@ -65,9 +65,9 @@ export default () => {
                   />
                 </div>
               </div>
-              <button className="ui fluid large black submit button">
+              <Button basic inverted color="green" style={{width: "100%"}}>
                 Login
-              </button>
+              </Button>
             </div>
 
             <div className="ui error message" />

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from "react";
+import { Button } from "semantic-ui-react";
 
 const ROUND_TIME = 5000;
 
@@ -15,12 +16,12 @@ export const GameField = ({
 
   const renderCode = () => {
     return displayCode.split("").map((char, index) => {
-      let color = "black";
+      let color = "#dddddd";
       let backgroundColor = "";
       if (char === typedCode[index]) {
         color = "lightgreen";
       } else if (typedCode[index] === undefined) {
-        color = "black";
+        color = "#dddddd";
       } else {
         color = "#FA8072";
         if (char === " ") {
@@ -79,8 +80,11 @@ export const GameField = ({
         </div>
       </form>
       <div className="item" style={{ marginTop: 10 }}>
-        <button
-          className="ui basic black button left floated"
+        <Button
+          basic
+          inverted
+          color="green"
+          className="ui left floated"
           onClick={() => {
             clearInterval(intervalRef.current);
             updateClock(ROUND_TIME);
@@ -89,13 +93,13 @@ export const GameField = ({
           }}
         >
           <i className="undo icon" style={{ margin: "auto" }} />
-        </button>
+        </Button>
         <div
           className="ui right floated"
           style={{
             padding: 10,
             textAlign: "right",
-            color: clock <= 5000 ? "red" : "black"
+            color: clock <= 5000 ? "tomato" : "black"
           }}
         >
           {clock / 1000}

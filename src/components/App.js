@@ -1,7 +1,6 @@
 import React, { useContext } from "react";
 import Spinner from "./utility/Spinner";
 import AuthContext from "./context/APIContext";
-import "./app.css";
 import LandingPage from "./LandingPage";
 
 export const App = () => {

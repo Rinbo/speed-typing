@@ -37,9 +37,9 @@ const GlobalHighScores = () => {
   }
   return (
     <>
-      <div className="ui centered sub header">Score board</div>
+      <div className="ui centered inverted sub header">Score board</div>
       <table
-        className="ui very basic centered collapsing celled table"
+        className="ui very basic centered collapsing celled inverted table"
         style={{
           maxWidth: 350,
           textAlign: "center",

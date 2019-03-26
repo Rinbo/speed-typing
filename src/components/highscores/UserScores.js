@@ -44,10 +44,10 @@ const UserScores = () => {
   }
 
   return (
-    <>
-      <div className="ui centered sub header">Your history</div>
+    <div>
+      <div className="ui centered inverted sub header">Your history</div>
       <table
-        className="ui very basic centered collapsing celled table"
+        className="ui very basic centered collapsing celled inverted table"
         style={{
           maxWidth: 225,
           textAlign: "center",
@@ -64,7 +64,7 @@ const UserScores = () => {
         </thead>
         <tbody>{renderScores()}</tbody>
       </table>
-    </>
+    </div>
   );
 };
 

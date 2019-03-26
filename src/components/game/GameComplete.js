@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import Register from "../auth/Register";
 import APIContext from "../context/APIContext";
+import { Button } from "semantic-ui-react";
 
 const GameComplete = ({ score, restart }) => {
   const apiContext = useContext(APIContext);
@@ -14,15 +15,17 @@ const GameComplete = ({ score, restart }) => {
         >
           Your score: {score}
         </div>
-        <button
-          className="ui button basic black"
+        <Button
+          basic
+          inverted
+          color="green"
           style={{ marginTop: 20 }}
           onClick={() => {
             restart();
           }}
         >
           <i className="undo icon" style={{ margin: "auto" }} />
-        </button>
+        </Button>
       </div>
       {!apiContext.isSignedIn ? <Register score={score} /> : null}
     </>

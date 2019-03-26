@@ -4,6 +4,7 @@ import { setHeaders } from "../apis/setHeaders";
 import { parseErr } from "../utility/parseResponse";
 import APIContext from "../context/APIContext";
 import NavigationContext from "../context/NavigationContext";
+import { Button } from "semantic-ui-react";
 
 export const Register = ({ score }) => {
   const [name, updateName] = useState("");
@@ -69,27 +70,29 @@ export const Register = ({ score }) => {
                   />
                 </div>
               </div>
-              <button className="ui fluid large black submit button">
+              <Button basic inverted color="green" style={{ width: "100%" }}>
                 Register!
-              </button>
+              </Button>
             </div>
           </form>
           <div
             className="ui horizontal divider"
-            style={{ maxWidth: 360, margin: "auto" }}
+            style={{ maxWidth: 360, margin: "auto", color: "#cccccc" }}
           >
             OR
           </div>
           <p style={{ textAlign: "center", marginTop: 15 }}>
             If you already have an account
           </p>
-          <button
+          <Button
             style={{ display: "block", margin: "auto" }}
-            className="ui button basic black"
+            basic
+            inverted
+            color="green"
             onClick={() => navigation.selectPage(5)}
           >
             Login
-          </button>
+          </Button>
         </div>
       </div>
     </div>

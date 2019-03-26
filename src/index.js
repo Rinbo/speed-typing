@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import "semantic-ui-css/semantic.min.css";
+import "./components/app.css";
 import App from "./components/App";
 import { AuthStore } from "./components/context/APIContext";
 import { Navigation } from "./components/context/NavigationContext";
