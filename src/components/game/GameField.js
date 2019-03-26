@@ -59,7 +59,7 @@ export const GameField = ({
   }
 
   return (
-    <div style={{ textAlign: "center", maxWidth: 400, margin: "auto" }}>
+    <div style={{ textAlign: "center", maxWidth: 500, margin: "auto" }}>
       <pre>
         <code className="unselectable">{renderCode()}</code>
       </pre>
