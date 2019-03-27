@@ -45,8 +45,8 @@ export default ({ selectPage }) => {
     <div
       className={
         windowWidth < 769
-          ? "ui bottom fixed fluid four item inverted menu"
-          : "ui vertical icon menu inverted fixed-menu"
+          ? "ui bottom fixed fluid four item green inverted menu"
+          : "ui vertical icon menu green inverted fixed-menu"
       }
     >
       <button className="item borjessons-link" onClick={() => selectPage(1)}>

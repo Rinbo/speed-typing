@@ -65,7 +65,10 @@ export const GameField = ({
         <code className="unselectable">{renderCode()}</code>
       </pre>
       <form className="ui form" onSubmit={e => e.preventDefault()}>
-        <div className="field" style={{ marginTop: 30 }}>
+        <div
+          className="field"
+          style={{ marginTop: 30, border: "solid green", borderRadius: "8px", borderWidth: 2 }}
+        >
           <input
             type="text"
             spellCheck="false"
@@ -73,6 +76,7 @@ export const GameField = ({
               e.preventDefault();
               parseInput(e.target.value);
             }}
+            placeholder="The timer starts when you begin typing..."
             onKeyDown={begin}
             value={typedCode}
             style={{ display: "inline" }}
