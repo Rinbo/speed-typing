@@ -39,17 +39,20 @@ export const Register = ({ score }) => {
             Register an account and see how you measure up against others on the
             scoreboard:
           </div>
-          <form
-            className="ui large form"
-            onSubmit={onSubmit}
-            autoComplete="off"
-          >
+          <form className="ui large form" onSubmit={onSubmit}>
             <div className="ui basic segment">
               <div className="field">
+                <label style={{ color: "#cccccc", textAlign: "left" }}>
+                  Name
+                </label>
+
                 <div className="ui left icon input">
                   <i className="user icon" />
                   <input
                     placeholder="Username"
+                    autoComplete="off"
+                    name="name"
+                    type="text"
                     onChange={e => {
                       updateName(e.target.value);
                     }}
@@ -58,9 +61,14 @@ export const Register = ({ score }) => {
                 </div>
               </div>
               <div className="field">
+                <label style={{ color: "#cccccc", textAlign: "left" }}>
+                  Password
+                </label>
                 <div className="ui left icon input">
                   <i className="lock icon" />
                   <input
+                    autoComplete="off"
+                    name="password"
                     type="password"
                     placeholder="Password"
                     onChange={e => {

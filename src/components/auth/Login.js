@@ -37,6 +37,9 @@ export default () => {
           <form className="ui large form" onSubmit={onSubmit}>
             <div className="ui basic segment">
               <div className="field">
+                <label style={{ color: "#cccccc", textAlign: "left" }}>
+                  Name
+                </label>
                 <div className="ui left icon input">
                   <i className="user icon" />
                   <input
@@ -52,6 +55,9 @@ export default () => {
               </div>
 
               <div className="field">
+                <label style={{ color: "#cccccc", textAlign: "left" }}>
+                  Password
+                </label>
                 <div className="ui left icon input">
                   <i className="lock icon" />
                   <input
@@ -65,7 +71,7 @@ export default () => {
                   />
                 </div>
               </div>
-              <Button basic inverted color="green" style={{width: "100%"}}>
+              <Button basic inverted color="green" style={{ width: "100%" }}>
                 Login
               </Button>
             </div>
