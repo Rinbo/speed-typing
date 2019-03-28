@@ -19,7 +19,7 @@ export const GameField = ({
       let color = "#dddddd";
       let backgroundColor = "";
       if (char === typedCode[index]) {
-        color = "lightgreen";
+        color = "#21ba45";
       } else if (typedCode[index] === undefined) {
         color = "#dddddd";
       } else {
@@ -67,7 +67,12 @@ export const GameField = ({
       <form className="ui form" onSubmit={e => e.preventDefault()}>
         <div
           className="field"
-          style={{ marginTop: 30, border: "solid green", borderRadius: "8px", borderWidth: 2 }}
+          style={{
+            marginTop: 30,
+            border: "solid #21ba45",
+            borderRadius: "6px",
+            borderWidth: 2
+          }}
         >
           <input
             type="text"

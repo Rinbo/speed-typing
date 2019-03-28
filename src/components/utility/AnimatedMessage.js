@@ -15,7 +15,7 @@ export const AnimatedMessage = ({ message, statusCode, setStatus }) => {
       id="banner"
       className="ui centered sub header statusMessage"
       style={{
-        color: statusCode === 200 ? "darkgreen" : "darkred",
+        color: statusCode === 200 ? "#21ba45" : "darkred",
         marginTop: 20
       }}
     >

@@ -15,6 +15,7 @@ body {
 }
 
 .borjessons-icon {
+  color: "#21ba45";
   height: 100%;
   width: 100%;
 }
@@ -25,8 +26,8 @@ body {
 
 .fixed-menu {
   position: fixed;
-  top: 10vh;
-  left: 10vw;
+  top: 38vh;
+  left: 5px;
 }
 
 .unselectable {
