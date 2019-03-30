@@ -12,10 +12,7 @@ const AppWrapper = () => {
     <Navigation>
       <AuthStore>
         <StatusMessage />
-        <div
-          className="ui container"
-          style={{ paddingTop: 100}}
-        >
+        <div className="ui container" style={{ paddingTop: 60 }}>
           <App />
         </div>
       </AuthStore>

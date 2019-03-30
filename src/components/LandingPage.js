@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import GameContainer from "./game/GameContainer";
 import Menu from "./utility/Menu";
 import GlobalHighScores from "./highscores/GlobalHighScores";
-import UserScores from "./highscores/UserScores";
+import UserContainer from "./users/UserContainer";
 import NavigationContext from "./context/NavigationContext";
 import Register from "./auth/Register";
 import Login from "./auth/Login";
@@ -17,7 +17,7 @@ export const LandingPage = () => {
       case 2:
         return <GlobalHighScores />;
       case 3:
-        return <UserScores />;
+        return <UserContainer />;
       case 4:
         return <Register />;
       case 5:

@@ -41,7 +41,7 @@ const GlobalHighScores = () => {
       <table
         className="ui very basic centered collapsing celled inverted table"
         style={{
-          maxWidth: 350,
+          maxWidth: 400,
           textAlign: "center",
           display: "block",
           margin: "25px auto"
