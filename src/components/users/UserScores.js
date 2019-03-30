@@ -45,7 +45,7 @@ const UserScores = () => {
 
   return (
     <div>
-      <div className="ui centered inverted sub header">Your history</div>
+      <div className="ui centered inverted sub header">Your Scores</div>
       <table
         className="ui very basic centered collapsing celled inverted table"
         style={{

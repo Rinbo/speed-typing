@@ -69,7 +69,6 @@ export const GameField = ({
           className="field"
           style={{
             marginTop: 30,
-            border: "solid #21ba45",
             borderRadius: "6px",
             borderWidth: 2
           }}

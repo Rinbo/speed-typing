@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import AuthContext from "../context/APIContext";
-import { Accordion, Icon } from "semantic-ui-react";
+import { Accordion, Icon, Button } from "semantic-ui-react";
 
 export default ({ selectPage }) => {
   const [windowWidth, setWindowWidth] = useState(1000);
@@ -8,7 +8,7 @@ export default ({ selectPage }) => {
   const authContext = useContext(AuthContext);
 
   const styles = {
-    icon: { color: "#21ba45" }
+    icon: { color: "#cccccc", backgroundColor: "#1b1c1d" }
   };
 
   useEffect(() => {
@@ -23,10 +23,19 @@ export default ({ selectPage }) => {
   const renderUserLinks = () => {
     return (
       <>
-        <button className="item borjessons-link" onClick={() => selectPage(3)}>
+        <Button
+          inverted
+          basic
+          color="green"
+          className="item borjessons-link"
+          onClick={() => selectPage(3)}
+        >
           <i className="user icon borjessons-icon" style={styles.icon} />
-        </button>
-        <button
+        </Button>
+        <Button
+          inverted
+          basic
+          color="green"
           className="item borjessons-link"
           onClick={() => {
             authContext.signOut();
@@ -34,16 +43,22 @@ export default ({ selectPage }) => {
           }}
         >
           <i className="sign-out icon borjessons-icon" style={styles.icon} />
-        </button>
+        </Button>
       </>
     );
   };
 
   const renderAuthLinks = () => {
     return (
-      <button className="item borjessons-link" onClick={() => selectPage(4)}>
+      <Button
+        inverted
+        basic
+        color="green"
+        className="item borjessons-link"
+        onClick={() => selectPage(4)}
+      >
         <i className="sign-in icon borjessons-icon" style={styles.icon} />
-      </button>
+      </Button>
     );
   };
 
@@ -56,12 +71,24 @@ export default ({ selectPage }) => {
           : "ui vertical icon menu inverted fixed-menu"
       }
     >
-      <button className="item borjessons-link" onClick={() => selectPage(1)}>
+      <Button
+        inverted
+        basic
+        color="green"
+        className="item borjessons-link"
+        onClick={() => selectPage(1)}
+      >
         <i className="gamepad icon borjessons-icon" style={styles.icon} />
-      </button>
-      <button className="item borjessons-link" onClick={() => selectPage(2)}>
+      </Button>
+      <Button
+        inverted
+        basic
+        color="green"
+        className="item borjessons-link"
+        onClick={() => selectPage(2)}
+      >
         <i className="trophy icon borjessons-icon" style={styles.icon} />
-      </button>
+      </Button>
       {authContext.isSignedIn ? renderUserLinks() : renderAuthLinks()}
     </div>
   );
