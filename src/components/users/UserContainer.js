@@ -12,11 +12,7 @@ const UserContainer = () => {
 
   return (
     <Segment inverted style={{ width: 450, margin: "auto" }}>
-      <Menu
-        pointing
-        secondary
-        inverted
-      >
+      <Menu pointing secondary inverted>
         <Menu.Item
           name="Your scores"
           active={activeTab === "Your scores"}
@@ -28,7 +24,7 @@ const UserContainer = () => {
           onClick={handleClick}
         />
       </Menu>
-      <div inverted className="borjessons-margin">
+      <div className="borjessons-margin">
         {activeTab === "Profile" ? <UserProfile /> : <UserScores />}
       </div>
     </Segment>
