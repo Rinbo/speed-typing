@@ -36,15 +36,14 @@ const GlobalHighScores = () => {
     return null;
   }
   return (
-    <>
+    <div style={{ margin: "auto", maxWidth: 450 }}>
       <div className="ui centered inverted sub header">Score board</div>
       <table
-        className="ui very basic centered collapsing celled inverted table"
+        className="ui very basic collapsing celled inverted table"
         style={{
-          maxWidth: 400,
           textAlign: "center",
           display: "block",
-          margin: "25px auto"
+          padding: "25px"
         }}
       >
         <thead>
@@ -57,7 +56,7 @@ const GlobalHighScores = () => {
         </thead>
         <tbody>{renderHighscores()}</tbody>
       </table>
-    </>
+    </div>
   );
 };
 

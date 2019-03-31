@@ -76,6 +76,12 @@ export const AuthStore = props => {
     destroyToken();
   };
 
+  const updateUser = user => {
+    updateState(prevState => {
+      return { ...prevState, userEmail: user.email, signedInUser: user.name };
+    });
+  };
+
   const setScore = score => {
     updateState(prevState => {
       return { ...prevState, score };
@@ -90,7 +96,7 @@ export const AuthStore = props => {
 
   return (
     <Context.Provider
-      value={{ ...state, signIn, signOut, setStatus, setScore }}
+      value={{ ...state, signIn, signOut, setStatus, setScore, updateUser }}
     >
       {props.children}
     </Context.Provider>

@@ -100,7 +100,7 @@ export default ({ selectPage }) => {
   };
 
   return (
-    <Accordion inverted as={Icon} horizontal>
+    <Accordion inverted as={Icon}>
       <Accordion.Title
         active={activeIndex === 0}
         index={0}
@@ -109,8 +109,7 @@ export default ({ selectPage }) => {
         <Icon
           name="bars"
           size="big"
-          inverted
-          color="green"
+          inverted          
           style={{ position: "fixed", left: 10, top: 10 }}
         />
       </Accordion.Title>
