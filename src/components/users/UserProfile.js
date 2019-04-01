@@ -4,25 +4,23 @@ import { Button, List } from "semantic-ui-react";
 import endpoint from "../apis/endpoint";
 import { setHeaders } from "../apis/setHeaders";
 import { parseErr } from "../utility/parseResponse";
+import { updateEmail } from "../apis/updateUser";
 
 const UserProfile = () => {
   const apiContext = useContext(APIContext);
   const [email, setEmail] = useState("");
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault();
-    endpoint
-      .put("/users/update", { email })
-      .then(response => {
-        localStorage.setItem("token", response.headers.token);
-        setHeaders();
-        apiContext.updateUser(response.data);
-        apiContext.setStatus("Update successful", 200);
-      })
-      .catch(err => {
-        const [message, statusCode] = parseErr(err);
-        apiContext.setStatus(message, statusCode);
-      });
+    const {status, payload} = await updateEmail({ email });
+    debugger;
+    /*  if (status === 200) {
+      apiContext.updateUser(payload);
+      apiContext.setStatus("Update successful", 200);
+    } else {
+      const [message, statusCode] = parseErr(payload);
+      apiContext.setStatus(message, statusCode);
+    } */
   };
 
   const renderField = () => {
