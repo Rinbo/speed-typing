@@ -1,26 +1,25 @@
 import React, { useContext, useState } from "react";
 import APIContext from "../context/APIContext";
 import { Button, List } from "semantic-ui-react";
-import endpoint from "../apis/endpoint";
-import { setHeaders } from "../apis/setHeaders";
 import { parseErr } from "../utility/parseResponse";
 import { updateEmail } from "../apis/updateUser";
+import UpdatePassword from "./UpdatePassword";
 
 const UserProfile = () => {
   const apiContext = useContext(APIContext);
   const [email, setEmail] = useState("");
+  const [showButton, setShowButton] = useState(false);
 
   const handleSubmit = async e => {
     e.preventDefault();
-    const {status, payload} = await updateEmail({ email });
-    debugger;
-    /*  if (status === 200) {
+    const { status, payload } = await updateEmail({ email });
+    if (status === 200) {
       apiContext.updateUser(payload);
       apiContext.setStatus("Update successful", 200);
     } else {
       const [message, statusCode] = parseErr(payload);
       apiContext.setStatus(message, statusCode);
-    } */
+    }
   };
 
   const renderField = () => {
@@ -48,14 +47,30 @@ const UserProfile = () => {
   };
 
   return (
-    <List inverted>
-      <List.Item icon="user" content={apiContext.signedInUser} />
-      {apiContext.userEmail ? (
-        <List.Item icon="mail" content={apiContext.userEmail} />
+    <div>
+      <List inverted style={{ marginBottom: 25 }}>
+        <List.Item icon="user" content={apiContext.signedInUser} />
+        {apiContext.userEmail ? (
+          <List.Item icon="mail" content={apiContext.userEmail} />
+        ) : (
+          renderField()
+        )}
+      </List>
+      {showButton ? (
+        <UpdatePassword setShowButton={setShowButton} />
       ) : (
-        renderField()
+        <Button
+          basic
+          inverted
+          color="green"
+          onClick={() => {
+            setShowButton(true);
+          }}
+        >
+          Change passsword
+        </Button>
       )}
-    </List>
+    </div>
   );
 };
 
