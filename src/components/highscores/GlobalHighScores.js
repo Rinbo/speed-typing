@@ -8,7 +8,7 @@ const GlobalHighScores = () => {
 
   useEffect(() => {
     endpoint
-      .get("/highscores/all")
+      .get("/highscores/all", { params: { name: apiContext.signedInUser } })
       .then(response => {
         updateHighscores(response.data);
       })
@@ -37,7 +37,9 @@ const GlobalHighScores = () => {
   }
   return (
     <div style={{ margin: "auto", maxWidth: 450 }}>
-      <div className="ui centered inverted sub header">Score board</div>
+      <div className="ui centered inverted sub header">
+        Score board - Top 10
+      </div>
       <table
         className="ui very basic collapsing celled inverted table"
         style={{
