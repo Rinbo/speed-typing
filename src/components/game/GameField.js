@@ -107,7 +107,7 @@ export const GameField = ({
           style={{
             padding: 10,
             textAlign: "right",
-            color: clock <= 5000 ? "tomato" : "black"
+            color: clock <= 5000 ? "tomato" : "#cccccc"
           }}
         >
           {clock / 1000}
