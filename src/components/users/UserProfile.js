@@ -1,26 +1,19 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useReducer } from "react";
 import APIContext from "../context/APIContext";
 import { Button, List } from "semantic-ui-react";
-import { parseErr } from "../utility/parseResponse";
-import { updateEmail } from "../apis/updateUser";
+import { updateUser } from "../apis/updateUser";
 import UpdatePassword from "./UpdatePassword";
+import { userReducer, initialUserState } from "../reducers/userReducer";
 
 const UserProfile = () => {
   const apiContext = useContext(APIContext);
-  const [email, setEmail] = useState("");
+  const [address, setAddress] = useState("");
   const [showButton, setShowButton] = useState(false);
+  const [state, dispatch] = useReducer(userReducer, initialUserState);
 
-  const handleSubmit = async e => {
-    e.preventDefault();
-    const { status, payload } = await updateEmail({ email });
-    if (status === 200) {
-      apiContext.updateUser(payload);
-      apiContext.setStatus("Update successful", 200);
-    } else {
-      const [message, statusCode] = parseErr(payload);
-      apiContext.setStatus(message, statusCode);
-    }
-  };
+  // @TODO move global store from context to reducers
+  console.log(state.data, "This is the data");
+  console.log(state.message, "This is the message");
 
   const renderField = () => {
     return (
@@ -28,13 +21,19 @@ const UserProfile = () => {
         <div style={{ marginTop: "10px", marginBottom: "10px" }}>
           Register your email address in case you forget your password:
         </div>
-        <form className="ui form" onSubmit={handleSubmit}>
+        <form
+          className="ui form"
+          onSubmit={e => {
+            e.preventDefault();
+            updateUser({ email: address }, "update", dispatch);
+          }}
+        >
           <div className="ui input">
             <input
               name="email"
               type="email"
-              value={email}
-              onChange={e => setEmail(e.target.value)}
+              value={address}
+              onChange={e => setAddress(e.target.value)}
               style={{ maxWidth: 200 }}
             />
             <Button basic inverted color="green" style={{ marginLeft: 10 }}>
@@ -50,8 +49,8 @@ const UserProfile = () => {
     <div>
       <List inverted style={{ marginBottom: 25 }}>
         <List.Item icon="user" content={apiContext.signedInUser} />
-        {apiContext.userEmail ? (
-          <List.Item icon="mail" content={apiContext.userEmail} />
+        {state.user.email ? (
+          <List.Item icon="mail" content={state.user.email} />
         ) : (
           renderField()
         )}

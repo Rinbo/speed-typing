@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { setHeaders } from "../apis/setHeaders";
+import { setHeaders, destroyToken } from "../apis/setHeaders";
 import endpoint from "../apis/endpoint";
 
 export default () => {
@@ -37,10 +37,9 @@ export default () => {
           isLoading: false,
           statusMessage:
             "Unable to validate your token. Please try to log in using your credentials",
-          statusCode: 401
+          statusCode: e.response.status
         });
-        localStorage.removeItem("token");
-        console.log("Failed to validate token");
+        destroyToken();
       });
   }, []);
   return [state, updateState];

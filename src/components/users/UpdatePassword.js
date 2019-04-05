@@ -1,27 +1,22 @@
-import React, { useState, useContext } from "react";
-import APIContext from "../context/APIContext";
+import React, { useState, useReducer } from "react";
 import { Button } from "semantic-ui-react";
-import { parseErr } from "../utility/parseResponse";
-import { updatePassword } from "../apis/updateUser";
+import { updateUser } from "../apis/updateUser";
+import { userReducer, initialUserState } from "../reducers/userReducer";
 
 const UpdatePassword = ({ setShowButton }) => {
   const [password, setPassword] = useState("");
-  const apiContext = useContext(APIContext);
-
-  const handleSubmit = async e => {
-    e.preventDefault();
-    const { status, payload } = await updatePassword({ password });
-    if (status === 200) {
-      apiContext.setStatus("Update successful", 200);
-    } else {
-      const [message, statusCode] = parseErr(payload);
-      apiContext.setStatus(message, statusCode);
-    }
-  };
+  const [state, dispatch] = useReducer(userReducer, { initialUserState });
 
   return (
     <div>
-      <form className="ui form" onSubmit={handleSubmit}>
+      <form
+        className="ui form"
+        onSubmit={e => {
+          e.preventDefault();
+          updateUser({ password }, "update", dispatch);
+          setShowButton(false);
+        }}
+      >
         <div className="ui input">
           <input
             type="password"

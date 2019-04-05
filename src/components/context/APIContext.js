@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import endpoint from "../apis/endpoint";
 import { setHeaders, destroyToken } from "../apis/setHeaders";
 import useValidateToken from "./useValidateToken";
