@@ -1,15 +1,15 @@
 export const initialUserState = {
-  message: {},
-  user: {}
+  user: {},
+  isSignedIn: false,
+  signedInUser: null,
+  userEmail: null,
+  score: null
 };
 
 export const userReducer = (state, action) => {
   switch (action.type) {
     case "updateUser":
       return { ...state, user: action.payload };
-    case "setMessage":
-      // @TODO move this to it's own reducer?
-      return { ...state, message: action.payload };
     default:
       return state;
   }

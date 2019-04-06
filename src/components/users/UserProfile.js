@@ -1,19 +1,21 @@
-import React, { useContext, useState, useReducer } from "react";
+import React, { useContext, useReducer } from "react";
 import APIContext from "../context/APIContext";
 import { Button, List } from "semantic-ui-react";
 import { updateUser } from "../apis/updateUser";
 import UpdatePassword from "./UpdatePassword";
 import { userReducer, initialUserState } from "../reducers/userReducer";
+import {
+  utilityReducer,
+  initialUtilityState
+} from "../reducers/utilityReducer";
 
 const UserProfile = () => {
   const apiContext = useContext(APIContext);
-  const [address, setAddress] = useState("");
-  const [showButton, setShowButton] = useState(false);
-  const [state, dispatch] = useReducer(userReducer, initialUserState);
-
-  // @TODO move global store from context to reducers
-  console.log(state.data, "This is the data");
-  console.log(state.message, "This is the message");
+  const [userState, userDispatch] = useReducer(userReducer, initialUserState);
+  const [utilityState, utilityDispatch] = useReducer(
+    utilityReducer,
+    initialUtilityState
+  );
 
   const renderField = () => {
     return (
@@ -25,15 +27,25 @@ const UserProfile = () => {
           className="ui form"
           onSubmit={e => {
             e.preventDefault();
-            updateUser({ email: address }, "update", dispatch);
+            updateUser(
+              { email: utilityState.formInput },
+              "update",
+              userDispatch,
+              utilityDispatch
+            );
           }}
         >
           <div className="ui input">
             <input
               name="email"
               type="email"
-              value={address}
-              onChange={e => setAddress(e.target.value)}
+              value={utilityState.formInput}
+              onChange={e =>
+                utilityDispatch({
+                  type: "updateFormInput",
+                  payload: e.target.value
+                })
+              }
               style={{ maxWidth: 200 }}
             />
             <Button basic inverted color="green" style={{ marginLeft: 10 }}>
@@ -49,21 +61,21 @@ const UserProfile = () => {
     <div>
       <List inverted style={{ marginBottom: 25 }}>
         <List.Item icon="user" content={apiContext.signedInUser} />
-        {state.user.email ? (
-          <List.Item icon="mail" content={state.user.email} />
+        {userState.user.email ? (
+          <List.Item icon="mail" content={userState.user.email} />
         ) : (
           renderField()
         )}
       </List>
-      {showButton ? (
-        <UpdatePassword setShowButton={setShowButton} />
+      {utilityState.toggle ? (
+        <UpdatePassword parentUtilityDispatch={utilityDispatch} />
       ) : (
         <Button
           basic
           inverted
           color="green"
           onClick={() => {
-            setShowButton(true);
+            utilityDispatch({ type: "doToggle" });
           }}
         >
           Change passsword

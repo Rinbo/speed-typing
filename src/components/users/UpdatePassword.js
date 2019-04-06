@@ -1,11 +1,20 @@
-import React, { useState, useReducer } from "react";
+import React, { useReducer } from "react";
 import { Button } from "semantic-ui-react";
 import { updateUser } from "../apis/updateUser";
 import { userReducer, initialUserState } from "../reducers/userReducer";
+import {
+  utilityReducer,
+  initialUtilityState
+} from "../reducers/utilityReducer";
 
-const UpdatePassword = ({ setShowButton }) => {
-  const [password, setPassword] = useState("");
-  const [state, dispatch] = useReducer(userReducer, { initialUserState });
+const UpdatePassword = ({ parentUtilityDispatch }) => {
+  const [, userDispatch] = useReducer(userReducer, {
+    initialUserState
+  });
+  const [utilityState, utilityDispatch] = useReducer(
+    utilityReducer,
+    initialUtilityState
+  );
 
   return (
     <div>
@@ -13,15 +22,22 @@ const UpdatePassword = ({ setShowButton }) => {
         className="ui form"
         onSubmit={e => {
           e.preventDefault();
-          updateUser({ password }, "update", dispatch);
-          setShowButton(false);
+          updateUser(
+            { password: utilityState.formInput },
+            "update",
+            userDispatch,
+            utilityDispatch
+          );
+          parentUtilityDispatch({ type: "doToggle" });
         }}
       >
         <div className="ui input">
           <input
             type="password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
+            value={utilityState.formInput}
+            onChange={e =>
+              utilityDispatch({ type: "setFormInput", payload: e.target.value })
+            }
             style={{ maxWidth: 200 }}
           />
           <Button basic inverted color="green" style={{ marginLeft: 10 }}>
@@ -30,7 +46,7 @@ const UpdatePassword = ({ setShowButton }) => {
         </div>
         <div
           className="ui inverted basic button"
-          onClick={() => setShowButton(false)}
+          onClick={() => parentUtilityDispatch({ type: "doToggle" })}
           style={{ display: "inline", marginLeft: 20 }}
         >
           X
