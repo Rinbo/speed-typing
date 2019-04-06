@@ -1,34 +1,25 @@
-import React, { useContext, useState } from "react";
-import endpoint from "../apis/endpoint";
-import { setHeaders } from "../apis/setHeaders";
-import { parseErr } from "../utility/parseResponse";
+import React, { useContext, useReducer, useState } from "react";
 import APIContext from "../context/APIContext";
 import NavigationContext from "../context/NavigationContext";
 import { Button } from "semantic-ui-react";
+import { signUpUser } from "../actions/userActions";
+import {
+  utilityReducer,
+  initialUtilityState
+} from "../reducers/utilityReducer";
 
 export const Register = ({ score }) => {
   const [name, updateName] = useState("");
   const [password, updatePassword] = useState("");
+  const [, utilityDispatch] = useReducer(utilityReducer, initialUtilityState);
   const apiContext = useContext(APIContext);
   const navigation = useContext(NavigationContext);
+
   const onSubmit = e => {
     e.preventDefault();
-
-    const signupScore = score;
-    const body = { name, password, score: signupScore };
-
-    endpoint
-      .post("/users/add", body)
-      .then(response => {
-        localStorage.setItem("token", response.headers.token);
-        setHeaders();
-        apiContext.signIn(response.data);
-        navigation.selectPage(1);
-      })
-      .catch(err => {
-        const [message, statusCode] = parseErr(err);
-        apiContext.setStatus(message, statusCode);
-      });
+    const body = { name, password, score };
+    signUpUser(body, apiContext.globalDispatch, utilityDispatch);
+    navigation.selectPage(1);
   };
 
   return (

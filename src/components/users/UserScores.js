@@ -20,7 +20,7 @@ const UserScores = () => {
         try {
           const message = e.response.data.message.split('"')[1];
           const statusCode = parseInt(e.response.data.message.match(/\d+/g)[0]);
-          apiContext.setStatus(message, statusCode);
+          //apiContext.setStatus(message, statusCode);
         } catch (e) {
           console.log("Failed to fetch user score data");
         }

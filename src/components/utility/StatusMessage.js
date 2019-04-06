@@ -3,7 +3,7 @@ import APIContext from "../context/APIContext";
 import AnimatedMessage from "./AnimatedMessage";
 
 const StatusMessage = () => {
-  const apiContext = useContext(APIContext);
+  /* const apiContext = useContext(APIContext);
   const [showMessage, updateShowMessage] = useState("");
 
   useEffect(() => {
@@ -19,7 +19,8 @@ const StatusMessage = () => {
       statusCode={apiContext.statusCode}
       setStatus={apiContext.setStatus}
     />
-  );
+  ); */
+  return null;
 };
 
 export default StatusMessage;

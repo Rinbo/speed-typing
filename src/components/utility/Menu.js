@@ -38,7 +38,7 @@ export default ({ selectPage }) => {
           color="green"
           className="item borjessons-link"
           onClick={() => {
-            authContext.signOut();
+            //authContext.signOut();
             selectPage(1);
           }}
         >

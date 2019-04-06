@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 import { Button } from "semantic-ui-react";
-import { updateUser } from "../apis/updateUser";
+import { updateUser } from "../actions/userActions";
 import { userReducer, initialUserState } from "../reducers/userReducer";
 import {
   utilityReducer,
@@ -28,7 +28,7 @@ const UpdatePassword = ({ parentUtilityDispatch }) => {
             userDispatch,
             utilityDispatch
           );
-          parentUtilityDispatch({ type: "doToggle" });
+          parentUtilityDispatch({ type: "DO_TOGGLE" });
         }}
       >
         <div className="ui input">
@@ -36,7 +36,10 @@ const UpdatePassword = ({ parentUtilityDispatch }) => {
             type="password"
             value={utilityState.formInput}
             onChange={e =>
-              utilityDispatch({ type: "setFormInput", payload: e.target.value })
+              utilityDispatch({
+                type: "SET_FORM_INPUT",
+                payload: e.target.value
+              })
             }
             style={{ maxWidth: 200 }}
           />
@@ -46,7 +49,7 @@ const UpdatePassword = ({ parentUtilityDispatch }) => {
         </div>
         <div
           className="ui inverted basic button"
-          onClick={() => parentUtilityDispatch({ type: "doToggle" })}
+          onClick={() => parentUtilityDispatch({ type: "DO_TOGGLE" })}
           style={{ display: "inline", marginLeft: 20 }}
         >
           X

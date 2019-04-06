@@ -9,7 +9,9 @@ const GlobalHighScores = () => {
 
   useEffect(() => {
     endpoint
-      .get("/highscores/all", { params: { name: apiContext.signedInUser } })
+      .get("/highscores/all", {
+        params: { name: apiContext.signedInUser }
+      })
       .then(response => {
         const scores = response.data;
         if (scores.length === 11) {
@@ -20,7 +22,7 @@ const GlobalHighScores = () => {
       .catch(e => {
         const message = e.response.data.message.split('"')[1];
         const statusCode = parseInt(e.response.data.message.match(/\d+/g)[0]);
-        apiContext.setStatus(message, statusCode);
+        //apiContext.setStatus(message, statusCode);
       });
   }, []);
 

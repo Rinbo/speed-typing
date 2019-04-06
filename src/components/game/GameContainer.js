@@ -1,11 +1,14 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useReducer } from "react";
 import GameField from "./GameField";
 import { makeCodeSnippet } from "../utility/codeMaker";
 import GameComplete from "./GameComplete";
 import endpoint from "../apis/endpoint";
 import { setHeaders } from "../apis/setHeaders";
-import { parseErr } from "../utility/parseResponse";
 import APIContext from "../context/APIContext";
+import {
+  utilityReducer,
+  initialUtilityState
+} from "../reducers/utilityReducer";
 
 export const GameContainer = () => {
   const [typedCode, setTypedCode] = useState("");
@@ -13,6 +16,7 @@ export const GameContainer = () => {
   const [score, setScore] = useState(0);
   const [gameStatus, setGameStatus] = useState("ready");
   const apiContext = useContext(APIContext);
+  const [, utilityDispatch] = useReducer(utilityReducer, initialUtilityState);
 
   useEffect(() => {
     getRandomCode();
@@ -53,13 +57,11 @@ export const GameContainer = () => {
       .put("/highscores/update", { score: finalScore })
       .then(response => {
         localStorage.setItem("token", response.headers.token);
-        apiContext.setStatus(response.data, response.status);
+        utilityDispatch({ type: "SET_FLASH", payload: response.data });
         console.log(response);
       })
       .catch(err => {
-        const [message, statusCode] = parseErr(err);
-        apiContext.setStatus(message, statusCode);
-        console.log(message, statusCode);
+        utilityDispatch({ type: "SET_FLASH", payload: err });        
       });
   };
 

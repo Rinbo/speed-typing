@@ -1,7 +1,7 @@
 import React, { useContext, useReducer } from "react";
 import APIContext from "../context/APIContext";
 import { Button, List } from "semantic-ui-react";
-import { updateUser } from "../apis/updateUser";
+import { updateUser } from "../actions/userActions";
 import UpdatePassword from "./UpdatePassword";
 import { userReducer, initialUserState } from "../reducers/userReducer";
 import {
@@ -11,7 +11,6 @@ import {
 
 const UserProfile = () => {
   const apiContext = useContext(APIContext);
-  const [userState, userDispatch] = useReducer(userReducer, initialUserState);
   const [utilityState, utilityDispatch] = useReducer(
     utilityReducer,
     initialUtilityState
@@ -30,7 +29,7 @@ const UserProfile = () => {
             updateUser(
               { email: utilityState.formInput },
               "update",
-              userDispatch,
+              apiContext.globalDispatch,
               utilityDispatch
             );
           }}
@@ -42,7 +41,7 @@ const UserProfile = () => {
               value={utilityState.formInput}
               onChange={e =>
                 utilityDispatch({
-                  type: "updateFormInput",
+                  type: "UPDATE_FORM_INPUT",
                   payload: e.target.value
                 })
               }
@@ -61,8 +60,8 @@ const UserProfile = () => {
     <div>
       <List inverted style={{ marginBottom: 25 }}>
         <List.Item icon="user" content={apiContext.signedInUser} />
-        {userState.user.email ? (
-          <List.Item icon="mail" content={userState.user.email} />
+        {apiContext.email ? (
+          <List.Item icon="mail" content={apiContext.email} />
         ) : (
           renderField()
         )}
@@ -75,7 +74,7 @@ const UserProfile = () => {
           inverted
           color="green"
           onClick={() => {
-            utilityDispatch({ type: "doToggle" });
+            utilityDispatch({ type: "DO_TOGGLE" });
           }}
         >
           Change passsword
