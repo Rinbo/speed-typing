@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
 import GameField from "./GameField";
 import { makeCodeSnippet } from "../utility/codeMaker";
+import { FLASH_MESSAGE } from "../types";
 import GameComplete from "./GameComplete";
 import endpoint from "../apis/endpoint";
 import { setHeaders } from "../apis/setHeaders";
@@ -54,19 +55,19 @@ export const GameContainer = () => {
       .then(response => {
         localStorage.setItem("token", response.headers.token);
         apiContext.globalDispatch({
-          type: "SET_FLASH",
+          type: FLASH_MESSAGE,
           payload: { message: response.data, status: response.status }
         });
-        console.log(response);
       })
       .catch(err => {
         const { message, status } = parseErr(err);
         apiContext.globalDispatch({
-          type: "SET_FLASH",
+          type: FLASH_MESSAGE,
           payload: { message, status }
         });
       });
   };
+  console.log(apiContext.message, "from game container");
 
   const countRemaingScore = () => {
     let counter = 0;

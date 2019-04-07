@@ -13,8 +13,7 @@ export const Register = ({ score }) => {
   const onSubmit = e => {
     e.preventDefault();
     const body = { name, password, score };
-    signUpUser(body, apiContext.globalDispatch);
-    navigation.selectPage(1);
+    signUpUser(body, apiContext.globalDispatch, navigation);
   };
 
   return (

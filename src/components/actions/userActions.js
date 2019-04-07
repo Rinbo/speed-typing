@@ -22,7 +22,7 @@ export const updateUser = async (obj, route, userDispatch) => {
   }
 };
 
-export const signInUser = async (obj, userDispatch) => {
+export const signInUser = async (obj, userDispatch, navigation) => {
   try {
     setHeaders();
     const response = await endpoint.post("/users/signin", { ...obj });
@@ -35,6 +35,7 @@ export const signInUser = async (obj, userDispatch) => {
         status: 200
       }
     });
+    navigation.selectPage(1);
   } catch (e) {
     const [message, status] = parseErr(e);
     userDispatch({
@@ -44,7 +45,7 @@ export const signInUser = async (obj, userDispatch) => {
   }
 };
 
-export const signUpUser = async (obj, userDispatch) => {
+export const signUpUser = async (obj, userDispatch, navigation) => {
   try {
     setHeaders();
     const response = await endpoint.post("/users/add", { ...obj });
@@ -57,6 +58,7 @@ export const signUpUser = async (obj, userDispatch) => {
         status: 200
       }
     });
+    navigation.selectPage(1);
   } catch (e) {
     const [message, status] = parseErr(e);
     userDispatch({

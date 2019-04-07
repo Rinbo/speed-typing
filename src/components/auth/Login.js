@@ -13,8 +13,7 @@ export default () => {
   const onSubmit = e => {
     e.preventDefault();
     const body = { name, password, score: apiContext.score };
-    signInUser(body, apiContext.globalDispatch);
-    navigation.selectPage(1);
+    signInUser(body, apiContext.globalDispatch, navigation);
   };
 
   return (

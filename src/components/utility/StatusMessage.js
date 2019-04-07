@@ -16,8 +16,8 @@ const StatusMessage = () => {
   return (
     <AnimatedMessage
       message={apiContext.message}
-      statusCode={apiContext.status}
-      statusDispatch={apiContext.globalDispatch}
+      status={apiContext.status}
+      dispatch={apiContext.globalDispatch}
     />
   );
 };

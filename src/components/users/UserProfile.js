@@ -43,8 +43,8 @@ const UserProfile = () => {
     <div>
       <List inverted style={{ marginBottom: 25 }}>
         <List.Item icon="user" content={apiContext.signedInUser} />
-        {apiContext.email ? (
-          <List.Item icon="mail" content={apiContext.email} />
+        {apiContext.userEmail ? (
+          <List.Item icon="mail" content={apiContext.userEmail} />
         ) : (
           renderField()
         )}
