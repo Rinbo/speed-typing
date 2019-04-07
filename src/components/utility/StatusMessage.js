@@ -3,11 +3,11 @@ import APIContext from "../context/APIContext";
 import AnimatedMessage from "./AnimatedMessage";
 
 const StatusMessage = () => {
-  /* const apiContext = useContext(APIContext);
+  const apiContext = useContext(APIContext);
   const [showMessage, updateShowMessage] = useState("");
 
   useEffect(() => {
-    updateShowMessage(apiContext.statusMessage);
+    updateShowMessage(apiContext.message);
   });
 
   if (showMessage === "") {
@@ -15,12 +15,11 @@ const StatusMessage = () => {
   }
   return (
     <AnimatedMessage
-      message={apiContext.statusMessage}
-      statusCode={apiContext.statusCode}
-      setStatus={apiContext.setStatus}
+      message={apiContext.message}
+      statusCode={apiContext.status}
+      statusDispatch={apiContext.globalDispatch}
     />
-  ); */
-  return null;
+  );
 };
 
 export default StatusMessage;

@@ -1,24 +1,19 @@
-import React, { useContext, useState, useReducer } from "react";
+import React, { useContext, useState } from "react";
 import APIContext from "../context/APIContext";
 import NavigationContext from "../context/NavigationContext";
 import { Button } from "semantic-ui-react";
 import { signInUser } from "../actions/userActions";
-import {
-  utilityReducer,
-  initialUtilityState
-} from "../reducers/utilityReducer";
 
 export default () => {
   const [name, updateName] = useState("");
   const [password, updatePassword] = useState("");
   const apiContext = useContext(APIContext);
-  const [, utilityDispatch] = useReducer(utilityReducer, initialUtilityState);
   const navigation = useContext(NavigationContext);
 
   const onSubmit = e => {
     e.preventDefault();
     const body = { name, password, score: apiContext.score };
-    signInUser(body, apiContext.globalDispatch, utilityDispatch);
+    signInUser(body, apiContext.globalDispatch);
     navigation.selectPage(1);
   };
 

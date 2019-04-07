@@ -10,7 +10,7 @@ export const initialUserState = {
   signedInUser: null,
   userEmail: null,
   score: null,
-  message: {},
+  message: "",
   status: null
 };
 
@@ -32,9 +32,13 @@ export const userReducer = (state, action) => {
         userEmail: action.payload.email
       };
     case SIGN_OUT:
-      return init(action.payload);
+      return init(initialUserState);
     case FLASH_MESSAGE:
-      return { ...state, message: action.payload };
+      return {
+        ...state,
+        message: action.payload.message,
+        status: action.payload.status
+      };
     default:
       return state;
   }

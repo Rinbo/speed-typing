@@ -1,20 +1,11 @@
-import React, { useReducer } from "react";
+import React, { useState, useContext } from "react";
 import { Button } from "semantic-ui-react";
 import { updateUser } from "../actions/userActions";
-import { userReducer, initialUserState } from "../reducers/userReducer";
-import {
-  utilityReducer,
-  initialUtilityState
-} from "../reducers/utilityReducer";
+import APIContext from "../context/APIContext";
 
-const UpdatePassword = ({ parentUtilityDispatch }) => {
-  const [, userDispatch] = useReducer(userReducer, {
-    initialUserState
-  });
-  const [utilityState, utilityDispatch] = useReducer(
-    utilityReducer,
-    initialUtilityState
-  );
+const UpdatePassword = ({ doToggle }) => {
+  const apiContext = useContext(APIContext);
+  const [password, setPassword] = useState("");
 
   return (
     <div>
@@ -22,25 +13,15 @@ const UpdatePassword = ({ parentUtilityDispatch }) => {
         className="ui form"
         onSubmit={e => {
           e.preventDefault();
-          updateUser(
-            { password: utilityState.formInput },
-            "update",
-            userDispatch,
-            utilityDispatch
-          );
-          parentUtilityDispatch({ type: "DO_TOGGLE" });
+          updateUser({ password }, "update", apiContext.globalDispatch);
+          doToggle(false);
         }}
       >
         <div className="ui input">
           <input
             type="password"
-            value={utilityState.formInput}
-            onChange={e =>
-              utilityDispatch({
-                type: "SET_FORM_INPUT",
-                payload: e.target.value
-              })
-            }
+            value={password}
+            onChange={e => setPassword(e.target.value)}
             style={{ maxWidth: 200 }}
           />
           <Button basic inverted color="green" style={{ marginLeft: 10 }}>
@@ -49,7 +30,7 @@ const UpdatePassword = ({ parentUtilityDispatch }) => {
         </div>
         <div
           className="ui inverted basic button"
-          onClick={() => parentUtilityDispatch({ type: "DO_TOGGLE" })}
+          onClick={() => doToggle(false)}
           style={{ display: "inline", marginLeft: 20 }}
         >
           X

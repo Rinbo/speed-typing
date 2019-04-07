@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from "react";
 import endpoint from "../apis/endpoint";
 import { setHeaders } from "../apis/setHeaders";
 import APIContext from "../context/APIContext";
+import { parseErr } from "../utility/parseResponse";
 
 const UserScores = () => {
   const [scores, updateScore] = useState([]);
@@ -14,13 +15,11 @@ const UserScores = () => {
       .then(response => {
         updateScore(response.data);
         localStorage.setItem("token", response.headers.token);
-        setHeaders();
       })
       .catch(e => {
         try {
-          const message = e.response.data.message.split('"')[1];
-          const statusCode = parseInt(e.response.data.message.match(/\d+/g)[0]);
-          //apiContext.setStatus(message, statusCode);
+          const { message, status } = parseErr(e);
+          apiContext.globalDispatch(message, status);
         } catch (e) {
           console.log("Failed to fetch user score data");
         }

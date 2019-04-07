@@ -1,24 +1,19 @@
-import React, { useContext, useReducer, useState } from "react";
+import React, { useContext, useState } from "react";
 import APIContext from "../context/APIContext";
 import NavigationContext from "../context/NavigationContext";
 import { Button } from "semantic-ui-react";
 import { signUpUser } from "../actions/userActions";
-import {
-  utilityReducer,
-  initialUtilityState
-} from "../reducers/utilityReducer";
 
 export const Register = ({ score }) => {
   const [name, updateName] = useState("");
   const [password, updatePassword] = useState("");
-  const [, utilityDispatch] = useReducer(utilityReducer, initialUtilityState);
   const apiContext = useContext(APIContext);
   const navigation = useContext(NavigationContext);
 
   const onSubmit = e => {
     e.preventDefault();
     const body = { name, password, score };
-    signUpUser(body, apiContext.globalDispatch, utilityDispatch);
+    signUpUser(body, apiContext.globalDispatch);
     navigation.selectPage(1);
   };
 

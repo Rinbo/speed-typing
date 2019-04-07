@@ -1,15 +1,15 @@
 import React, { useEffect } from "react";
 
-export const AnimatedMessage = ({ message, statusCode, setStatus }) => {
+export const AnimatedMessage = ({ message, statusCode, statusDispatch }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
-      setStatus("", null);
+      statusDispatch({ message: "", status: null });
     }, 3100);
     return () => {
       clearTimeout(timer);
     };
   });
-
+  
   return (
     <div
       id="banner"

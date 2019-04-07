@@ -1,20 +1,13 @@
-import React, { useContext, useReducer } from "react";
+import React, { useContext, useState } from "react";
 import APIContext from "../context/APIContext";
 import { Button, List } from "semantic-ui-react";
 import { updateUser } from "../actions/userActions";
 import UpdatePassword from "./UpdatePassword";
-import { userReducer, initialUserState } from "../reducers/userReducer";
-import {
-  utilityReducer,
-  initialUtilityState
-} from "../reducers/utilityReducer";
 
 const UserProfile = () => {
   const apiContext = useContext(APIContext);
-  const [utilityState, utilityDispatch] = useReducer(
-    utilityReducer,
-    initialUtilityState
-  );
+  const [email, setEmail] = useState("");
+  const [toggle, doToggle] = useState(false);
 
   const renderField = () => {
     return (
@@ -26,25 +19,15 @@ const UserProfile = () => {
           className="ui form"
           onSubmit={e => {
             e.preventDefault();
-            updateUser(
-              { email: utilityState.formInput },
-              "update",
-              apiContext.globalDispatch,
-              utilityDispatch
-            );
+            updateUser({ email }, "update", apiContext.globalDispatch);
           }}
         >
           <div className="ui input">
             <input
               name="email"
               type="email"
-              value={utilityState.formInput}
-              onChange={e =>
-                utilityDispatch({
-                  type: "UPDATE_FORM_INPUT",
-                  payload: e.target.value
-                })
-              }
+              value={email}
+              onChange={e => setEmail(e.target.value)}
               style={{ maxWidth: 200 }}
             />
             <Button basic inverted color="green" style={{ marginLeft: 10 }}>
@@ -66,17 +49,10 @@ const UserProfile = () => {
           renderField()
         )}
       </List>
-      {utilityState.toggle ? (
-        <UpdatePassword parentUtilityDispatch={utilityDispatch} />
+      {toggle ? (
+        <UpdatePassword doToggle={doToggle} />
       ) : (
-        <Button
-          basic
-          inverted
-          color="green"
-          onClick={() => {
-            utilityDispatch({ type: "DO_TOGGLE" });
-          }}
-        >
+        <Button basic inverted color="green" onClick={() => doToggle(true)}>
           Change passsword
         </Button>
       )}

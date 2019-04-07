@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from "react";
 import AuthContext from "../context/APIContext";
 import { Accordion, Icon, Button } from "semantic-ui-react";
+import { signOutUser } from "../actions/userActions";
 
 export default ({ selectPage }) => {
   const [windowWidth, setWindowWidth] = useState(1000);
@@ -38,7 +39,7 @@ export default ({ selectPage }) => {
           color="green"
           className="item borjessons-link"
           onClick={() => {
-            //authContext.signOut();
+            signOutUser(authContext.globalDispatch);
             selectPage(1);
           }}
         >
@@ -109,7 +110,7 @@ export default ({ selectPage }) => {
         <Icon
           name="bars"
           size="big"
-          inverted          
+          inverted
           style={{ position: "fixed", left: 10, top: 10 }}
         />
       </Accordion.Title>
