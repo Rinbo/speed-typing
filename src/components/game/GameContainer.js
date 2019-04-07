@@ -67,7 +67,6 @@ export const GameContainer = () => {
         });
       });
   };
-  console.log(apiContext.message, "from game container");
 
   const countRemaingScore = () => {
     let counter = 0;

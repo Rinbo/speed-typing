@@ -5,7 +5,6 @@ import { Button } from "semantic-ui-react";
 
 const GameComplete = ({ score, restart }) => {
   const apiContext = useContext(APIContext);
-  console.log(apiContext.message, "from game complete");
   return (
     <>
       <div style={{ textAlign: "center", fontSize: 30, marginBottom: 50 }}>
