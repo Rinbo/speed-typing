@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
-import endpoint from "../apis/endpoint";
 import APIContext from "../context/APIContext";
-import { parseErr } from "../utility/parseResponse";
+import { getHighscores } from "../actions/highscoreActions";
 
 const GlobalHighScores = () => {
   const [highscores, updateHighscores] = useState([]);
@@ -9,24 +8,14 @@ const GlobalHighScores = () => {
   const apiContext = useContext(APIContext);
 
   useEffect(() => {
-    endpoint
-      .get("/highscores/all", {
-        params: { name: apiContext.signedInUser }
-      })
-      .then(response => {
-        const scores = response.data;
-        if (scores.length === 11) {
-          updateUserScore(scores.splice(10)[0]);
-        }
-        updateHighscores(scores);
-      })
-      .catch(e => {
-        const { message, status } = parseErr(e);
-        apiContext.globalDispatch({
-          type: "FLASH_MESSAGE",
-          payload: { message, status }
-        });
-      });
+    const scores = getHighscores(
+      { params: apiContext.signedInUser },
+      apiContext.globalDispatch
+    );
+    if (scores.length === 11) {
+      updateUserScore(scores.splice(10)[0]);
+    }
+    updateHighscores(scores);
   }, []);
 
   const renderUserScore = () => {

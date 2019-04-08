@@ -19,13 +19,13 @@ const UserContainer = () => {
           onClick={handleClick}
         />
         <Menu.Item
-          name="Profile"
-          active={activeTab === "Profile"}
+          name="Account"
+          active={activeTab === "Account"}
           onClick={handleClick}
         />
       </Menu>
       <div className="borjessons-margin">
-        {activeTab === "Profile" ? <UserProfile /> : <UserScores />}
+        {activeTab === "Account" ? <UserProfile /> : <UserScores />}
       </div>
     </Segment>
   );

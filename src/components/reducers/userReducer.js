@@ -14,7 +14,6 @@ export const initialUserState = {
   status: null
 };
 
-// @TODO Update backend to always return the same user object
 export const userReducer = (state, action) => {
   switch (action.type) {
     case UPDATE_USER:

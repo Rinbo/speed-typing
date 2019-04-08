@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import GameField from "./GameField";
 import { makeCodeSnippet } from "../utility/codeMaker";
 import { FLASH_MESSAGE } from "../types";
+import { updateScore } from "../actions/highscoreActions";
 import GameComplete from "./GameComplete";
 import endpoint from "../apis/endpoint";
 import { setHeaders } from "../apis/setHeaders";
@@ -49,23 +50,7 @@ export const GameContainer = () => {
   };
 
   const updateHighScore = finalScore => {
-    setHeaders();
-    endpoint
-      .put("/highscores/update", { score: finalScore })
-      .then(response => {
-        localStorage.setItem("token", response.headers.token);
-        apiContext.globalDispatch({
-          type: FLASH_MESSAGE,
-          payload: { message: response.data, status: response.status }
-        });
-      })
-      .catch(err => {
-        const { message, status } = parseErr(err);
-        apiContext.globalDispatch({
-          type: FLASH_MESSAGE,
-          payload: { message, status }
-        });
-      });
+    updateScore({ score: finalScore }, apiContext.globalDispatch);
   };
 
   const countRemaingScore = () => {

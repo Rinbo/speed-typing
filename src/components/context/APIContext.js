@@ -13,7 +13,7 @@ export const AuthStore = props => {
   );
 
   useEffect(() => {
-    validateToken(globalDispatch);
+    if (localStorage.getItem) validateToken(globalDispatch);
   }, []);
 
   const setScore = score => {
