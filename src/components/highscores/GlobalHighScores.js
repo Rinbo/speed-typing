@@ -1,56 +1,68 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useContext, useReducer } from "react";
 import APIContext from "../context/APIContext";
 import { getHighscores } from "../actions/highscoreActions";
+import {
+  highscoreReducer,
+  initialHighscores
+} from "../reducers/highscoreReducer";
 
 const GlobalHighScores = () => {
-  const [highscores, updateHighscores] = useState([]);
-  const [userScore, updateUserScore] = useState(null);
   const apiContext = useContext(APIContext);
+  const [state, highscoresDispatch] = useReducer(
+    highscoreReducer,
+    initialHighscores
+  );
 
   useEffect(() => {
-    const scores = getHighscores(
-      { params: apiContext.signedInUser },
+    getHighscores(
+      { params: { name: apiContext.signedInUser } },
+      highscoresDispatch,
       apiContext.globalDispatch
     );
-    if (scores.length === 11) {
-      updateUserScore(scores.splice(10)[0]);
-    }
-    updateHighscores(scores);
   }, []);
 
   const renderUserScore = () => {
-    return (
-      <>
-        <tr>
-          <td />
-          <td />
-          <td />
-          <td />
-        </tr>
-        <tr style={{ borderTop: "3px solid white" }}>
-          <td>{userScore.flashRank}.</td>
-          <td>{userScore.name}</td>
-          <td>{userScore.score}</td>
-          <td>{userScore.date.slice(0, 10)}</td>
-        </tr>
-      </>
-    );
+    if (state.highscores.length === 11) {
+      const userScore = state.highscores.splice(10)[0];
+      return (
+        <>
+          <tr>
+            <td />
+            <td />
+            <td />
+            <td />
+          </tr>
+          <tr style={{ borderTop: "3px solid white" }}>
+            <td>{userScore.flashRank}.</td>
+            <td>{userScore.name}</td>
+            <td>{userScore.score}</td>
+            <td>{userScore.date.slice(0, 10)}</td>
+          </tr>
+        </>
+      );
+    } else {
+      return null;
+    }
   };
 
   const renderHighscores = () => {
-    return highscores.map((highscore, index) => {
-      return (
-        <tr key={highscore.id}>
-          <td>{index + 1}.</td>
-          <td>{highscore.name}</td>
-          <td>{highscore.score}</td>
-          <td>{highscore.date.slice(0, 10)}</td>
-        </tr>
-      );
+    return state.highscores.map((highscore, index) => {
+      if (index < 10) {
+        return (
+          <tr key={highscore.id}>
+            <td>{index + 1}.</td>
+            <td>{highscore.name}</td>
+            <td>{highscore.score}</td>
+            <td>{highscore.date.slice(0, 10)}</td>
+          </tr>
+        );
+      } else {
+        return null;
+      }
     });
   };
 
-  if (highscores.length === 0) {
+  if (state.highscores.length === 0) {
     return null;
   }
   return (
@@ -77,7 +89,7 @@ const GlobalHighScores = () => {
         </thead>
         <tbody>
           {renderHighscores()}
-          {userScore ? renderUserScore() : null}
+          {renderUserScore()}
         </tbody>
       </table>
     </div>

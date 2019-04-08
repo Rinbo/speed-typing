@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import GameField from "./GameField";
 import { makeCodeSnippet } from "../utility/codeMaker";
-import { FLASH_MESSAGE } from "../types";
 import { updateScore } from "../actions/highscoreActions";
 import GameComplete from "./GameComplete";
-import endpoint from "../apis/endpoint";
-import { setHeaders } from "../apis/setHeaders";
-import { parseErr } from "../utility/parseResponse";
 import APIContext from "../context/APIContext";
 
 export const GameContainer = () => {
