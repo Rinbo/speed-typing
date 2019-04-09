@@ -1,6 +1,6 @@
 import { setHeaders } from "../apis/setHeaders";
 import endpoint from "../apis/endpoint";
-import { FLASH_MESSAGE, GET_HIGHSCORES } from "../types";
+import { FLASH_MESSAGE, GET_HIGHSCORES, GET_USER_SCORES } from "../types";
 import { parseErr } from "../utility/parseResponse";
 
 export const updateScore = async (score, flashDispatch) => {
@@ -24,6 +24,19 @@ export const getHighscores = (params, highscoresDispatch, flashDispatch) => {
     .get("/highscores/all", { ...params })
     .then(response => {
       highscoresDispatch({ type: GET_HIGHSCORES, payload: response.data });
+    })
+    .catch(e => {
+      const [message, status] = parseErr(e);
+      flashDispatch({ type: FLASH_MESSAGE, payload: { message, status } });
+    });
+};
+
+export const getUserScores = (scoresDispatch, flashDispatch) => {
+  setHeaders();
+  endpoint
+    .get("/highscores/user")
+    .then(response => {
+      scoresDispatch({ type: GET_USER_SCORES, payload: response.data });
     })
     .catch(e => {
       const [message, status] = parseErr(e);

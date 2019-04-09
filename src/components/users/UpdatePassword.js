@@ -11,16 +11,6 @@ const UpdatePassword = ({ doToggle }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    if (newPassword.length < 6) {
-      apiContext.globalDispatch({
-        type: "FLASH_MESSAGE",
-        payload: {
-          message: "Your new password must be atleast 6 characters long",
-          status: 400
-        }
-      });
-      return null;
-    }
     updateUser({ password, newPassword }, "update", apiContext.globalDispatch);
     doToggle(false);
   };
@@ -37,6 +27,7 @@ const UpdatePassword = ({ doToggle }) => {
               type={reveal ? "" : "password"}
               placeholder="Current Password"
               value={password}
+              name="current-password"
               onChange={e => setPassword(e.target.value)}
               style={{ maxWidth: 200 }}
             />
@@ -49,9 +40,11 @@ const UpdatePassword = ({ doToggle }) => {
           </label>
           <div className="ui input">
             <input
+              className="ui error"
               type={reveal ? "" : "password"}
               placeholder="New Password"
               value={newPassword}
+              name="new-password"
               onChange={e => setNewPassword(e.target.value)}
               style={{ maxWidth: 200 }}
             />

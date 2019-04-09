@@ -1,17 +1,11 @@
 import React, { useEffect, useContext, useReducer } from "react";
 import APIContext from "../context/APIContext";
 import { getHighscores } from "../actions/highscoreActions";
-import {
-  highscoreReducer,
-  initialHighscores
-} from "../reducers/highscoreReducer";
+import { scoresReducer, initialScores } from "../reducers/scoresReducer";
 
 const GlobalHighScores = () => {
   const apiContext = useContext(APIContext);
-  const [state, highscoresDispatch] = useReducer(
-    highscoreReducer,
-    initialHighscores
-  );
+  const [state, highscoresDispatch] = useReducer(scoresReducer, initialScores);
 
   useEffect(() => {
     getHighscores(

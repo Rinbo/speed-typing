@@ -1,29 +1,22 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useReducer, useContext } from "react";
 import endpoint from "../apis/endpoint";
 import { setHeaders } from "../apis/setHeaders";
 import APIContext from "../context/APIContext";
 import { parseErr } from "../utility/parseResponse";
+import { getUserScores } from "../actions/highscoreActions";
+import {
+  scoresReducer,
+  initialScores
+} from "../reducers/scoresReducer";
+import { userReducer } from "../reducers/userReducer";
 
 const UserScores = () => {
-  const [scores, updateScore] = useState([]);
+  const [state, updateState] = useReducer(scoresReducer, initialScores);
   const apiContext = useContext(APIContext);
 
   useEffect(() => {
     setHeaders();
-    endpoint
-      .get("/highscores/user")
-      .then(response => {
-        updateScore(response.data);
-        localStorage.setItem("token", response.headers.token);
-      })
-      .catch(e => {
-        try {
-          const { message, status } = parseErr(e);
-          apiContext.globalDispatch(message, status);
-        } catch (e) {
-          console.log("Failed to fetch user score data");
-        }
-      });
+    
   }, []);
 
   const renderScores = () => {
