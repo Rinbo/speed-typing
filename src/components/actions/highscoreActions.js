@@ -36,8 +36,10 @@ export const getUserScores = (scoresDispatch, flashDispatch) => {
   endpoint
     .get("/highscores/user")
     .then(response => {
+      localStorage.setItem("token", response.headers.token);
       scoresDispatch({ type: GET_USER_SCORES, payload: response.data });
     })
+
     .catch(e => {
       const [message, status] = parseErr(e);
       flashDispatch({ type: FLASH_MESSAGE, payload: { message, status } });

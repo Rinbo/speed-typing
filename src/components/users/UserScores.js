@@ -1,26 +1,18 @@
 import React, { useEffect, useReducer, useContext } from "react";
-import endpoint from "../apis/endpoint";
-import { setHeaders } from "../apis/setHeaders";
 import APIContext from "../context/APIContext";
-import { parseErr } from "../utility/parseResponse";
 import { getUserScores } from "../actions/highscoreActions";
-import {
-  scoresReducer,
-  initialScores
-} from "../reducers/scoresReducer";
-import { userReducer } from "../reducers/userReducer";
+import { scoresReducer, initialScores } from "../reducers/scoresReducer";
 
 const UserScores = () => {
   const [state, updateState] = useReducer(scoresReducer, initialScores);
   const apiContext = useContext(APIContext);
 
   useEffect(() => {
-    setHeaders();
-    
+    getUserScores(updateState, apiContext.globalDispatch);
   }, []);
 
   const renderScores = () => {
-    return scores.map((score, index) => {
+    return state.userScores.map((score, index) => {
       return (
         <tr key={score.id}>
           <td>{index + 1}.</td>
@@ -31,7 +23,7 @@ const UserScores = () => {
     });
   };
 
-  if (scores.length === 0) {
+  if (state.userScores.length === 0) {
     return null;
   }
 
