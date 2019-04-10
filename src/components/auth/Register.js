@@ -1,17 +1,30 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import APIContext from "../context/APIContext";
 import NavigationContext from "../context/NavigationContext";
 import { Button } from "semantic-ui-react";
 import { signUpUser } from "../actions/userActions";
+import { validations } from "./authValidations";
+import AuthForm from "./AuthForm";
 
 export const Register = ({ score }) => {
   const [name, updateName] = useState("");
   const [password, updatePassword] = useState("");
+  const [showErrors, setShowErrors] = useState(false);
+  const [errors, setErrors] = useState({});
   const apiContext = useContext(APIContext);
   const navigation = useContext(NavigationContext);
 
+  useEffect(() => {
+    validations(name, password, setErrors);
+  }, [password, name]);
+
   const onSubmit = e => {
     e.preventDefault();
+    if (errors.exist) {
+      setShowErrors(true);
+      return null;
+    }
+    setShowErrors(false);
     const body = { name, password, score };
     signUpUser(body, apiContext.globalDispatch, navigation);
   };
@@ -24,45 +37,17 @@ export const Register = ({ score }) => {
             Register an account and see how you measure up against others on the
             scoreboard:
           </div>
-          <form className="ui large form" onSubmit={onSubmit}>
+          <form className="ui large form error" onSubmit={onSubmit}>
             <div className="ui basic segment">
-              <div className="field">
-                <label style={{ color: "#cccccc", textAlign: "left" }}>
-                  Name
-                </label>
-
-                <div className="ui left icon input">
-                  <i className="user icon" />
-                  <input
-                    placeholder="Username"
-                    autoComplete="off"
-                    name="name"
-                    type="text"
-                    onChange={e => {
-                      updateName(e.target.value);
-                    }}
-                    value={name}
-                  />
-                </div>
-              </div>
-              <div className="field">
-                <label style={{ color: "#cccccc", textAlign: "left" }}>
-                  Password
-                </label>
-                <div className="ui left icon input">
-                  <i className="lock icon" />
-                  <input
-                    autoComplete="off"
-                    name="password"
-                    type="password"
-                    placeholder="Password"
-                    onChange={e => {
-                      updatePassword(e.target.value);
-                    }}
-                    value={password}
-                  />
-                </div>
-              </div>
+              <AuthForm
+                password={password}
+                updatePassword={updatePassword}
+                name={name}
+                updateName={updateName}
+                errors={errors}
+                showErrors={showErrors}
+                setShowErrors={setShowErrors}
+              />
               <Button basic inverted color="green" style={{ width: "100%" }}>
                 Register!
               </Button>
