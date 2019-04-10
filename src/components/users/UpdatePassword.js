@@ -11,7 +11,11 @@ const UpdatePassword = ({ doToggle }) => {
 
   const onSubmit = e => {
     e.preventDefault();
-    updateUser({ password, newPassword }, "update", apiContext.globalDispatch);
+    updateUser(
+      { password, newPw: newPassword },
+      "update",
+      apiContext.globalDispatch
+    );
     doToggle(false);
   };
 
