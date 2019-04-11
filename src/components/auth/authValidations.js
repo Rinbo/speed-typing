@@ -5,7 +5,7 @@ export const validations = (name, password, setErrors) => {
     errors.password = "Password must be 6 characters long or more";
     errors.exist = true;
   }
-  if (name.length < 1 || name.length > 15) {
+  if (name.length < 1 || name.length > 20) {
     errors.name = "Name must be between 1 and 15 characters long";
     errors.exist = true;
   }

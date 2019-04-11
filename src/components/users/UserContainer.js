@@ -11,7 +11,7 @@ const UserContainer = () => {
   };
 
   return (
-    <Segment inverted style={{ width: 450, margin: "auto" }}>
+    <Segment inverted style={{ width: 375, margin: "auto" }}>
       <Menu pointing secondary inverted>
         <Menu.Item
           name="Your scores"

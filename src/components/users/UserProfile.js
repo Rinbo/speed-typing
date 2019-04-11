@@ -1,11 +1,13 @@
 import React, { useContext, useState } from "react";
 import APIContext from "../context/APIContext";
+import NavigationContext from "../context/NavigationContext";
 import { Button, List } from "semantic-ui-react";
-import { updateUser } from "../actions/userActions";
+import { updateUser, deleteUser } from "../actions/userActions";
 import UpdatePassword from "./UpdatePassword";
 
 const UserProfile = () => {
   const apiContext = useContext(APIContext);
+  const navigation = useContext(NavigationContext);
   const [email, setEmail] = useState("");
   const [toggle, doToggle] = useState(false);
 
@@ -40,8 +42,8 @@ const UserProfile = () => {
   };
 
   return (
-    <div>
-      <List inverted style={{ marginBottom: 25 }}>
+    <div style={{ maxWidth: 375 }}>
+      <List responsive inverted style={{ marginBottom: 25 }}>
         <List.Item icon="user" content={apiContext.signedInUser} />
         {apiContext.userEmail ? (
           <List.Item icon="mail" content={apiContext.userEmail} />
@@ -52,10 +54,30 @@ const UserProfile = () => {
       {toggle ? (
         <UpdatePassword doToggle={doToggle} />
       ) : (
-        <Button basic inverted color="green" onClick={() => doToggle(true)}>
-          Change passsword
+        <Button
+          basic
+          inverted
+          color="green"
+          onClick={() => doToggle(true)}
+          style={{ width: 200 }}
+        >
+          Change password
         </Button>
       )}
+      <div>
+        <Button
+          basic
+          inverted
+          color="red"
+          onClick={() => {
+            deleteUser(apiContext.globalDispatch);
+            navigation.selectPage(1);
+          }}
+          style={{ width: 200, marginTop: 15 }}
+        >
+          Delete Account
+        </Button>
+      </div>
     </div>
   );
 };

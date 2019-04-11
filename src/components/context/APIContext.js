@@ -12,6 +12,8 @@ export const AuthStore = props => {
     init
   );
 
+  // @TODO Add windowWidth and make it a global variable. Set maxWidth to this width
+
   useEffect(() => {
     if (localStorage.getItem) validateToken(globalDispatch, setScore);
   }, []);

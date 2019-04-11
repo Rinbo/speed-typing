@@ -68,6 +68,29 @@ export const signUpUser = async (obj, userDispatch, navigation) => {
   }
 };
 
+export const deleteUser = async userDispatch => {
+  try {
+    setHeaders();
+    await endpoint.delete("/users/delete");
+    destroyToken();
+    userDispatch({ type: SIGN_OUT });
+    userDispatch({
+      type: FLASH_MESSAGE,
+      payload: {
+        message: "Account destroyed.  Bye bye... ",
+        status: 200
+      }
+    });
+  } catch (e) {
+    const [message, status] = parseErr(e);
+    userDispatch({ type: SIGN_OUT });
+    userDispatch({
+      type: FLASH_MESSAGE,
+      payload: { message, status }
+    });
+  }
+};
+
 export const signOutUser = async userDispatch => {
   setHeaders();
   endpoint.delete("/users/signout");
