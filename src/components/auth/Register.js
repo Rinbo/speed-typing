@@ -62,15 +62,18 @@ export const Register = ({ score }) => {
           <p style={{ textAlign: "center", marginTop: 15 }}>
             If you already have an account
           </p>
-          <Button
-            style={{ display: "block", margin: "auto" }}
-            basic
-            inverted
-            color="green"
+          <div
+            className="ui centered link"
+            style={{
+              display: "block",
+              margin: "auto",
+              color: "#21ba45",
+              cursor: "pointer"
+            }}
             onClick={() => navigation.selectPage(5)}
           >
             Login
-          </Button>
+          </div>
         </div>
       </div>
     </div>

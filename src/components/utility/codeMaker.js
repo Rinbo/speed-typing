@@ -59,7 +59,7 @@ const makeFunction = () => {
   if (f === "function") {
     return `${f}(${param1}, ${param2}) { return ${param1}${operator}${param2}} `;
   }
-  return `${f}((${param1}) => { ${param1}.${utility}(${noun})})`;
+  return `${f}((${param1}) => { ${param1}.${utility}(${noun})});`;
 };
 
 const makeDeclaration = () => {

@@ -82,7 +82,7 @@ export const signOutUser = async userDispatch => {
   });
 };
 
-export const validateToken = async userDispatch => {
+export const validateToken = async (userDispatch, setScore) => {
   try {
     setHeaders();
     endpoint.get("/users/validatetoken").then(response => {
@@ -98,9 +98,11 @@ export const validateToken = async userDispatch => {
     });
   } catch (e) {
     const [message, status] = parseErr(e);
+    userDispatch({ type: SIGN_OUT });
     userDispatch({
       type: FLASH_MESSAGE,
       payload: { message, status }
     });
+    setScore(null);
   }
 };

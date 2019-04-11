@@ -1,12 +1,11 @@
 import React, { useEffect, useState, useContext } from "react";
-import AuthContext from "../context/APIContext";
-import { Accordion, Icon, Button, Popup } from "semantic-ui-react";
+import APIContext from "../context/APIContext";
+import { Button, Popup } from "semantic-ui-react";
 import { signOutUser } from "../actions/userActions";
 
 export default ({ selectPage }) => {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const [activeIndex, setActiveIndex] = useState(0);
-  const authContext = useContext(AuthContext);
+  const apiContext = useContext(APIContext);
 
   const styles = {
     icon: { color: "#cccccc", backgroundColor: "#1b1c1d" }
@@ -46,7 +45,8 @@ export default ({ selectPage }) => {
               color="green"
               className="item borjessons-link"
               onClick={() => {
-                signOutUser(authContext.globalDispatch);
+                signOutUser(apiContext.globalDispatch);
+                apiContext.setScore(null);
                 selectPage(1);
               }}
             >
@@ -119,31 +119,9 @@ export default ({ selectPage }) => {
         content="Global Highscores"
       />
 
-      {authContext.isSignedIn ? renderUserLinks() : renderAuthLinks()}
+      {apiContext.isSignedIn ? renderUserLinks() : renderAuthLinks()}
     </div>
   );
 
-  const handleClick = (e, titleProps) => {
-    const { index } = titleProps;
-    const newIndex = activeIndex === index ? -1 : index;
-    setActiveIndex(newIndex);
-  };
-
-  return (
-    <Accordion inverted as={Icon}>
-      <Accordion.Title
-        active={activeIndex === 0}
-        index={0}
-        onClick={handleClick}
-      >
-        <Icon
-          name="bars"
-          size="big"
-          inverted
-          style={{ position: "fixed", left: 10, top: 10 }}
-        />
-      </Accordion.Title>
-      <Accordion.Content active={activeIndex === 0} content={renderContent} />
-    </Accordion>
-  );
+  return renderContent;
 };
