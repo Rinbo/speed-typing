@@ -1,18 +1,9 @@
-import React, { useEffect, useReducer, useContext } from "react";
-import APIContext from "../context/APIContext";
-import { getUserScores } from "../actions/highscoreActions";
-import { scoresReducer, initialScores } from "../reducers/scoresReducer";
+import React from "react";
 
-const UserScores = () => {
-  const [state, updateState] = useReducer(scoresReducer, initialScores);
-  const apiContext = useContext(APIContext);
-
-  useEffect(() => {
-    getUserScores(updateState, apiContext.globalDispatch);
-  }, []);
-
+const UserScores = ({ state }) => {
   const renderScores = () => {
-    return state.userScores.map((score, index) => {
+    const topTen = state.userScores.slice(0, 10);
+    return topTen.map((score, index) => {
       return (
         <tr key={score.id}>
           <td>{index + 1}.</td>
@@ -40,7 +31,7 @@ const UserScores = () => {
       >
         <thead>
           <tr>
-            <th>Top 10</th>
+            <th>Position</th>
             <th>Score</th>
             <th>Date</th>
           </tr>

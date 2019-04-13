@@ -1,11 +1,20 @@
-import React, { useState } from "react";
+import React, { useState, useReducer, useContext, useEffect } from "react";
 import UserScores from "./UserScores";
 import UserProfile from "./UserProfile";
 import UserStats from "./UserStats";
+import APIContext from "../context/APIContext";
+import { getUserScores } from "../actions/highscoreActions";
+import { scoresReducer, initialScores } from "../reducers/scoresReducer";
 import { Menu, Segment } from "semantic-ui-react";
 
 const UserContainer = () => {
   const [activeTab, setActiveTab] = useState("Your scores");
+  const [state, updateState] = useReducer(scoresReducer, initialScores);
+  const apiContext = useContext(APIContext);
+
+  useEffect(() => {
+    getUserScores(updateState, apiContext.globalDispatch);
+  }, []);
 
   const handleClick = (e, { name }) => {
     setActiveTab(name);
@@ -16,9 +25,9 @@ const UserContainer = () => {
       case "Account":
         return <UserProfile />;
       case "Your scores":
-        return <UserScores />;
+        return <UserScores state={state} />;
       case "Statistics":
-        return <UserStats />;
+        return <UserStats state={state} />;
       default:
         return null;
     }
