@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import UserScores from "./UserScores";
 import UserProfile from "./UserProfile";
+import UserStats from "./UserStats";
 import { Menu, Segment } from "semantic-ui-react";
 
 const UserContainer = () => {
@@ -8,6 +9,19 @@ const UserContainer = () => {
 
   const handleClick = (e, { name }) => {
     setActiveTab(name);
+  };
+
+  const renderTab = () => {
+    switch (activeTab) {
+      case "Account":
+        return <UserProfile />;
+      case "Your scores":
+        return <UserScores />;
+      case "Statistics":
+        return <UserStats />;
+      default:
+        return null;
+    }
   };
 
   return (
@@ -19,14 +33,17 @@ const UserContainer = () => {
           onClick={handleClick}
         />
         <Menu.Item
+          name="Statistics"
+          active={activeTab === "Statistics"}
+          onClick={handleClick}
+        />
+        <Menu.Item
           name="Account"
           active={activeTab === "Account"}
           onClick={handleClick}
         />
       </Menu>
-      <div className="borjessons-margin">
-        {activeTab === "Account" ? <UserProfile /> : <UserScores />}
-      </div>
+      <div className="borjessons-margin">{renderTab()}</div>
     </Segment>
   );
 };

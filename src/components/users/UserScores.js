@@ -40,7 +40,7 @@ const UserScores = () => {
       >
         <thead>
           <tr>
-            <th>Rank</th>
+            <th>Top 10</th>
             <th>Score</th>
             <th>Date</th>
           </tr>
