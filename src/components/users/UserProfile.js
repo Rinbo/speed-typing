@@ -43,7 +43,7 @@ const UserProfile = () => {
 
   return (
     <div style={{ maxWidth: 375 }}>
-      <List responsive inverted style={{ marginBottom: 25 }}>
+      <List inverted style={{ marginBottom: 25 }}>
         <List.Item icon="user" content={apiContext.signedInUser} />
         {apiContext.userEmail ? (
           <List.Item icon="mail" content={apiContext.userEmail} />
