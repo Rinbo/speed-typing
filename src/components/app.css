@@ -69,3 +69,9 @@ body {
   animation-name: banner;
   animation-duration: 3s;
 }
+
+.chart-container {
+  position: relative;
+  height: 300px;
+  width: 100%;
+}
