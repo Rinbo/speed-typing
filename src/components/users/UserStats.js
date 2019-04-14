@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 
-var CanvasJSReact = require("../../assets/canvasjs.react");
-var CanvasJS = CanvasJSReact.CanvasJS;
-var CanvasJSChart = CanvasJSReact.CanvasJSChart;
+import CanvasJSReact from "../../assets/canvasjs.react";
 
 const XAXIS_PADDING = 10;
 const GRANULARITY = 5;
 
 const UserStats = ({ state }) => {
   const [dataPoints, setDataPoints] = useState([]);
+  const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
   useEffect(() => {
     calculateDataPoints();
@@ -38,8 +37,14 @@ const UserStats = ({ state }) => {
   };
 
   const options = {
-    title: {
-      text: "Histogram of your score history"
+    animationEnabled: true,
+    theme: "dark2",
+    backgroundColor: "transparent",
+    axisY: {
+      title: "# of Results"
+    },
+    axisX: {
+      title: "Score"
     },
     data: [
       {
@@ -48,9 +53,17 @@ const UserStats = ({ state }) => {
       }
     ]
   };
-
   if (dataPoints.length === 0) return null;
-  return <CanvasJSChart options={options} />;
+  return (
+    <div>
+      <CanvasJSChart options={options} />
+      <p>
+        Histogram of your result history. Your scores are grouped in intervals
+        of 5 on the x-axis and the number of results in each interval is shown
+        on the y-axis
+      </p>
+    </div>
+  );
 };
 
 export default UserStats;
