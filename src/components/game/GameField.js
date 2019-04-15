@@ -76,6 +76,10 @@ export const GameField = ({
           <input
             type="text"
             spellCheck="false"
+            onPaste={e => {
+              e.preventDefault();
+              return null;
+            }}
             onChange={e => {
               e.preventDefault();
               parseInput(e.target.value);
