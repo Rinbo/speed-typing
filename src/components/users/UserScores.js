@@ -40,7 +40,6 @@ const UserScores = ({ state }) => {
       {state.userScores.length > 10 ? (
         <Button
           style={{ margin: "auto", display: "block" }}
-          centered
           basic
           inverted
           color="green"

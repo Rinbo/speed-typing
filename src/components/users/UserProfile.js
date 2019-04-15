@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
 import APIContext from "../context/APIContext";
 import NavigationContext from "../context/NavigationContext";
+import ConfirmationModal from "../utility/ConfirmationModal";
 import { Button, List } from "semantic-ui-react";
 import { updateUser, deleteUser } from "../actions/userActions";
 import UpdatePassword from "./UpdatePassword";
@@ -41,6 +42,11 @@ const UserProfile = () => {
     );
   };
 
+  const deleteAccount = () => {
+    deleteUser(apiContext.globalDispatch);
+    navigation.selectPage(1);
+  };
+
   return (
     <div style={{ maxWidth: 375 }}>
       <List inverted style={{ marginBottom: 25 }}>
@@ -69,14 +75,18 @@ const UserProfile = () => {
           basic
           inverted
           color="red"
-          onClick={() => {
-            deleteUser(apiContext.globalDispatch);
-            navigation.selectPage(1);
-          }}
+          onClick={deleteUser}
           style={{ width: 200, marginTop: 15 }}
         >
           Delete Account
         </Button>
+        <ConfirmationModal
+          action={deleteAccount}
+          content="Are you sure you want to delete your account?"
+          title="Delete Account"
+          buttonName="Delete Account"
+          accent="red"
+        />
       </div>
     </div>
   );
