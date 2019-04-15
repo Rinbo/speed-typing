@@ -60,20 +60,17 @@ const GlobalHighScores = () => {
     return null;
   }
   return (
-    <div style={{ margin: "auto", maxWidth: 450 }}>
+    <div style={{ margin: "auto", maxWidth: 375 }}>
       <div className="ui centered inverted sub header">
         Score board - Top 10
       </div>
       <table
-        className="ui very basic sortable collapsing celled inverted table"
+        className="ui very basic sortable celled inverted table"
         style={{
-          minWidth: 400,
-          textAlign: "center",
-          display: "block",
-          padding: "25px"
+          textAlign: "center"
         }}
       >
-        <thead>
+        <thead className="full-width">
           <tr>
             <th>Position</th>
             <th>User</th>

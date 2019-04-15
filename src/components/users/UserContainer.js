@@ -35,23 +35,27 @@ const UserContainer = () => {
 
   return (
     <Segment inverted style={{ width: 375, margin: "auto" }}>
-      <Menu pointing secondary inverted>
-        <Menu.Item
-          name="Your scores"
-          active={activeTab === "Your scores"}
-          onClick={handleClick}
-        />
-        <Menu.Item
-          name="Statistics"
-          active={activeTab === "Statistics"}
-          onClick={handleClick}
-        />
-        <Menu.Item
-          name="Account"
-          active={activeTab === "Account"}
-          onClick={handleClick}
-        />
-      </Menu>
+      <div className="ui centered grid">
+        <div className="center aligned column">
+          <Menu pointing compact secondary inverted>
+            <Menu.Item
+              name="Your scores"
+              active={activeTab === "Your scores"}
+              onClick={handleClick}
+            />
+            <Menu.Item
+              name="Statistics"
+              active={activeTab === "Statistics"}
+              onClick={handleClick}
+            />
+            <Menu.Item
+              name="Account"
+              active={activeTab === "Account"}
+              onClick={handleClick}
+            />
+          </Menu>
+        </div>
+      </div>
       <div className="borjessons-margin">{renderTab()}</div>
     </Segment>
   );

@@ -23,15 +23,12 @@ const UserScores = ({ state }) => {
   return (
     <div>
       <table
-        className="ui very basic centered collapsing celled inverted table"
+        className="ui very basic sortable celled inverted table"
         style={{
-          maxWidth: 225,
-          textAlign: "center",
-          display: "block",
-          margin: "25px auto"
+          textAlign: "center"
         }}
       >
-        <thead>
+        <thead className="full-width">
           <tr>
             <th>Position</th>
             <th>Score</th>

@@ -132,7 +132,7 @@ const UserStats = ({ state }) => {
             labels: lineLabels,
             datasets: [
               {
-                label: "Number of results in score range",
+                label: "Evolution over time",
                 backgroundColor: "rgba(33,186,69,0.2)",
                 borderColor: "rgba(33,186,69,1)",
                 borderWidth: 1,
