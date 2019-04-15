@@ -5,7 +5,6 @@ const XAXIS_PADDING = 10;
 const GRANULARITY = 5;
 
 const UserStats = ({ state }) => {
-  const [dataPoints, setDataPoints] = useState([]);
   const [barLabels, setBarLabels] = useState([]);
   const [barData, setBarData] = useState([]);
   const [lineLabels, setLineLabels] = useState([]);
@@ -47,7 +46,6 @@ const UserStats = ({ state }) => {
       };
       incrementCount++;
     }
-    setDataPoints(histogram);
     setBarLabels(histogram.map(obj => `${obj.x} - ${obj.x + GRANULARITY} `));
     setBarData(histogram.map(obj => obj.y));
   };
@@ -81,6 +79,9 @@ const UserStats = ({ state }) => {
             scaleLabel: {
               display: true,
               labelString: ylabel
+            },
+            ticks: {
+              precision: 0
             }
           }
         ]
@@ -90,8 +91,6 @@ const UserStats = ({ state }) => {
     };
     return opts;
   };
-
-  if (dataPoints.length === 0) return null;
 
   return (
     <div style={{ marginTop: 50 }}>

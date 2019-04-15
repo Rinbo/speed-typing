@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
+import { Button } from "semantic-ui-react";
 
 const UserScores = ({ state }) => {
+  const [allScores, toggle] = useState(false);
   const renderScores = () => {
-    const topTen = state.userScores.slice(0, 10);
-    return topTen.map((score, index) => {
+    const scores = allScores ? state.userScores : state.userScores.slice(0, 10);
+    return scores.map((score, index) => {
       return (
         <tr key={score.id}>
           <td>{index + 1}.</td>
@@ -38,6 +40,20 @@ const UserScores = ({ state }) => {
         </thead>
         <tbody>{renderScores()}</tbody>
       </table>
+      {state.userScores.length > 10 ? (
+        <Button
+          style={{ margin: "auto", display: "block" }}
+          centered
+          basic
+          inverted
+          color="green"
+          onClick={() => {
+            toggle(prevState => !prevState);
+          }}
+        >
+          {allScores ? "Show less" : "Show all"}
+        </Button>
+      ) : null}
     </div>
   );
 };

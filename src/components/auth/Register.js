@@ -68,7 +68,8 @@ export const Register = ({ score }) => {
               display: "block",
               margin: "auto",
               color: "#21ba45",
-              cursor: "pointer"
+              cursor: "pointer",
+              textDecoration: "underline"
             }}
             onClick={() => navigation.selectPage(5)}
           >
