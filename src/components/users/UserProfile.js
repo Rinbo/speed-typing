@@ -71,15 +71,6 @@ const UserProfile = () => {
         </Button>
       )}
       <div>
-        <Button
-          basic
-          inverted
-          color="red"
-          onClick={deleteUser}
-          style={{ width: 200, marginTop: 15 }}
-        >
-          Delete Account
-        </Button>
         <ConfirmationModal
           action={deleteAccount}
           content="Are you sure you want to delete your account?"

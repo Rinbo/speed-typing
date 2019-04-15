@@ -6,7 +6,13 @@ const ConfirmationModal = ({ action, content, title, buttonName, accent }) => {
   return (
     <Modal
       trigger={
-        <Button inverted basic color={accent} onClick={() => setShow(true)}>
+        <Button
+          inverted
+          basic
+          color={accent}
+          style={{ width: 200, marginTop: 15 }}
+          onClick={() => setShow(true)}
+        >
           {buttonName}
         </Button>
       }
@@ -20,11 +26,23 @@ const ConfirmationModal = ({ action, content, title, buttonName, accent }) => {
         <p>{content}</p>
       </Modal.Content>
       <Modal.Actions>
-        <Button basic inverted onClick={() => setShow(false)}>
-          <Icon name="remove" /> No
+        <Button
+          style={{ widht: 80 }}
+          basic
+          inverted
+          onClick={() => setShow(false)}
+        >
+          No
         </Button>
-        <Button inverted basic color="red" inverted onClick={action}>
-          <Icon name="checkmark" /> Yes
+        <Button
+          style={{ widht: 80 }}
+          inverted
+          basic
+          color="red"
+          inverted
+          onClick={action}
+        >
+          Yes
         </Button>
       </Modal.Actions>
     </Modal>
