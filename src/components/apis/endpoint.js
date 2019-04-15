@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://localhost:5000",
+  baseURL: "http://acc-game-backend.eu-north-1.elasticbeanstalk.com",
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers":
@@ -11,4 +11,4 @@ export default axios.create({
 });
 
 //http://acc-game-backend.eu-north-1.elasticbeanstalk.com
-//   baseURL: "http://localhost:5000/users",
+//   baseURL: "http://localhost:5000",

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Header, Icon, Modal } from "semantic-ui-react";
+import { Button, Header, Modal } from "semantic-ui-react";
 
 const ConfirmationModal = ({ action, content, title, buttonName, accent }) => {
   const [show, setShow] = useState(false);
@@ -39,7 +39,6 @@ const ConfirmationModal = ({ action, content, title, buttonName, accent }) => {
           inverted
           basic
           color="red"
-          inverted
           onClick={action}
         >
           Yes
