@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Bar, Line, defaults } from "react-chartjs-2";
 
-const XAXIS_PADDING = 10;
+const XAXIS_PADDING = 5;
 const GRANULARITY = 5;
 
 const UserStats = ({ state }) => {
@@ -32,7 +32,7 @@ const UserStats = ({ state }) => {
     const histogram = [];
     const min = Math.min.apply(null, prunedScores);
     const max = Math.max.apply(null, prunedScores);
-    const minX = min - (min % XAXIS_PADDING);
+    const minX = min - (min % XAXIS_PADDING) - XAXIS_PADDING;
     const maxX = max + (XAXIS_PADDING - (max % XAXIS_PADDING));
     let incrementCount = 0;
     let yValues = [];
