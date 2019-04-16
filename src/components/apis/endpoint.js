@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL: "http://acc-game-backend.eu-north-1.elasticbeanstalk.com",
+  baseURL: "https://typing.borjessons.nu",
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers":
