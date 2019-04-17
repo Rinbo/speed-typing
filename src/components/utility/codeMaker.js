@@ -7,7 +7,6 @@ const operators = ["+", "-", "/", "*", "^"];
 const comparators = ["===", "==", ">", "<", ">=", "<="];
 const extentions = ["c", "txt", "rb", "py", "jl", "java", "bat"];
 const utilities = ["split", "concat", "join", "push"];
-// @TODO add Html
 const params1 = "abcdefghijklmnopqrstuvxyz".split("");
 const params2 = [
   "sigma",
