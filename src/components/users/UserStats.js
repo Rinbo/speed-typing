@@ -11,6 +11,7 @@ const UserStats = ({ state }) => {
   const [lineLabels, setLineLabels] = useState([]);
   const [lineData, setLineData] = useState([]);
   defaults.global.defaultFontColor = "#cccccc";
+  defaults.global.responsive = true;
 
   useEffect(() => {
     calculateDataPoints();
@@ -52,7 +53,7 @@ const UserStats = ({ state }) => {
   };
 
   return (
-    <div style={{ marginTop: 50 }}>
+    <div style={{ marginTop: 40 }}>
       <div className="chart-container">
         <div className="ui inverted centered sub header">Evolution</div>
         <p style={{ fontSize: 10, marginTop: 20 }}>
