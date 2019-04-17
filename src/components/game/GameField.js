@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Button } from "semantic-ui-react";
 
-const ROUND_TIME = 60000;
+const ROUND_TIME = 6000;
 
 export const GameField = ({
   typedCode,

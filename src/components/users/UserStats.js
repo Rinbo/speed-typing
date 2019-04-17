@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Bar, Line, defaults } from "react-chartjs-2";
+import { options } from "./options";
 
 const XAXIS_PADDING = 5;
-const GRANULARITY = 5;
+const GRANULARITY = 10;
 
 const UserStats = ({ state }) => {
   const [barLabels, setBarLabels] = useState([]);
@@ -50,51 +51,35 @@ const UserStats = ({ state }) => {
     setBarData(histogram.map(obj => obj.y));
   };
 
-  const options = (xlabel, ylabel) => {
-    const opts = {
-      legend: {
-        display: false
-      },
-      scales: {
-        xAxes: [
-          {
-            display: true,
-            gridLines: {
-              display: false,
-              color: "#cccccc"
-            },
-            scaleLabel: {
-              display: true,
-              labelString: xlabel
-            }
-          }
-        ],
-        yAxes: [
-          {
-            display: true,
-            gridLines: {
-              display: true,
-              color: "rgba(204, 204, 204, 0.5)"
-            },
-            scaleLabel: {
-              display: true,
-              labelString: ylabel
-            },
-            ticks: {
-              precision: 0
-            }
-          }
-        ]
-      },
-      responsive: true,
-      maintainAspectRatio: false
-    };
-    return opts;
-  };
-
   return (
     <div style={{ marginTop: 50 }}>
       <div className="chart-container">
+        <div className="ui inverted centered sub header">Evolution</div>
+        <p style={{ fontSize: 10, marginTop: 20 }}>
+          This graph shows how your result has changed over time
+        </p>
+        <Line
+          data={{
+            labels: lineLabels,
+            datasets: [
+              {
+                label: "Evolution over time",
+                backgroundColor: "rgba(33,186,69,0.2)",
+                borderColor: "rgba(33,186,69,1)",
+                borderWidth: 1,
+                defaultFontColor: "#cccccc",
+                hoverBackgroundColor: "rgba(33,186,69,0.4)",
+                hoverBorderColor: "rgba(33,186,69,1)",
+                data: lineData
+              }
+            ]
+          }}
+          width={400}
+          height={400}
+          options={options("Time", "Score")}
+        />
+      </div>
+      <div className="chart-container" style={{ marginTop: 90 }}>
         <div className="ui inverted centered sub header">Histogram</div>
         <p style={{ fontSize: 10, marginTop: 20 }}>
           Histogram of your result history - Your scores are grouped in
@@ -120,32 +105,6 @@ const UserStats = ({ state }) => {
           width={400}
           height={400}
           options={options("Score", "Frequency")}
-        />
-      </div>
-      <div className="chart-container" style={{ marginTop: 100 }}>
-        <div className="ui inverted centered sub header">Evolution</div>
-        <p style={{ fontSize: 10, marginTop: 20 }}>
-          This graph shows how your result has changed over time
-        </p>
-        <Line
-          data={{
-            labels: lineLabels,
-            datasets: [
-              {
-                label: "Evolution over time",
-                backgroundColor: "rgba(33,186,69,0.2)",
-                borderColor: "rgba(33,186,69,1)",
-                borderWidth: 1,
-                defaultFontColor: "#cccccc",
-                hoverBackgroundColor: "rgba(33,186,69,0.4)",
-                hoverBorderColor: "rgba(33,186,69,1)",
-                data: lineData
-              }
-            ]
-          }}
-          width={400}
-          height={400}
-          options={options("Time", "Score")}
         />
       </div>
     </div>
