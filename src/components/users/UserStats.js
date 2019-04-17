@@ -84,7 +84,7 @@ const UserStats = ({ state }) => {
         <div className="ui inverted centered sub header">Histogram</div>
         <p style={{ fontSize: 10, marginTop: 20 }}>
           Histogram of your result history - Your scores are grouped in
-          intervals of 5 on the x-axis and the number of results in each
+          intervals of 10 on the x-axis and the number of results in each
           interval is shown on the y-axis
         </p>
         <Bar
