@@ -6,7 +6,7 @@ Type the code snippets that appear on screen. You have 60 seconds to complete as
 - Node 10 or later
 
 ## Installation
-- Clone and run ´npm install´
+- Clone and run `npm install`
 - Connect to and endpoint such as this: https://github.com/Rinbo/speed-typing-backend
 
 ## Info
