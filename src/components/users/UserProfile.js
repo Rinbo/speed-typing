@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import APIContext from "../context/APIContext";
 import NavigationContext from "../context/NavigationContext";
 import ConfirmationModal from "../utility/ConfirmationModal";
-import { Button, List } from "semantic-ui-react";
+import { Button, List, Checkbox } from "semantic-ui-react";
 import { updateUser, deleteUser } from "../actions/userActions";
 import UpdatePassword from "./UpdatePassword";
 
@@ -41,6 +41,21 @@ const UserProfile = () => {
       </div>
     );
   };
+  const CheckboxToggle = () => (
+    <Checkbox
+      checked={apiContext.singleSemiColon}
+      toggle
+      color="green"
+      label="Use single semicolon"
+      onChange={() =>
+        updateUser(
+          { singleSemiColon: !apiContext.singleSemiColon },
+          "update",
+          apiContext.globalDispatch
+        )
+      }
+    />
+  );
 
   const deleteAccount = () => {
     deleteUser(apiContext.globalDispatch);
@@ -57,6 +72,10 @@ const UserProfile = () => {
           renderField()
         )}
       </List>
+      <div className="ui field" style={{ marginBottom: 25 }}>
+        {CheckboxToggle()}
+      </div>
+
       {toggle ? (
         <UpdatePassword doToggle={doToggle} />
       ) : (

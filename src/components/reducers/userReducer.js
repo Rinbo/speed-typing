@@ -10,6 +10,7 @@ export const initialUserState = {
   signedInUser: null,
   userEmail: null,
   score: null,
+  singleSemiColon: false,
   message: "",
   status: null
 };
@@ -20,7 +21,8 @@ export const userReducer = (state, action) => {
       return {
         ...state,
         user: action.payload,
-        userEmail: action.payload.email
+        userEmail: action.payload.email,
+        singleSemiColon: action.payload.singleSemiColon
       };
     case SIGN_IN:
       return {
@@ -28,7 +30,8 @@ export const userReducer = (state, action) => {
         user: action.payload,
         signedInUser: action.payload.name,
         isSignedIn: true,
-        userEmail: action.payload.email
+        userEmail: action.payload.email,        
+        singleSemiColon: action.payload.singleSemiColon
       };
     case SIGN_OUT:
       return init(initialUserState);
