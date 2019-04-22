@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import APIContext from "../context/APIContext";
 import NavigationContext from "../context/NavigationContext";
 import ConfirmationModal from "../utility/ConfirmationModal";
-import { Button, List, Checkbox } from "semantic-ui-react";
+import { Button, List } from "semantic-ui-react";
 import { updateUser, deleteUser } from "../actions/userActions";
 import UpdatePassword from "./UpdatePassword";
 
@@ -11,6 +11,7 @@ const UserProfile = () => {
   const navigation = useContext(NavigationContext);
   const [email, setEmail] = useState("");
   const [toggle, doToggle] = useState(false);
+  const [checkbox, toggleCheckbox] = useState(apiContext.singleSemiColon);
 
   const renderField = () => {
     return (
@@ -42,19 +43,26 @@ const UserProfile = () => {
     );
   };
   const CheckboxToggle = () => (
-    <Checkbox
-      checked={apiContext.singleSemiColon}
-      toggle
-      color="green"
-      label="Use single semicolon"
-      onChange={() =>
-        updateUser(
-          { singleSemiColon: !apiContext.singleSemiColon },
-          "update",
-          apiContext.globalDispatch
-        )
-      }
-    />
+    <div>
+      <label style={{ color: "#cccccc", display: "block", marginBottom: 10 }}>
+        Use single semicolon
+      </label>
+      <label className="switch">
+        <input
+          checked={checkbox}
+          type="checkbox"
+          onChange={() => {
+            toggleCheckbox(!checkbox);
+            updateUser(
+              { singleSemiColon: !checkbox },
+              "update",
+              apiContext.globalDispatch
+            );
+          }}
+        />
+        <span class="slider round" />
+      </label>
+    </div>
   );
 
   const deleteAccount = () => {

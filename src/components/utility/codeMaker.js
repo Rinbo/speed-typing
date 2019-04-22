@@ -33,15 +33,21 @@ String.prototype.capitalize = function() {
   });
 };
 
-export const makeCodeSnippet = () => {
+export const makeCodeSnippet = singleSemiColon => {
   const type = starters[randomizer(starters.length)];
   switch (type) {
     case "functions":
-      return makeFunction();
+      return singleSemiColon
+        ? makeFunction().replace(/"+/g, "'")
+        : makeFunction();
     case "declarations":
-      return makeDeclaration();
+      return singleSemiColon
+        ? makeDeclaration().replace(/"+/g, "'")
+        : makeDeclaration();
     case "conditionals":
-      return makeConditional();
+      return singleSemiColon
+        ? makeConditional().replace(/"+/g, "'")
+        : makeConditional();
     default:
       return null;
   }
@@ -70,7 +76,7 @@ const makeDeclaration = () => {
   if (d === "class") {
     return `export ${d} ${noun1.capitalize()} extends ${noun2.capitalize()} {}`;
   } else if (d === "export") {
-    return `const ${noun1} = require("../${noun2}.${extention})`;
+    return `const ${noun1} = require("../${noun2}.${extention}")`;
   } else {
     return `${d} { ${noun1} } = this.${noun2}`;
   }

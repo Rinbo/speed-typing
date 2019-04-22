@@ -17,7 +17,7 @@ export const GameContainer = () => {
   }, []);
 
   const getRandomCode = () => {
-    setDisplayCode(makeCodeSnippet().trim());
+    setDisplayCode(makeCodeSnippet(apiContext.singleSemiColon).trim());
   };
 
   const restart = () => {
