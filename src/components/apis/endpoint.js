@@ -2,7 +2,9 @@ import axios from "axios";
 
 export default axios.create({
   //baseURL: "http://localhost:5000",
-  baseURL: "https://typing.borjessons.nu",
+  //baseURL: "https://typing.borjessons.nu",
+  baseURL:
+    "http://ec2-13-53-130-252.eu-north-1.compute.amazonaws.com:8080/game-backend",
   headers: {
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Headers":
@@ -10,5 +12,3 @@ export default axios.create({
     "Content-Type": "application/json"
   }
 });
-
-//http://acc-game-backend.eu-north-1.elasticbeanstalk.com
