@@ -1,11 +1,17 @@
 import axios from "axios";
 
-export default axios.create({
+const instance = axios.create({
   baseURL: "https://api.borjessons.nu/game-backend",
   headers: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers":
-      "Origin, X-Requested-With, Content-Type, Accept",
     "Content-Type": "application/json",
+    Accept: "application/json",
   },
 });
+
+instance.interceptors.request.use(function (config) {
+  const token = localStorage.getItem("token") || "";
+  config.headers = { ...config.headers, token };
+  return config;
+});
+
+export default instance;
